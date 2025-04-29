@@ -20,7 +20,7 @@ namespace ProyectoFinal
 
             Console.WriteLine("Hola2");
             Console.WriteLine("HUECOOOOOOOOOOOOOOOOOOOOOOO");
-            Console.WriteLine("HOLAAAAAAAAA");
+            
             Console.WriteLine("Hola3");
 
         }
