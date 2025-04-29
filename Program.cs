@@ -18,10 +18,7 @@ namespace ProyectoFinal
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            Console.WriteLine("Hola2");
-            Console.WriteLine("HUECOOOOOOOOOOOOOOOOOOOOOOO");
             
-            Console.WriteLine("Hola3");
 
         }
     }
