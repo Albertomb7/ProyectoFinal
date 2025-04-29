@@ -65,7 +65,7 @@
             this.txt_user.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_user.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_user.ForeColor = System.Drawing.Color.White;
-            this.txt_user.Location = new System.Drawing.Point(69, 166);
+            this.txt_user.Location = new System.Drawing.Point(62, 166);
             this.txt_user.Name = "txt_user";
             this.txt_user.Size = new System.Drawing.Size(208, 19);
             this.txt_user.TabIndex = 1;
@@ -77,7 +77,7 @@
             this.txt_password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_password.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
             this.txt_password.ForeColor = System.Drawing.Color.White;
-            this.txt_password.Location = new System.Drawing.Point(69, 232);
+            this.txt_password.Location = new System.Drawing.Point(62, 232);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(207, 19);
             this.txt_password.TabIndex = 2;
@@ -90,11 +90,12 @@
             this.lbl_user.BackColor = System.Drawing.Color.Transparent;
             this.lbl_user.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_user.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbl_user.Location = new System.Drawing.Point(65, 137);
+            this.lbl_user.Location = new System.Drawing.Point(58, 137);
             this.lbl_user.Name = "lbl_user";
             this.lbl_user.Size = new System.Drawing.Size(72, 19);
             this.lbl_user.TabIndex = 3;
             this.lbl_user.Text = "Usuario";
+            this.lbl_user.Click += new System.EventHandler(this.lbl_user_Click);
             // 
             // label2
             // 
@@ -102,7 +103,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(65, 202);
+            this.label2.Location = new System.Drawing.Point(58, 202);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 19);
             this.label2.TabIndex = 4;
@@ -113,10 +114,11 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel1.ForeColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(69, 253);
+            this.panel1.Location = new System.Drawing.Point(62, 253);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(207, 1);
             this.panel1.TabIndex = 5;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
@@ -168,7 +170,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(69, 286);
+            this.button1.Location = new System.Drawing.Point(62, 286);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(207, 27);
             this.button1.TabIndex = 7;
@@ -180,7 +182,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel3.ForeColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(69, 187);
+            this.panel3.Location = new System.Drawing.Point(62, 187);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(207, 1);
             this.panel3.TabIndex = 6;
