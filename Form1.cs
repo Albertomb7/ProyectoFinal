@@ -15,6 +15,22 @@ namespace ProyectoFinal
         public Form1()
         {
             InitializeComponent();
+            this.BackColor = ColorTranslator.FromHtml("#17153B");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_password_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
