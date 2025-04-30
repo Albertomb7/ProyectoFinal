@@ -1,6 +1,6 @@
 ﻿namespace ProyectoFinal
 {
-    partial class Form2
+    partial class registro
     {
         /// <summary>
         /// Required designer variable.
