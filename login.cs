@@ -77,5 +77,17 @@ namespace ProyectoFinal
         {
 
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            registro RegistroForm = new registro();  
+            RegistroForm.Show();                   
+            this.Hide();
+
+            RegistroForm.FormClosed += (s, args) => this.Show();
+
+            this.Hide();       
+             
+        }
     }
 }
