@@ -45,7 +45,11 @@ namespace ProyectoFinal
 
         private void btn_registrarse_Click(object sender, EventArgs e)
         {
+            Persona persona = new Persona();
+            persona.usuario = txt_usuario_registro.Text;
+            persona.contraseña = txt_contrasenia_registro.Text; 
 
+            datosUsuarios.CrearUsuario(persona);
         }
 
         private void txt_telefono_registro_TextChanged(object sender, EventArgs e)
@@ -89,6 +93,11 @@ namespace ProyectoFinal
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
         {
 
         }
