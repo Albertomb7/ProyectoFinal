@@ -30,17 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(registro));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_nombre_registro = new System.Windows.Forms.Label();
-            this.txt_nombre_registro = new System.Windows.Forms.TextBox();
-            this.txt_usuario_registro = new System.Windows.Forms.TextBox();
-            this.lbl_usuario_registro = new System.Windows.Forms.Label();
-            this.txt_contrasenia_registro = new System.Windows.Forms.TextBox();
-            this.lbl_contrasenia_registro = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_registro = new System.Windows.Forms.Label();
+            this.btn_registrarse = new System.Windows.Forms.Button();
             this.txt_telefono_registro = new System.Windows.Forms.TextBox();
             this.lbl_telefono_registro = new System.Windows.Forms.Label();
-            this.btn_registrarse = new System.Windows.Forms.Button();
-            this.lbl_registro = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.txt_contrasenia_registro = new System.Windows.Forms.TextBox();
+            this.lbl_contrasenia_registro = new System.Windows.Forms.Label();
+            this.txt_usuario_registro = new System.Windows.Forms.TextBox();
+            this.lbl_usuario_registro = new System.Windows.Forms.Label();
+            this.txt_nombre_registro = new System.Windows.Forms.TextBox();
+            this.lbl_nombre_registro = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -66,55 +66,66 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
-            // lbl_nombre_registro
+            // panel2
             // 
-            this.lbl_nombre_registro.AutoSize = true;
-            this.lbl_nombre_registro.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_nombre_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.lbl_nombre_registro.ForeColor = System.Drawing.Color.White;
-            this.lbl_nombre_registro.Location = new System.Drawing.Point(60, 101);
-            this.lbl_nombre_registro.Name = "lbl_nombre_registro";
-            this.lbl_nombre_registro.Size = new System.Drawing.Size(143, 19);
-            this.lbl_nombre_registro.TabIndex = 0;
-            this.lbl_nombre_registro.Text = "Nombre y apellido";
-            this.lbl_nombre_registro.Click += new System.EventHandler(this.lbl_nombre_registro_Click);
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel2.Location = new System.Drawing.Point(49, 78);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(284, 1);
+            this.panel2.TabIndex = 10;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // txt_nombre_registro
+            // lbl_registro
             // 
-            this.txt_nombre_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.txt_nombre_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_nombre_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.txt_nombre_registro.ForeColor = System.Drawing.Color.White;
-            this.txt_nombre_registro.Location = new System.Drawing.Point(64, 128);
-            this.txt_nombre_registro.Name = "txt_nombre_registro";
-            this.txt_nombre_registro.Size = new System.Drawing.Size(250, 26);
-            this.txt_nombre_registro.TabIndex = 1;
-            this.txt_nombre_registro.TextChanged += new System.EventHandler(this.txt_nombre_registro_TextChanged);
+            this.lbl_registro.AutoSize = true;
+            this.lbl_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_registro.ForeColor = System.Drawing.Color.White;
+            this.lbl_registro.Location = new System.Drawing.Point(109, 36);
+            this.lbl_registro.Name = "lbl_registro";
+            this.lbl_registro.Size = new System.Drawing.Size(158, 24);
+            this.lbl_registro.TabIndex = 9;
+            this.lbl_registro.Text = "REGISTRARSE";
+            this.lbl_registro.Click += new System.EventHandler(this.lbl_registro_Click);
             // 
-            // txt_usuario_registro
+            // btn_registrarse
             // 
-            this.txt_usuario_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.txt_usuario_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_usuario_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.txt_usuario_registro.ForeColor = System.Drawing.Color.White;
-            this.txt_usuario_registro.Location = new System.Drawing.Point(64, 188);
-            this.txt_usuario_registro.Name = "txt_usuario_registro";
-            this.txt_usuario_registro.Size = new System.Drawing.Size(250, 26);
-            this.txt_usuario_registro.TabIndex = 3;
-            this.txt_usuario_registro.TextChanged += new System.EventHandler(this.txt_usuario_registro_TextChanged);
+            this.btn_registrarse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(134)))), ((int)(((byte)(227)))));
+            this.btn_registrarse.FlatAppearance.BorderSize = 0;
+            this.btn_registrarse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_registrarse.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btn_registrarse.ForeColor = System.Drawing.Color.White;
+            this.btn_registrarse.Location = new System.Drawing.Point(64, 368);
+            this.btn_registrarse.Name = "btn_registrarse";
+            this.btn_registrarse.Size = new System.Drawing.Size(250, 26);
+            this.btn_registrarse.TabIndex = 8;
+            this.btn_registrarse.Text = "Registrarse";
+            this.btn_registrarse.UseVisualStyleBackColor = false;
+            this.btn_registrarse.Click += new System.EventHandler(this.btn_registrarse_Click);
             // 
-            // lbl_usuario_registro
+            // txt_telefono_registro
             // 
-            this.lbl_usuario_registro.AutoSize = true;
-            this.lbl_usuario_registro.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_usuario_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.lbl_usuario_registro.ForeColor = System.Drawing.Color.White;
-            this.lbl_usuario_registro.Location = new System.Drawing.Point(60, 163);
-            this.lbl_usuario_registro.Name = "lbl_usuario_registro";
-            this.lbl_usuario_registro.Size = new System.Drawing.Size(65, 19);
-            this.lbl_usuario_registro.TabIndex = 2;
-            this.lbl_usuario_registro.Text = "Usuario";
-            this.lbl_usuario_registro.Click += new System.EventHandler(this.lbl_usuario_registro_Click);
+            this.txt_telefono_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.txt_telefono_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_telefono_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.txt_telefono_registro.ForeColor = System.Drawing.Color.White;
+            this.txt_telefono_registro.Location = new System.Drawing.Point(64, 317);
+            this.txt_telefono_registro.Name = "txt_telefono_registro";
+            this.txt_telefono_registro.Size = new System.Drawing.Size(250, 26);
+            this.txt_telefono_registro.TabIndex = 7;
+            this.txt_telefono_registro.TextChanged += new System.EventHandler(this.txt_telefono_registro_TextChanged);
+            // 
+            // lbl_telefono_registro
+            // 
+            this.lbl_telefono_registro.AutoSize = true;
+            this.lbl_telefono_registro.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_telefono_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.lbl_telefono_registro.ForeColor = System.Drawing.Color.White;
+            this.lbl_telefono_registro.Location = new System.Drawing.Point(60, 292);
+            this.lbl_telefono_registro.Name = "lbl_telefono_registro";
+            this.lbl_telefono_registro.Size = new System.Drawing.Size(73, 19);
+            this.lbl_telefono_registro.TabIndex = 6;
+            this.lbl_telefono_registro.Text = "Telefono";
+            this.lbl_telefono_registro.Click += new System.EventHandler(this.lbl_telefono_registro_Click);
             // 
             // txt_contrasenia_registro
             // 
@@ -142,66 +153,55 @@
             this.lbl_contrasenia_registro.Text = "Contraseña";
             this.lbl_contrasenia_registro.Click += new System.EventHandler(this.lbl_contrasenia_registro_Click);
             // 
-            // txt_telefono_registro
+            // txt_usuario_registro
             // 
-            this.txt_telefono_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.txt_telefono_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_telefono_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.txt_telefono_registro.ForeColor = System.Drawing.Color.White;
-            this.txt_telefono_registro.Location = new System.Drawing.Point(64, 317);
-            this.txt_telefono_registro.Name = "txt_telefono_registro";
-            this.txt_telefono_registro.Size = new System.Drawing.Size(250, 26);
-            this.txt_telefono_registro.TabIndex = 7;
-            this.txt_telefono_registro.TextChanged += new System.EventHandler(this.txt_telefono_registro_TextChanged);
+            this.txt_usuario_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.txt_usuario_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_usuario_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.txt_usuario_registro.ForeColor = System.Drawing.Color.White;
+            this.txt_usuario_registro.Location = new System.Drawing.Point(64, 188);
+            this.txt_usuario_registro.Name = "txt_usuario_registro";
+            this.txt_usuario_registro.Size = new System.Drawing.Size(250, 26);
+            this.txt_usuario_registro.TabIndex = 3;
+            this.txt_usuario_registro.TextChanged += new System.EventHandler(this.txt_usuario_registro_TextChanged);
             // 
-            // lbl_telefono_registro
+            // lbl_usuario_registro
             // 
-            this.lbl_telefono_registro.AutoSize = true;
-            this.lbl_telefono_registro.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_telefono_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.lbl_telefono_registro.ForeColor = System.Drawing.Color.White;
-            this.lbl_telefono_registro.Location = new System.Drawing.Point(60, 292);
-            this.lbl_telefono_registro.Name = "lbl_telefono_registro";
-            this.lbl_telefono_registro.Size = new System.Drawing.Size(73, 19);
-            this.lbl_telefono_registro.TabIndex = 6;
-            this.lbl_telefono_registro.Text = "Telefono";
-            this.lbl_telefono_registro.Click += new System.EventHandler(this.lbl_telefono_registro_Click);
+            this.lbl_usuario_registro.AutoSize = true;
+            this.lbl_usuario_registro.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_usuario_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.lbl_usuario_registro.ForeColor = System.Drawing.Color.White;
+            this.lbl_usuario_registro.Location = new System.Drawing.Point(60, 163);
+            this.lbl_usuario_registro.Name = "lbl_usuario_registro";
+            this.lbl_usuario_registro.Size = new System.Drawing.Size(65, 19);
+            this.lbl_usuario_registro.TabIndex = 2;
+            this.lbl_usuario_registro.Text = "Usuario";
+            this.lbl_usuario_registro.Click += new System.EventHandler(this.lbl_usuario_registro_Click);
             // 
-            // btn_registrarse
+            // txt_nombre_registro
             // 
-            this.btn_registrarse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(134)))), ((int)(((byte)(227)))));
-            this.btn_registrarse.FlatAppearance.BorderSize = 0;
-            this.btn_registrarse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_registrarse.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btn_registrarse.ForeColor = System.Drawing.Color.White;
-            this.btn_registrarse.Location = new System.Drawing.Point(64, 368);
-            this.btn_registrarse.Name = "btn_registrarse";
-            this.btn_registrarse.Size = new System.Drawing.Size(250, 26);
-            this.btn_registrarse.TabIndex = 8;
-            this.btn_registrarse.Text = "Registrarse";
-            this.btn_registrarse.UseVisualStyleBackColor = false;
-            this.btn_registrarse.Click += new System.EventHandler(this.btn_registrarse_Click);
+            this.txt_nombre_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.txt_nombre_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_nombre_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.txt_nombre_registro.ForeColor = System.Drawing.Color.White;
+            this.txt_nombre_registro.Location = new System.Drawing.Point(64, 128);
+            this.txt_nombre_registro.Name = "txt_nombre_registro";
+            this.txt_nombre_registro.Size = new System.Drawing.Size(250, 26);
+            this.txt_nombre_registro.TabIndex = 1;
+            this.txt_nombre_registro.TextChanged += new System.EventHandler(this.txt_nombre_registro_TextChanged);
             // 
-            // lbl_registro
+            // lbl_nombre_registro
             // 
-            this.lbl_registro.AutoSize = true;
-            this.lbl_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_registro.ForeColor = System.Drawing.Color.White;
-            this.lbl_registro.Location = new System.Drawing.Point(109, 36);
-            this.lbl_registro.Name = "lbl_registro";
-            this.lbl_registro.Size = new System.Drawing.Size(158, 24);
-            this.lbl_registro.TabIndex = 9;
-            this.lbl_registro.Text = "REGISTRARSE";
-            this.lbl_registro.Click += new System.EventHandler(this.lbl_registro_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel2.Location = new System.Drawing.Point(49, 78);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(284, 1);
-            this.panel2.TabIndex = 10;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.lbl_nombre_registro.AutoSize = true;
+            this.lbl_nombre_registro.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_nombre_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.lbl_nombre_registro.ForeColor = System.Drawing.Color.White;
+            this.lbl_nombre_registro.Location = new System.Drawing.Point(60, 101);
+            this.lbl_nombre_registro.Name = "lbl_nombre_registro";
+            this.lbl_nombre_registro.Size = new System.Drawing.Size(143, 19);
+            this.lbl_nombre_registro.TabIndex = 0;
+            this.lbl_nombre_registro.Text = "Nombre y apellido";
+            this.lbl_nombre_registro.Click += new System.EventHandler(this.lbl_nombre_registro_Click);
             // 
             // pictureBox1
             // 
@@ -223,7 +223,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "registro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Registro";
+            this.Text = " ";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="conexionSql.cs" />
+    <Compile Include="datosUsuarios.cs" />
     <Compile Include="login.cs">
       <SubType>Form</SubType>
     </Compile>
