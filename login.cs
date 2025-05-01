@@ -6,7 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
 using System.Windows.Forms;
+
+
 
 namespace ProyectoFinal
 {
@@ -15,12 +19,12 @@ namespace ProyectoFinal
         public login()
         {
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -80,14 +84,14 @@ namespace ProyectoFinal
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            registro RegistroForm = new registro();  
-            RegistroForm.Show();                   
+            registro RegistroForm = new registro();
+            RegistroForm.Show();
             this.Hide();
 
             RegistroForm.FormClosed += (s, args) => this.Show();
 
-            this.Hide();       
-             
+            this.Hide();
+
         }
     }
 }

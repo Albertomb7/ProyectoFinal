@@ -19,6 +19,7 @@ namespace ProyectoFinal
             Application.Run(new login());
 
 
+            Console.WriteLine("hola");
         }
     }
 }
