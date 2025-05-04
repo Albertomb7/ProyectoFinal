@@ -165,6 +165,12 @@
     <Compile Include="conexionSql.cs" />
     <Compile Include="datosUsuarios.cs" />
     <Compile Include="encrip.cs" />
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
     </Compile>

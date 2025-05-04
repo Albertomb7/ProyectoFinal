@@ -35,13 +35,13 @@
             this.lbl_usuario = new System.Windows.Forms.Label();
             this.lbl_contrasenia = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_ver_contraseña = new System.Windows.Forms.Button();
             this.linklbl_registrarse = new System.Windows.Forms.LinkLabel();
             this.lbl_pregunta = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_iniciar_sesion = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -114,7 +114,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btn_ver_contraseña);
             this.panel2.Controls.Add(this.linklbl_registrarse);
             this.panel2.Controls.Add(this.lbl_pregunta);
             this.panel2.Controls.Add(this.panel4);
@@ -130,6 +130,20 @@
             this.panel2.Size = new System.Drawing.Size(332, 388);
             this.panel2.TabIndex = 6;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // btn_ver_contraseña
+            // 
+            this.btn_ver_contraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.btn_ver_contraseña.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btn_ver_contraseña.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ver_contraseña.ForeColor = System.Drawing.Color.White;
+            this.btn_ver_contraseña.Image = ((System.Drawing.Image)(resources.GetObject("btn_ver_contraseña.Image")));
+            this.btn_ver_contraseña.Location = new System.Drawing.Point(258, 234);
+            this.btn_ver_contraseña.Name = "btn_ver_contraseña";
+            this.btn_ver_contraseña.Size = new System.Drawing.Size(30, 26);
+            this.btn_ver_contraseña.TabIndex = 11;
+            this.btn_ver_contraseña.UseVisualStyleBackColor = false;
+            this.btn_ver_contraseña.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // linklbl_registrarse
             // 
@@ -201,19 +215,6 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(258, 234);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 26);
-            this.button1.TabIndex = 11;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,7 +250,7 @@
         private System.Windows.Forms.Label lbl_pregunta;
         private System.Windows.Forms.LinkLabel linklbl_registrarse;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_ver_contraseña;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
+
 namespace ProyectoFinal
 {
     public class datosUsuarios
@@ -71,6 +72,30 @@ namespace ProyectoFinal
             return retorna;
         }
 
+        public static int IniciarSesion(Persona persona)
+        {
+            int retorna = 0;
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                string query = "SELECT ePass FROM usuarios WHERE usuario = @usuario";
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@usuario", persona.usuario);
+
+                    using (Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            
+                            persona.ePass = reader.GetString(0);
+                            retorna = 1; 
+                        }
+                    }
+                }
+            }
+            return retorna;
+
+        }
 
 
     }
