@@ -45,7 +45,25 @@ namespace ProyectoFinal
 
         private void btn_registrarse_Click(object sender, EventArgs e)
         {
+            Persona persona = new Persona();
+            persona.usuario = txt_usuario_registro.Text;
+            persona.nombre = txt_nombre_registro.Text;
 
+            string Pass = txt_contrasenia_registro.Text;
+
+            persona.ePass = encrip.GetShga256(Pass);
+
+            int registro1 = datosUsuarios.CrearUsuario(persona);
+            if (registro1 == 1) {
+                MessageBox.Show("Se creo el usuario con exito");
+            }
+            else {
+                MessageBox.Show("Hubo un error al crear el usuario");
+            } 
+
+            Form registro = new login();
+            registro.Show();
+            this.Close();
         }
 
         private void txt_telefono_registro_TextChanged(object sender, EventArgs e)

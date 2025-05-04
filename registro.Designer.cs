@@ -108,7 +108,7 @@
             this.txt_telefono_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_telefono_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
             this.txt_telefono_registro.ForeColor = System.Drawing.Color.White;
-            this.txt_telefono_registro.Location = new System.Drawing.Point(64, 317);
+            this.txt_telefono_registro.Location = new System.Drawing.Point(64, 314);
             this.txt_telefono_registro.Name = "txt_telefono_registro";
             this.txt_telefono_registro.Size = new System.Drawing.Size(250, 26);
             this.txt_telefono_registro.TabIndex = 7;

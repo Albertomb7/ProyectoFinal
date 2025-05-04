@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
 namespace ProyectoFinal
@@ -14,27 +15,36 @@ namespace ProyectoFinal
         {
             public int id { get; set; }
             public string usuario { get; set; }
-            public string contraseña { get; set; }
+            public string nombre { get; set; }
+            public string ePass { get; set; }
             public Persona() { }
 
-            public Persona(int id, string usuario, string contraseña)
+            public Persona(int id, string usuario, string nombre, string ePass)
             {
                 this.id = id;
                 this.usuario = usuario;
-                this.contraseña = contraseña;
+                this.nombre = nombre;
+                this.ePass = ePass;
             }
         }
 
         public static int CrearUsuario(Persona persona)
         {
             int retorna = 0;
-            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            try
             {
-                string query = ("Insert into usuarios values('"+persona.usuario+ "','"+persona.contraseña+"')");
-                Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
-                retorna = comando.ExecuteNonQuery();
+                using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+                {
+                    string query = ("Insert into usuarios values('" + persona.usuario + "', '" + persona.nombre + "','" + persona.ePass + "')");
+                    Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
+                    retorna = comando.ExecuteNonQuery();
+                }
             }
-                return retorna;
+            catch (Microsoft.Data.SqlClient.SqlException e)
+            {
+                throw;
+            }
+            return retorna;
         }
 
         public static int ActualizarUsuario(Persona persona)
@@ -42,7 +52,7 @@ namespace ProyectoFinal
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = ("update usuarios set usuario = '"+persona.usuario+"', contraseña = '"+persona.contraseña+"' where id = "+persona.id+"");
+                string query = ("update usuarios set usuario = '"+persona.usuario+ "',nombre = '"+persona.nombre+ "', ePass = '" + persona.ePass+"',  where id = "+persona.id+"");
                 Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
                 retorna = comando.ExecuteNonQuery();
             }
