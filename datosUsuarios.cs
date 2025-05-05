@@ -41,7 +41,7 @@ namespace ProyectoFinal
                     retorna = comando.ExecuteNonQuery();
                 }
             }
-            catch (Microsoft.Data.SqlClient.SqlException e)
+            catch (Microsoft.Data.SqlClient.SqlException )
             {
                 throw;
             }
@@ -86,7 +86,7 @@ namespace ProyectoFinal
                     {
                         if (reader.Read())
                         {
-                            
+
                             persona.ePass = reader.GetString(0);
                             retorna = 1; 
                         }

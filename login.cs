@@ -71,8 +71,8 @@ namespace ProyectoFinal
 
             if (ePass == persona.ePass)
             {
-                Form login = new Inicio();
-                login.Show();
+                Form FormInicio = new Inicio();
+                FormInicio.Show();
                 this.Hide();
             }
             else

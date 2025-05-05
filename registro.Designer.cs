@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(registro));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_informacion = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_registro = new System.Windows.Forms.Label();
             this.btn_registrarse = new System.Windows.Forms.Button();
             this.txt_telefono_registro = new System.Windows.Forms.TextBox();
             this.lbl_telefono_registro = new System.Windows.Forms.Label();
-            this.txt_contrasenia_registro = new System.Windows.Forms.TextBox();
+            this.txt_contraseña_registro = new System.Windows.Forms.TextBox();
             this.lbl_contrasenia_registro = new System.Windows.Forms.Label();
             this.txt_usuario_registro = new System.Windows.Forms.TextBox();
             this.lbl_usuario_registro = new System.Windows.Forms.Label();
@@ -49,12 +50,13 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel1.Controls.Add(this.lbl_informacion);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.lbl_registro);
             this.panel1.Controls.Add(this.btn_registrarse);
             this.panel1.Controls.Add(this.txt_telefono_registro);
             this.panel1.Controls.Add(this.lbl_telefono_registro);
-            this.panel1.Controls.Add(this.txt_contrasenia_registro);
+            this.panel1.Controls.Add(this.txt_contraseña_registro);
             this.panel1.Controls.Add(this.lbl_contrasenia_registro);
             this.panel1.Controls.Add(this.txt_usuario_registro);
             this.panel1.Controls.Add(this.lbl_usuario_registro);
@@ -65,6 +67,20 @@
             this.panel1.Size = new System.Drawing.Size(386, 453);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // lbl_informacion
+            // 
+            this.lbl_informacion.AutoSize = true;
+            this.lbl_informacion.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_informacion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
+            this.lbl_informacion.ForeColor = System.Drawing.Color.Red;
+            this.lbl_informacion.Location = new System.Drawing.Point(64, 347);
+            this.lbl_informacion.Name = "lbl_informacion";
+            this.lbl_informacion.Size = new System.Drawing.Size(91, 18);
+            this.lbl_informacion.TabIndex = 11;
+            this.lbl_informacion.Text = "Informacion";
+            this.lbl_informacion.Visible = false;
+            this.lbl_informacion.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // panel2
             // 
@@ -94,7 +110,7 @@
             this.btn_registrarse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_registrarse.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.btn_registrarse.ForeColor = System.Drawing.Color.White;
-            this.btn_registrarse.Location = new System.Drawing.Point(64, 368);
+            this.btn_registrarse.Location = new System.Drawing.Point(64, 380);
             this.btn_registrarse.Name = "btn_registrarse";
             this.btn_registrarse.Size = new System.Drawing.Size(250, 26);
             this.btn_registrarse.TabIndex = 8;
@@ -127,18 +143,18 @@
             this.lbl_telefono_registro.Text = "Telefono";
             this.lbl_telefono_registro.Click += new System.EventHandler(this.lbl_telefono_registro_Click);
             // 
-            // txt_contrasenia_registro
+            // txt_contraseña_registro
             // 
-            this.txt_contrasenia_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.txt_contrasenia_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_contrasenia_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.txt_contrasenia_registro.ForeColor = System.Drawing.Color.White;
-            this.txt_contrasenia_registro.Location = new System.Drawing.Point(64, 249);
-            this.txt_contrasenia_registro.Name = "txt_contrasenia_registro";
-            this.txt_contrasenia_registro.Size = new System.Drawing.Size(250, 26);
-            this.txt_contrasenia_registro.TabIndex = 5;
-            this.txt_contrasenia_registro.UseSystemPasswordChar = true;
-            this.txt_contrasenia_registro.TextChanged += new System.EventHandler(this.txt_contrasenia_registro_TextChanged);
+            this.txt_contraseña_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.txt_contraseña_registro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_contraseña_registro.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.txt_contraseña_registro.ForeColor = System.Drawing.Color.White;
+            this.txt_contraseña_registro.Location = new System.Drawing.Point(64, 249);
+            this.txt_contraseña_registro.Name = "txt_contraseña_registro";
+            this.txt_contraseña_registro.Size = new System.Drawing.Size(250, 26);
+            this.txt_contraseña_registro.TabIndex = 5;
+            this.txt_contraseña_registro.UseSystemPasswordChar = true;
+            this.txt_contraseña_registro.TextChanged += new System.EventHandler(this.txt_contrasenia_registro_TextChanged);
             // 
             // lbl_contrasenia_registro
             // 
@@ -238,7 +254,7 @@
         private System.Windows.Forms.TextBox txt_nombre_registro;
         private System.Windows.Forms.TextBox txt_usuario_registro;
         private System.Windows.Forms.Label lbl_usuario_registro;
-        private System.Windows.Forms.TextBox txt_contrasenia_registro;
+        private System.Windows.Forms.TextBox txt_contraseña_registro;
         private System.Windows.Forms.Label lbl_contrasenia_registro;
         private System.Windows.Forms.TextBox txt_telefono_registro;
         private System.Windows.Forms.Label lbl_telefono_registro;
@@ -246,5 +262,6 @@
         private System.Windows.Forms.Label lbl_registro;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbl_informacion;
     }
 }
