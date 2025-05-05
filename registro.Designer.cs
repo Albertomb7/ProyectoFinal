@@ -43,6 +43,7 @@
             this.txt_nombre_registro = new System.Windows.Forms.TextBox();
             this.lbl_nombre_registro = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_ver_contraseña_registro = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +51,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel1.Controls.Add(this.btn_ver_contraseña_registro);
             this.panel1.Controls.Add(this.lbl_informacion);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.lbl_registro);
@@ -70,15 +72,17 @@
             // 
             // lbl_informacion
             // 
+            this.lbl_informacion.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_informacion.AutoSize = true;
             this.lbl_informacion.BackColor = System.Drawing.Color.Transparent;
             this.lbl_informacion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
             this.lbl_informacion.ForeColor = System.Drawing.Color.Red;
-            this.lbl_informacion.Location = new System.Drawing.Point(64, 347);
+            this.lbl_informacion.Location = new System.Drawing.Point(140, 351);
             this.lbl_informacion.Name = "lbl_informacion";
             this.lbl_informacion.Size = new System.Drawing.Size(91, 18);
             this.lbl_informacion.TabIndex = 11;
             this.lbl_informacion.Text = "Informacion";
+            this.lbl_informacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_informacion.Visible = false;
             this.lbl_informacion.Click += new System.EventHandler(this.label1_Click_1);
             // 
@@ -151,7 +155,7 @@
             this.txt_contraseña_registro.ForeColor = System.Drawing.Color.White;
             this.txt_contraseña_registro.Location = new System.Drawing.Point(64, 249);
             this.txt_contraseña_registro.Name = "txt_contraseña_registro";
-            this.txt_contraseña_registro.Size = new System.Drawing.Size(250, 26);
+            this.txt_contraseña_registro.Size = new System.Drawing.Size(224, 26);
             this.txt_contraseña_registro.TabIndex = 5;
             this.txt_contraseña_registro.UseSystemPasswordChar = true;
             this.txt_contraseña_registro.TextChanged += new System.EventHandler(this.txt_contrasenia_registro_TextChanged);
@@ -229,6 +233,20 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // btn_ver_contraseña_registro
+            // 
+            this.btn_ver_contraseña_registro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.btn_ver_contraseña_registro.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btn_ver_contraseña_registro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ver_contraseña_registro.ForeColor = System.Drawing.Color.White;
+            this.btn_ver_contraseña_registro.Image = ((System.Drawing.Image)(resources.GetObject("btn_ver_contraseña_registro.Image")));
+            this.btn_ver_contraseña_registro.Location = new System.Drawing.Point(284, 249);
+            this.btn_ver_contraseña_registro.Name = "btn_ver_contraseña_registro";
+            this.btn_ver_contraseña_registro.Size = new System.Drawing.Size(30, 26);
+            this.btn_ver_contraseña_registro.TabIndex = 12;
+            this.btn_ver_contraseña_registro.UseVisualStyleBackColor = false;
+            this.btn_ver_contraseña_registro.Click += new System.EventHandler(this.btn_ver_contraseña_Click);
+            // 
             // registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,5 +281,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbl_informacion;
+        private System.Windows.Forms.Button btn_ver_contraseña_registro;
     }
 }
