@@ -53,7 +53,7 @@ namespace ProyectoFinal
             if (string.IsNullOrWhiteSpace(txt_nombre_registro.Text) || string.IsNullOrWhiteSpace(txt_usuario_registro.Text) || string.IsNullOrWhiteSpace(txt_contraseña_registro.Text) || string.IsNullOrWhiteSpace(txt_telefono_registro.Text))
             {
                 lbl_informacion.Visible = true;
-                lbl_informacion.Text = "Los campos no pueden estar vacios";
+                lbl_informacion.Text = "Este campo es obligatorio";
                 AjustarLabel();
                 valido = false;
             }
