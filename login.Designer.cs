@@ -80,7 +80,7 @@
             this.txt_contrasenia.ForeColor = System.Drawing.Color.White;
             this.txt_contrasenia.Location = new System.Drawing.Point(38, 234);
             this.txt_contrasenia.Name = "txt_contrasenia";
-            this.txt_contrasenia.Size = new System.Drawing.Size(223, 26);
+            this.txt_contrasenia.Size = new System.Drawing.Size(250, 26);
             this.txt_contrasenia.TabIndex = 2;
             this.txt_contrasenia.UseSystemPasswordChar = true;
             this.txt_contrasenia.TextChanged += new System.EventHandler(this.txt_password_TextChanged);
@@ -135,13 +135,17 @@
             // 
             this.btn_ver_contraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
             this.btn_ver_contraseña.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btn_ver_contraseña.FlatAppearance.BorderSize = 0;
+            this.btn_ver_contraseña.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_ver_contraseña.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_ver_contraseña.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_ver_contraseña.ForeColor = System.Drawing.Color.White;
             this.btn_ver_contraseña.Image = ((System.Drawing.Image)(resources.GetObject("btn_ver_contraseña.Image")));
-            this.btn_ver_contraseña.Location = new System.Drawing.Point(258, 234);
+            this.btn_ver_contraseña.Location = new System.Drawing.Point(253, 238);
             this.btn_ver_contraseña.Name = "btn_ver_contraseña";
-            this.btn_ver_contraseña.Size = new System.Drawing.Size(30, 26);
+            this.btn_ver_contraseña.Size = new System.Drawing.Size(32, 17);
             this.btn_ver_contraseña.TabIndex = 11;
+            this.btn_ver_contraseña.TabStop = false;
             this.btn_ver_contraseña.UseVisualStyleBackColor = false;
             this.btn_ver_contraseña.Click += new System.EventHandler(this.button1_Click_1);
             // 

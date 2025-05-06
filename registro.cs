@@ -76,6 +76,14 @@ namespace ProyectoFinal
                 valido = false;
             }
 
+            //Validar longitud de la contraseña
+            else if(txt_contraseña_registro.Text.Length < 8){
+                lbl_informacion.Visible = true;
+                lbl_informacion.Text = "La contraseña debe contener minimo 8 caracteres";
+                AjustarLabel();
+                valido = false;
+            }
+
             //Validacion de los caracteres especiales en los numeros de telefono
             else if (txt_telefono_registro.Text.Any(ch => !char.IsDigit(ch) && !char.IsWhiteSpace(ch)))
             {
@@ -117,7 +125,7 @@ namespace ProyectoFinal
                     int registro1 = datosUsuarios.CrearUsuario(persona);
                     if (registro1 == 1)
                     {
-                        MessageBox.Show("Se creo el usuario con exito");
+                        MessageBox.Show("Usuario registrado con exito", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Form registro = new login();
                         registro.Show();
                         this.Close();
@@ -130,6 +138,7 @@ namespace ProyectoFinal
                 else
                 {
                     MessageBox.Show("El usuario ingresado ya existe, ingrese uno diferente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_usuario_registro.Select();
                 }
             }
 
@@ -268,7 +277,7 @@ namespace ProyectoFinal
         //Funcion para centrar el label de informacion
         private void AjustarLabel()
         {
-            int Ubicacion_centrar = 190; 
+            int Ubicacion_centrar = 218; 
             lbl_informacion.AutoSize = true; 
             lbl_informacion.Left = Ubicacion_centrar - (lbl_informacion.Width / 2);
         }

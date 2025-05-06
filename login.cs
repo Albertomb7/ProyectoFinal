@@ -69,8 +69,11 @@ namespace ProyectoFinal
             Persona persona = new Persona();
             persona.usuario = txt_usuario.Text;
 
+            //Obtiene el valor que retorna la funcion para verificar el usuario existente
             int UsuarioExistente = VerificarUsuarioExistente(persona);
 
+
+            //Si el usuario si existe permite continuar
             if(UsuarioExistente == 0)
             {
              
@@ -88,15 +91,13 @@ namespace ProyectoFinal
                     MessageBox.Show("Datos incorrectos, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+
+            //Si el usuario no existe muestra el mensaje de error 
             else
             {
                 MessageBox.Show("El usuario no existe, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            
-
-
-            
         }
 
         private void label1_Click(object sender, EventArgs e)
