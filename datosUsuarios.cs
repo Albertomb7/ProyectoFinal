@@ -29,6 +29,7 @@ namespace ProyectoFinal
             }
         }
 
+        //Crea usuario nuevo en la base de datos
         public static int CrearUsuario(Persona persona)
         {
             int retorna = 0;
@@ -48,6 +49,8 @@ namespace ProyectoFinal
             return retorna;
         }
 
+
+        //Actualizar datos de usuario
         public static int ActualizarUsuario(Persona persona)
         {
             int retorna = 0;
@@ -59,7 +62,9 @@ namespace ProyectoFinal
             }
             return retorna;
         }
+        
 
+        //Eliminar usuario de la base de datos
         public static int EliminarUsuario(Persona persona)
         {
             int retorna = 0;
@@ -72,6 +77,7 @@ namespace ProyectoFinal
             return retorna;
         }
 
+        //Obtiene la contraseña para comparar con la ingresada
         public static int IniciarSesion(Persona persona)
         {
             int retorna = 0;
@@ -97,6 +103,32 @@ namespace ProyectoFinal
 
         }
 
+        public static int VerificarUsuarioExistente(Persona persona)
+        {
+            int retorna = 0;
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                string query = "SELECT * FROM usuarios WHERE usuario = @usuario";
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@usuario", persona.usuario);
+
+                    using (Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (!reader.HasRows)
+                        {
+                            retorna = 1;
+                        }
+                        else
+                        {
+                            retorna = 0;
+                        }
+                    }
+                }
+            }
+            return retorna;
+
+        }
 
     }
 }

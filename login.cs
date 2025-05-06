@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -62,23 +63,40 @@ namespace ProyectoFinal
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Hashea la contraseña ingresada
             string ePass = encrip.GetShga256(txt_contrasenia.Text);
 
             Persona persona = new Persona();
             persona.usuario = txt_usuario.Text;
 
-            datosUsuarios.IniciarSesion(persona);
+            int UsuarioExistente = VerificarUsuarioExistente(persona);
 
-            if (ePass == persona.ePass)
+            if(UsuarioExistente == 0)
             {
-                Form FormInicio = new Inicio();
-                FormInicio.Show();
-                this.Hide();
+             
+               datosUsuarios.IniciarSesion(persona);
+
+
+                if (ePass == persona.ePass)
+                {
+                    Form FormInicio = new Inicio(this);
+                    FormInicio.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Datos incorrectos, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("Datos incorrectos, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El usuario no existe, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            
+
+
+            
         }
 
         private void label1_Click(object sender, EventArgs e)

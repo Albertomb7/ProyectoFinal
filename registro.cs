@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -92,7 +93,7 @@ namespace ProyectoFinal
                 AjustarLabel();
                 valido = false;
             }
-           
+
 
             //Se cumple cuando pasa todas las validaciones
             else if (valido)
@@ -102,25 +103,34 @@ namespace ProyectoFinal
                 Persona persona = new Persona();
 
                 persona.usuario = txt_usuario_registro.Text;
+
                 persona.nombre = txt_nombre_registro.Text;
 
                 string Pass = txt_contraseña_registro.Text;
 
                 persona.ePass = encrip.GetShga256(Pass);
 
-                int registro1 = datosUsuarios.CrearUsuario(persona);
-                if (registro1 == 1)
+                int UsuarioExistente = VerificarUsuarioExistente(persona);
+
+                if (UsuarioExistente == 1)
                 {
-                    MessageBox.Show("Se creo el usuario con exito");
+                    int registro1 = datosUsuarios.CrearUsuario(persona);
+                    if (registro1 == 1)
+                    {
+                        MessageBox.Show("Se creo el usuario con exito");
+                        Form registro = new login();
+                        registro.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hubo un error al crear el usuario");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Hubo un error al crear el usuario");
+                    MessageBox.Show("El usuario ingresado ya existe, ingrese uno diferente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                Form registro = new login();
-                registro.Show();
-                this.Close();
             }
 
             

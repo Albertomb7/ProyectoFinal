@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,16 @@ namespace ProyectoFinal
 {
     public partial class Inicio : Form
     {
-        public Inicio()
+        private login _login;
+        public Inicio(login login)
         {
             InitializeComponent();
+            _login = login;
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            _login.Hide();  
         }
     }
 }
