@@ -34,8 +34,8 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(3, 3);
-            this.monthCalendar1.Location = new System.Drawing.Point(580, 18);
+            this.monthCalendar1.Location = new System.Drawing.Point(7, 139);
+            this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.RightToLeftLayout = true;
             this.monthCalendar1.TabIndex = 0;
