@@ -30,6 +30,7 @@
         {
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.MensajeBienveneida = new System.Windows.Forms.Label();
+            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.SuspendLayout();
             // 
             // monthCalendar1
@@ -52,11 +53,20 @@
             this.MensajeBienveneida.Text = "BIENVENIDO A TU AGENDA PERSONAL";
             this.MensajeBienveneida.Click += new System.EventHandler(this.label1_Click_1);
             // 
+            // monthCalendar2
+            // 
+            this.monthCalendar2.Location = new System.Drawing.Point(7, 304);
+            this.monthCalendar2.MaxSelectionCount = 1;
+            this.monthCalendar2.Name = "monthCalendar2";
+            this.monthCalendar2.RightToLeftLayout = true;
+            this.monthCalendar2.TabIndex = 2;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1299, 563);
+            this.Controls.Add(this.monthCalendar2);
             this.Controls.Add(this.MensajeBienveneida);
             this.Controls.Add(this.monthCalendar1);
             this.Name = "Inicio";
@@ -73,5 +83,6 @@
 
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Label MensajeBienveneida;
+        private System.Windows.Forms.MonthCalendar monthCalendar2;
     }
 }
