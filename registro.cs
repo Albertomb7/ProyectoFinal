@@ -81,7 +81,13 @@ namespace ProyectoFinal
                 MostrarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, "Este campo es obligatorio.", borde_usuario, ref valido);
                 
             }
-            
+
+            //Validacion de espacios en blanco en contraseña
+            if (string.IsNullOrWhiteSpace(txt_contraseña_registro.Text))
+            {
+                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "Este campo es obligatorio.", borde_contraseña, ref valido);
+
+            }
 
             //Validacion de cantidad de caracteres del nombre de usuario
             if (txt_usuario_registro.Text.Length > 10)
