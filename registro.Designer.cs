@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(registro));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_ver_contraseña_registro = new System.Windows.Forms.Button();
-            this.lbl_informacion = new System.Windows.Forms.Label();
+            this.lbl_informacion_nombre = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_registro = new System.Windows.Forms.Label();
             this.btn_registrarse = new System.Windows.Forms.Button();
@@ -45,17 +45,37 @@
             this.txt_nombre_registro = new System.Windows.Forms.TextBox();
             this.lbl_nombre_registro = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.error_provider_nombre = new System.Windows.Forms.ErrorProvider(this.components);
+            this.error_provider_usuario = new System.Windows.Forms.ErrorProvider(this.components);
+            this.error_provider_contraseña = new System.Windows.Forms.ErrorProvider(this.components);
+            this.error_provider_telefono = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lbl_informacion_usuario = new System.Windows.Forms.Label();
+            this.lbl_informacion_contraseña = new System.Windows.Forms.Label();
+            this.lbl_informacion_telefono = new System.Windows.Forms.Label();
+            this.borde_nombre = new System.Windows.Forms.Panel();
+            this.borde_usuario = new System.Windows.Forms.Panel();
+            this.borde_contraseña = new System.Windows.Forms.Panel();
+            this.borde_telefono = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_nombre)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_usuario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_contraseña)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_telefono)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel1.Controls.Add(this.borde_telefono);
+            this.panel1.Controls.Add(this.borde_contraseña);
+            this.panel1.Controls.Add(this.borde_usuario);
+            this.panel1.Controls.Add(this.borde_nombre);
+            this.panel1.Controls.Add(this.lbl_informacion_telefono);
+            this.panel1.Controls.Add(this.lbl_informacion_contraseña);
+            this.panel1.Controls.Add(this.lbl_informacion_usuario);
             this.panel1.Controls.Add(this.btn_ver_contraseña_registro);
-            this.panel1.Controls.Add(this.lbl_informacion);
+            this.panel1.Controls.Add(this.lbl_informacion_nombre);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.lbl_registro);
             this.panel1.Controls.Add(this.btn_registrarse);
@@ -90,21 +110,21 @@
             this.btn_ver_contraseña_registro.UseVisualStyleBackColor = false;
             this.btn_ver_contraseña_registro.Click += new System.EventHandler(this.btn_ver_contraseña_Click);
             // 
-            // lbl_informacion
+            // lbl_informacion_nombre
             // 
-            this.lbl_informacion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_informacion.AutoSize = true;
-            this.lbl_informacion.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_informacion.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F);
-            this.lbl_informacion.ForeColor = System.Drawing.Color.Red;
-            this.lbl_informacion.Location = new System.Drawing.Point(170, 151);
-            this.lbl_informacion.Name = "lbl_informacion";
-            this.lbl_informacion.Size = new System.Drawing.Size(81, 16);
-            this.lbl_informacion.TabIndex = 11;
-            this.lbl_informacion.Text = "Informacion";
-            this.lbl_informacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_informacion.Visible = false;
-            this.lbl_informacion.Click += new System.EventHandler(this.label1_Click_1);
+            this.lbl_informacion_nombre.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_informacion_nombre.AutoSize = true;
+            this.lbl_informacion_nombre.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_informacion_nombre.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F);
+            this.lbl_informacion_nombre.ForeColor = System.Drawing.Color.Red;
+            this.lbl_informacion_nombre.Location = new System.Drawing.Point(170, 154);
+            this.lbl_informacion_nombre.Name = "lbl_informacion_nombre";
+            this.lbl_informacion_nombre.Size = new System.Drawing.Size(81, 16);
+            this.lbl_informacion_nombre.TabIndex = 11;
+            this.lbl_informacion_nombre.Text = "Informacion";
+            this.lbl_informacion_nombre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_informacion_nombre.Visible = false;
+            this.lbl_informacion_nombre.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // panel2
             // 
@@ -253,9 +273,107 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // errorProvider1
+            // error_provider_nombre
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.error_provider_nombre.BlinkRate = 500;
+            this.error_provider_nombre.ContainerControl = this;
+            // 
+            // error_provider_usuario
+            // 
+            this.error_provider_usuario.ContainerControl = this;
+            // 
+            // error_provider_contraseña
+            // 
+            this.error_provider_contraseña.ContainerControl = this;
+            // 
+            // error_provider_telefono
+            // 
+            this.error_provider_telefono.ContainerControl = this;
+            // 
+            // lbl_informacion_usuario
+            // 
+            this.lbl_informacion_usuario.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_informacion_usuario.AutoSize = true;
+            this.lbl_informacion_usuario.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_informacion_usuario.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F);
+            this.lbl_informacion_usuario.ForeColor = System.Drawing.Color.Red;
+            this.lbl_informacion_usuario.Location = new System.Drawing.Point(170, 230);
+            this.lbl_informacion_usuario.Name = "lbl_informacion_usuario";
+            this.lbl_informacion_usuario.Size = new System.Drawing.Size(81, 16);
+            this.lbl_informacion_usuario.TabIndex = 13;
+            this.lbl_informacion_usuario.Text = "Informacion";
+            this.lbl_informacion_usuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_informacion_usuario.Visible = false;
+            // 
+            // lbl_informacion_contraseña
+            // 
+            this.lbl_informacion_contraseña.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_informacion_contraseña.AutoSize = true;
+            this.lbl_informacion_contraseña.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_informacion_contraseña.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F);
+            this.lbl_informacion_contraseña.ForeColor = System.Drawing.Color.Red;
+            this.lbl_informacion_contraseña.Location = new System.Drawing.Point(170, 314);
+            this.lbl_informacion_contraseña.Name = "lbl_informacion_contraseña";
+            this.lbl_informacion_contraseña.Size = new System.Drawing.Size(81, 16);
+            this.lbl_informacion_contraseña.TabIndex = 14;
+            this.lbl_informacion_contraseña.Text = "Informacion";
+            this.lbl_informacion_contraseña.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_informacion_contraseña.Visible = false;
+            // 
+            // lbl_informacion_telefono
+            // 
+            this.lbl_informacion_telefono.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_informacion_telefono.AutoSize = true;
+            this.lbl_informacion_telefono.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_informacion_telefono.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F);
+            this.lbl_informacion_telefono.ForeColor = System.Drawing.Color.Red;
+            this.lbl_informacion_telefono.Location = new System.Drawing.Point(170, 395);
+            this.lbl_informacion_telefono.Name = "lbl_informacion_telefono";
+            this.lbl_informacion_telefono.Size = new System.Drawing.Size(81, 16);
+            this.lbl_informacion_telefono.TabIndex = 15;
+            this.lbl_informacion_telefono.Text = "Informacion";
+            this.lbl_informacion_telefono.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_informacion_telefono.Visible = false;
+            // 
+            // borde_nombre
+            // 
+            this.borde_nombre.BackColor = System.Drawing.Color.Red;
+            this.borde_nombre.ForeColor = System.Drawing.Color.Red;
+            this.borde_nombre.Location = new System.Drawing.Point(94, 147);
+            this.borde_nombre.Name = "borde_nombre";
+            this.borde_nombre.Size = new System.Drawing.Size(246, 1);
+            this.borde_nombre.TabIndex = 16;
+            this.borde_nombre.Visible = false;
+            // 
+            // borde_usuario
+            // 
+            this.borde_usuario.BackColor = System.Drawing.Color.Red;
+            this.borde_usuario.ForeColor = System.Drawing.Color.Red;
+            this.borde_usuario.Location = new System.Drawing.Point(94, 223);
+            this.borde_usuario.Name = "borde_usuario";
+            this.borde_usuario.Size = new System.Drawing.Size(246, 1);
+            this.borde_usuario.TabIndex = 17;
+            this.borde_usuario.Visible = false;
+            // 
+            // borde_contraseña
+            // 
+            this.borde_contraseña.BackColor = System.Drawing.Color.Red;
+            this.borde_contraseña.ForeColor = System.Drawing.Color.Red;
+            this.borde_contraseña.Location = new System.Drawing.Point(94, 307);
+            this.borde_contraseña.Name = "borde_contraseña";
+            this.borde_contraseña.Size = new System.Drawing.Size(246, 1);
+            this.borde_contraseña.TabIndex = 17;
+            this.borde_contraseña.Visible = false;
+            // 
+            // borde_telefono
+            // 
+            this.borde_telefono.BackColor = System.Drawing.Color.Red;
+            this.borde_telefono.ForeColor = System.Drawing.Color.Red;
+            this.borde_telefono.Location = new System.Drawing.Point(94, 388);
+            this.borde_telefono.Name = "borde_telefono";
+            this.borde_telefono.Size = new System.Drawing.Size(246, 1);
+            this.borde_telefono.TabIndex = 17;
+            this.borde_telefono.Visible = false;
             // 
             // registro
             // 
@@ -271,7 +389,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_nombre)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_usuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_contraseña)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_telefono)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -291,8 +412,18 @@
         private System.Windows.Forms.Label lbl_registro;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lbl_informacion;
+        private System.Windows.Forms.Label lbl_informacion_nombre;
         private System.Windows.Forms.Button btn_ver_contraseña_registro;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider error_provider_nombre;
+        private System.Windows.Forms.ErrorProvider error_provider_usuario;
+        private System.Windows.Forms.ErrorProvider error_provider_contraseña;
+        private System.Windows.Forms.ErrorProvider error_provider_telefono;
+        private System.Windows.Forms.Label lbl_informacion_telefono;
+        private System.Windows.Forms.Label lbl_informacion_contraseña;
+        private System.Windows.Forms.Label lbl_informacion_usuario;
+        private System.Windows.Forms.Panel borde_nombre;
+        private System.Windows.Forms.Panel borde_contraseña;
+        private System.Windows.Forms.Panel borde_usuario;
+        private System.Windows.Forms.Panel borde_telefono;
     }
 }

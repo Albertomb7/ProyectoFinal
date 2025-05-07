@@ -4,11 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.Options;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static ProyectoFinal.datosUsuarios;
 
 namespace ProyectoFinal
@@ -45,68 +48,81 @@ namespace ProyectoFinal
 
         }
 
+        static bool valido = true;
         private void btn_registrarse_Click(object sender, EventArgs e)
         {
-            bool valido = true;
+            
 
-            //Validacion de espacios en blanco
-            if (string.IsNullOrWhiteSpace(txt_nombre_registro.Text) || string.IsNullOrWhiteSpace(txt_usuario_registro.Text) || string.IsNullOrWhiteSpace(txt_contraseña_registro.Text) || string.IsNullOrWhiteSpace(txt_telefono_registro.Text))
+            //Limpia todos los errores
+            LimpiarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, borde_nombre, ref valido);
+            LimpiarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, borde_usuario, ref valido);
+            LimpiarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, borde_contraseña, ref valido);
+            LimpiarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, borde_telefono, ref valido);
+
+
+            //Validacion de espacios en blanco en el nombre
+            if (string.IsNullOrWhiteSpace(txt_nombre_registro.Text))
             {
-                lbl_informacion.Visible = true;
-                lbl_informacion.Text = "Este campo es obligatorio";
-                AjustarLabel();
-                valido = false;
+                MostrarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, "Este campo es obligatorio.", borde_nombre, ref valido);              
+                
             }
 
             //Validacion los caracteres especiaales en el nombre
-            else if (txt_nombre_registro.Text.Any(ch => !char.IsLetter(ch) && !char.IsWhiteSpace(ch)))
+            if (txt_nombre_registro.Text.Any(ch => !char.IsLetter(ch) && !char.IsWhiteSpace(ch)))
             {
-                lbl_informacion.Visible = true;
-                lbl_informacion.Text = "El nombre solo puede contener letras";
-                AjustarLabel();
-                valido = false;
+                MostrarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, "El nombre solo puede contener letras.", borde_nombre, ref valido);
+                
+
+            }
+
+            //Validacion espacio en blanco en el usuario 
+            if (string.IsNullOrWhiteSpace(txt_usuario_registro.Text))
+            {
+                MostrarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, "Este campo es obligatorio.", borde_usuario, ref valido);
+                
+            }
+
+            //Validacion de espacios en blanco en contraseña
+            if (string.IsNullOrWhiteSpace(txt_contraseña_registro.Text))
+            {
+                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "Este campo es obligatorio.", borde_contraseña, ref valido);
+
             }
 
             //Validacion de cantidad de caracteres del nombre de usuario
-            else if (txt_usuario_registro.Text.Length > 10)
+            if (txt_usuario_registro.Text.Length > 10)
             {
-                lbl_informacion.Visible = true;
-                lbl_informacion.Text = "Nombre de usuario demasiado largo";
-                AjustarLabel();
-                valido = false;
+                MostrarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, "Usuario demasiado largo, maximo 10 caracteres.", borde_usuario, ref valido);
+                
             }
 
             //Validar longitud de la contraseña
-            else if(txt_contraseña_registro.Text.Length < 8){
-                lbl_informacion.Visible = true;
-                lbl_informacion.Text = "La contraseña debe contener minimo 8 caracteres";
-                AjustarLabel();
-                valido = false;
+            if(txt_contraseña_registro.Text.Length < 8){
+                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "La contraseña debe contener minimo 8 caracteres.", borde_contraseña, ref valido);
+                
             }
 
             //Validacion de los caracteres especiales en los numeros de telefono
-            else if (txt_telefono_registro.Text.Any(ch => !char.IsDigit(ch) && !char.IsWhiteSpace(ch)))
+            if (txt_telefono_registro.Text.Any(ch => !char.IsDigit(ch) && !char.IsWhiteSpace(ch)))
             {
-                lbl_informacion.Visible = true;
-                lbl_informacion.Text = "El telefono solo puede contener numeros";
-                AjustarLabel();
-                valido = false;
+                MostrarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, "El telefono solo puede contener numeros.", borde_telefono, ref valido);
+                
             }
 
             //Validacion de la longitud del numero de telefono
-            else if(txt_telefono_registro.Text.Length != 8) 
+            if(txt_telefono_registro.Text.Length != 8) 
             {
-                lbl_informacion.Visible = true;
-                lbl_informacion.Text = "El numero debe contener 8 caracteres";
-                AjustarLabel();
-                valido = false;
+                MostrarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, "El numero debe contener 8 caracteres.", borde_telefono, ref valido);
+                
             }
+
+            
 
 
             //Se cumple cuando pasa todas las validaciones
             else if (valido)
             {
-                lbl_informacion.Visible = false;
+                lbl_informacion_nombre.Visible = false;
 
                 Persona persona = new Persona();
 
@@ -145,6 +161,26 @@ namespace ProyectoFinal
             
         }
 
+
+        private void MostrarErrores(System.Windows.Forms.TextBox txt, Label lbl, ErrorProvider error, string mensaje, Panel borde, ref bool valido)
+        {
+            lbl.Text = mensaje;
+            lbl.Visible = true; 
+            borde.Visible = true;
+            error.SetError(txt, mensaje);
+            AjustarLabel(lbl);
+            valido = false;
+        }
+
+        private void LimpiarErrores(System.Windows.Forms.TextBox txt, Label lbl, ErrorProvider error, Panel borde, ref bool valido)
+        {
+            lbl.Visible = false;
+            borde.Visible = false;
+            error.SetError(txt, "");
+            valido = true;
+        }
+
+
         private void registro_Load(object sender, EventArgs e)
         {
             //Carga de eventos
@@ -162,7 +198,7 @@ namespace ProyectoFinal
         {
             //Bloquea espacios en blanco que se pegan
 
-            TextBox textBox = (TextBox)sender;
+            System.Windows.Forms.TextBox textBox = (System.Windows.Forms.TextBox)sender;
             int pos = textBox.SelectionStart;
 
             string sinEspacios = textBox.Text.Replace(" ", "");
@@ -171,6 +207,12 @@ namespace ProyectoFinal
             {
                 textBox.Text = sinEspacios;
                 textBox.SelectionStart = pos > 0 ? pos - 1 : 0;
+            }
+
+            //Limpia los errores si ya no existen
+            if(txt_telefono_registro.Text.Any(ch => char.IsDigit(ch) && char.IsWhiteSpace(ch)) && txt_telefono_registro.Text.Length == 8)
+            {
+                LimpiarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, borde_telefono, ref valido);
             }
         }
 
@@ -196,7 +238,7 @@ namespace ProyectoFinal
         {
             //Bloquea espacios en blanco que se pegan
 
-            TextBox textBox = (TextBox)sender;
+            System.Windows.Forms.TextBox textBox = (System.Windows.Forms.TextBox)sender;
             int pos = textBox.SelectionStart;
 
             string sinEspacios = textBox.Text.Replace(" ", "");
@@ -205,6 +247,12 @@ namespace ProyectoFinal
             {
                 textBox.Text = sinEspacios;
                 textBox.SelectionStart = pos > 0 ? pos - 1 : 0;
+            }
+
+            //Limpia los errores si ya no existen
+            if (txt_contraseña_registro.Text.Length > 8)
+            {
+                LimpiarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, borde_contraseña, ref valido);
             }
         }
 
@@ -226,7 +274,7 @@ namespace ProyectoFinal
         {
             //Bloquea espacios en blanco que se pegan
 
-            TextBox textBox = (TextBox)sender;
+            System.Windows.Forms.TextBox textBox = (System.Windows.Forms.TextBox)sender;
             int pos = textBox.SelectionStart;
 
             string sinEspacios = textBox.Text.Replace(" ", "");
@@ -235,6 +283,11 @@ namespace ProyectoFinal
             {
                 textBox.Text = sinEspacios;
                 textBox.SelectionStart = pos > 0 ? pos - 1 : 0;
+            }
+
+            //Limpia errores
+            if(!string.IsNullOrWhiteSpace(txt_usuario_registro.Text) && txt_usuario_registro.Text.Length < 10) { 
+            LimpiarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, borde_usuario, ref valido);
             }
         }
 
@@ -256,7 +309,10 @@ namespace ProyectoFinal
 
         private void txt_nombre_registro_TextChanged(object sender, EventArgs e)
         {
-
+            if(!string.IsNullOrWhiteSpace(txt_nombre_registro.Text) && txt_nombre_registro.Text.All(ch => char.IsLetter(ch) || char.IsWhiteSpace(ch) && !char.IsDigit(ch)))
+            {
+                LimpiarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, borde_nombre, ref valido);
+            }
         }
 
         private void lbl_nombre_registro_Click(object sender, EventArgs e)
@@ -275,11 +331,11 @@ namespace ProyectoFinal
         }
 
         //Funcion para centrar el label de informacion
-        private void AjustarLabel()
+        private void AjustarLabel(Label lbl)
         {
             int Ubicacion_centrar = 218; 
-            lbl_informacion.AutoSize = true; 
-            lbl_informacion.Left = Ubicacion_centrar - (lbl_informacion.Width / 2);
+            lbl.AutoSize = true; 
+            lbl.Left = Ubicacion_centrar - (lbl.Width / 2);
         }
 
         private void btn_ver_contraseña_Click(object sender, EventArgs e)
