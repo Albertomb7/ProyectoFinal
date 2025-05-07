@@ -28,35 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.MensajeBienveneida = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // monthCalendar1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold);
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(1, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label1.Size = new System.Drawing.Size(501, 33);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "MOMENTOS UNICOS EN AYUTLA";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(3, 3);
+            this.monthCalendar1.Location = new System.Drawing.Point(580, 18);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.RightToLeftLayout = true;
+            this.monthCalendar1.TabIndex = 0;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // MensajeBienveneida
+            // 
+            this.MensajeBienveneida.AutoSize = true;
+            this.MensajeBienveneida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MensajeBienveneida.Location = new System.Drawing.Point(157, 18);
+            this.MensajeBienveneida.Name = "MensajeBienveneida";
+            this.MensajeBienveneida.Size = new System.Drawing.Size(210, 13);
+            this.MensajeBienveneida.TabIndex = 1;
+            this.MensajeBienveneida.Text = "BIENVENIDO A TU AGENDA PERSONAL";
+            this.MensajeBienveneida.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // Inicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.ClientSize = new System.Drawing.Size(1299, 563);
+            this.Controls.Add(this.MensajeBienveneida);
+            this.Controls.Add(this.monthCalendar1);
             this.Name = "Inicio";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Inicio_Load);
@@ -67,6 +71,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Label MensajeBienveneida;
     }
 }
