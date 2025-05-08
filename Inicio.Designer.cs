@@ -2,15 +2,15 @@
 {
     partial class Inicio
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        // Controles del formulario
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.FlowLayoutPanel fLDias;
+
         /// <summary>
-        /// Clean up any resources being used.
+        /// Limpiar los recursos que se estén utilizando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,69 +20,47 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código generado por el Diseñador de Windows Forms
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.MensajeBienveneida = new System.Windows.Forms.Label();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.fLDias = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
+
             // 
-            // monthCalendar1
+            // btnNext
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(7, 139);
-            this.monthCalendar1.MaxSelectionCount = 1;
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.RightToLeftLayout = true;
-            this.monthCalendar1.TabIndex = 0;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.btnNext.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.btnNext.Location = new System.Drawing.Point(500, 20);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(40, 40);
+            this.btnNext.TabIndex = 0;
+            this.btnNext.Text = ">";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+
             // 
-            // MensajeBienveneida
+            // fLDias
             // 
-            this.MensajeBienveneida.AutoSize = true;
-            this.MensajeBienveneida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MensajeBienveneida.Location = new System.Drawing.Point(157, 18);
-            this.MensajeBienveneida.Name = "MensajeBienveneida";
-            this.MensajeBienveneida.Size = new System.Drawing.Size(210, 13);
-            this.MensajeBienveneida.TabIndex = 1;
-            this.MensajeBienveneida.Text = "BIENVENIDO A TU AGENDA PERSONAL";
-            this.MensajeBienveneida.Click += new System.EventHandler(this.label1_Click_1);
-            // 
-            // monthCalendar2
-            // 
-            this.monthCalendar2.Location = new System.Drawing.Point(7, 304);
-            this.monthCalendar2.MaxSelectionCount = 1;
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.RightToLeftLayout = true;
-            this.monthCalendar2.TabIndex = 2;
+            this.fLDias.Location = new System.Drawing.Point(30, 80);
+            this.fLDias.Name = "fLDias";
+            this.fLDias.Size = new System.Drawing.Size(600, 500);
+            this.fLDias.TabIndex = 1;
+
             // 
             // Inicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1299, 563);
-            this.Controls.Add(this.monthCalendar2);
-            this.Controls.Add(this.MensajeBienveneida);
-            this.Controls.Add(this.monthCalendar1);
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.fLDias);
+            this.Controls.Add(this.btnNext);
             this.Name = "Inicio";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Form1";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Inicio_Load);
+            this.Text = "Calendario";
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
 
         #endregion
-
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Label MensajeBienveneida;
-        private System.Windows.Forms.MonthCalendar monthCalendar2;
     }
 }

@@ -1,43 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProyectoFinal
 {
     public partial class Inicio : Form
     {
-        private login _login;
-        public Inicio(login login)
+        int mes, año;
+
+        public Inicio()
         {
             InitializeComponent();
-            _login = login;
+            mes = DateTime.Now.Month;
+            año = DateTime.Now.Year;
+            MostrarDiasDelMes(mes, año);
         }
 
-        private void Inicio_Load(object sender, EventArgs e)
+        private void btnPrev_Click(object sender, EventArgs e)
         {
-            _login.Hide();  
+            fLDias.Controls.Clear();
+            mes--;
+
+            if (mes < 1)
+            {
+                mes = 12;
+                año--;
+            }
+
+            MostrarDiasDelMes(mes, año);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnNext_Click(object sender, EventArgs e)
         {
+            fLDias.Controls.Clear();
+            mes++;
 
+            if (mes > 12)
+            {
+                mes = 1;
+                año++;
+            }
+
+            MostrarDiasDelMes(mes, año);
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private void MostrarDiasDelMes(int mes, int año)
         {
+            DateTime primerDiaDelMes = new DateTime(año, mes, 1);
+            int diasEnElMes = DateTime.DaysInMonth(año, mes);
+            int diaDeLaSemana = (int)primerDiaDelMes.DayOfWeek;
 
-        }
+            for (int i = 0; i < diaDeLaSemana; i++)
+            {
+                Panel panel = new Panel();
+                panel.Width = 100;
+                panel.Height = 80;
+                fLDias.Controls.Add(panel);
+            }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
+            for (int dia = 1; dia <= diasEnElMes; dia++)
+            {
+                UcDias diaControl = new UcDias();
+                diaControl.Dia = dia.ToString();  // Corrección aquí
+                fLDias.Controls.Add(diaControl);
+            }
         }
     }
 }

@@ -18,12 +18,11 @@ namespace ProyectoFinal
         public login()
         {
             InitializeComponent();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -72,17 +71,15 @@ namespace ProyectoFinal
             //Obtiene el valor que retorna la funcion para verificar el usuario existente
             int UsuarioExistente = VerificarUsuarioExistente(persona);
 
-
             //Si el usuario si existe permite continuar
-            if(UsuarioExistente == 0)
+            if (UsuarioExistente == 0)
             {
-             
-               datosUsuarios.IniciarSesion(persona);
-
+                datosUsuarios.IniciarSesion(persona);
 
                 if (ePass == persona.ePass)
                 {
-                    Form FormInicio = new Inicio(this);
+                    Form FormInicio = new Inicio();  // <--- CORREGIDO
+
                     FormInicio.Show();
                     this.Hide();
                 }
@@ -97,7 +94,6 @@ namespace ProyectoFinal
             {
                 MessageBox.Show("El usuario no existe, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -117,21 +113,20 @@ namespace ProyectoFinal
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            registro RegistroForm = new registro();  
-            RegistroForm.Show();                   
+            registro RegistroForm = new registro();
+            RegistroForm.Show();
             this.Hide();
 
             RegistroForm.FormClosed += (s, args) => this.Show();
 
-            this.Hide();       
-             
+            this.Hide();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             txt_contrasenia.UseSystemPasswordChar = !txt_contrasenia.UseSystemPasswordChar;
 
-            if(txt_contrasenia.UseSystemPasswordChar == false)
+            if (txt_contrasenia.UseSystemPasswordChar == false)
             {
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\..\Recursos\Imagenes\icon_ocultar.png");
                 rutaImagen = Path.GetFullPath(rutaImagen);
