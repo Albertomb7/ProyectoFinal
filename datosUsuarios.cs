@@ -18,16 +18,22 @@ namespace ProyectoFinal
             public string usuario { get; set; }
             public string nombre { get; set; }
             public string ePass { get; set; }
+            public string correo { get; set; }
             public Persona() { }
 
-            public Persona(int id, string usuario, string nombre, string ePass)
+            public Persona(int id, string usuario, string nombre, string ePass, string correo)
             {
                 this.id = id;
                 this.usuario = usuario;
                 this.nombre = nombre;
+                this.correo = correo;
                 this.ePass = ePass;
+
             }
         }
+
+
+        
 
         //Crea usuario nuevo en la base de datos
         public static int CrearUsuario(Persona persona)
@@ -37,9 +43,25 @@ namespace ProyectoFinal
             {
                 using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
                 {
-                    string query = ("Insert into usuarios values('" + persona.usuario + "', '" + persona.nombre + "','" + persona.ePass + "')");
-                    Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
-                    retorna = comando.ExecuteNonQuery();
+
+                    //Transaccion para hacer las dos acciones
+                    Microsoft.Data.SqlClient.SqlTransaction transaccion = conexion.BeginTransaction();
+
+                    string query1 = ("Insert into usuarios values('" + persona.usuario + "', '" + persona.nombre + "','" + persona.ePass + "'); SELECT SCOPE_IDENTITY();");
+
+                    Microsoft.Data.SqlClient.SqlCommand comando1 = new Microsoft.Data.SqlClient.SqlCommand(query1, conexion, transaccion);
+
+
+                    //Almacena el id del nuevo usuario creado
+                    int IdNuevoUsuario = Convert.ToInt32(comando1.ExecuteScalar());
+
+                    string query2 = ("Insert into CorreosElectronicos values('" + IdNuevoUsuario + "', '" + persona.correo + "')");
+
+                    Microsoft.Data.SqlClient.SqlCommand comando2 = new Microsoft.Data.SqlClient.SqlCommand(query2, conexion, transaccion);
+
+                    retorna = comando2.ExecuteNonQuery();
+
+                    transaccion.Commit();
                 }
             }
             catch (Microsoft.Data.SqlClient.SqlException )
@@ -49,7 +71,7 @@ namespace ProyectoFinal
             return retorna;
         }
 
-
+  
         //Actualizar datos de usuario
         public static int ActualizarUsuario(Persona persona)
         {

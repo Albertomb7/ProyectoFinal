@@ -18,16 +18,37 @@ namespace ProyectoFinal
         {
             InitializeComponent();
             _login = login;
+
+    
+
+           
         }
+
+        private void Calendario_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateTime fechaSeleccionada = e.Start;
+            MessageBox.Show("Seleccionaste: " + fechaSeleccionada.ToShortDateString());
+        }
+
+        
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            _login.Hide();  
+            _login.Hide();
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void Calendario_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
+        
+        
     }
 }

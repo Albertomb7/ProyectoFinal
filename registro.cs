@@ -57,7 +57,7 @@ namespace ProyectoFinal
             LimpiarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, borde_nombre, ref valido);
             LimpiarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, borde_usuario, ref valido);
             LimpiarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, borde_contraseña, ref valido);
-            LimpiarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, borde_telefono, ref valido);
+            LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_telefono, borde_correo, ref valido);
 
 
             //Validacion de espacios en blanco en el nombre
@@ -67,13 +67,6 @@ namespace ProyectoFinal
                 
             }
 
-            //Validacion los caracteres especiaales en el nombre
-            if (txt_nombre_registro.Text.Any(ch => !char.IsLetter(ch) && !char.IsWhiteSpace(ch)))
-            {
-                MostrarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, "El nombre solo puede contener letras.", borde_nombre, ref valido);
-                
-
-            }
 
             //Validacion espacio en blanco en el usuario 
             if (string.IsNullOrWhiteSpace(txt_usuario_registro.Text))
@@ -89,32 +82,20 @@ namespace ProyectoFinal
 
             }
 
-            //Validacion de cantidad de caracteres del nombre de usuario
-            if (txt_usuario_registro.Text.Length > 10)
+            //Validacion de espacios en blanco en el telefono
+            if (string.IsNullOrWhiteSpace(txt_correo_registro.Text))
             {
-                MostrarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, "Usuario demasiado largo, maximo 10 caracteres.", borde_usuario, ref valido);
-                
-            }
+                MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_telefono, "Este campo es obligatorio.", borde_correo, ref valido);
 
-            //Validar longitud de la contraseña
-            if(txt_contraseña_registro.Text.Length < 8){
-                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "La contraseña debe contener minimo 8 caracteres.", borde_contraseña, ref valido);
-                
             }
+            
+            
 
-            //Validacion de los caracteres especiales en los numeros de telefono
-            if (txt_telefono_registro.Text.Any(ch => !char.IsDigit(ch) && !char.IsWhiteSpace(ch)))
-            {
-                MostrarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, "El telefono solo puede contener numeros.", borde_telefono, ref valido);
-                
-            }
 
-            //Validacion de la longitud del numero de telefono
-            if(txt_telefono_registro.Text.Length != 8) 
-            {
-                MostrarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, "El numero debe contener 8 caracteres.", borde_telefono, ref valido);
-                
-            }
+
+            
+
+            
 
             
 
@@ -129,6 +110,8 @@ namespace ProyectoFinal
                 persona.usuario = txt_usuario_registro.Text;
 
                 persona.nombre = txt_nombre_registro.Text;
+
+                persona.correo = txt_correo_registro.Text;
 
                 string Pass = txt_contraseña_registro.Text;
 
@@ -161,7 +144,7 @@ namespace ProyectoFinal
             
         }
 
-
+        //Funcion para mostrar errores en los datos ingresados 
         private void MostrarErrores(System.Windows.Forms.TextBox txt, Label lbl, ErrorProvider error, string mensaje, Panel borde, ref bool valido)
         {
             lbl.Text = mensaje;
@@ -172,6 +155,7 @@ namespace ProyectoFinal
             valido = false;
         }
 
+        //Funcion para ocultar la informacion de los errores 
         private void LimpiarErrores(System.Windows.Forms.TextBox txt, Label lbl, ErrorProvider error, Panel borde, ref bool valido)
         {
             lbl.Visible = false;
@@ -190,11 +174,11 @@ namespace ProyectoFinal
             this.txt_contraseña_registro.KeyPress += new KeyPressEventHandler(txt_contrasenia_registro_KeyPress);
             this.txt_contraseña_registro.KeyPress += new KeyPressEventHandler(txt_contrasenia_registro_TextChanged);
 
-            this.txt_telefono_registro.KeyPress += new KeyPressEventHandler(txt_telefono_registro_KeyPress);
-            this.txt_telefono_registro.KeyPress += new KeyPressEventHandler(txt_telefono_registro_TextChanged);
+            this.txt_correo_registro.KeyPress += new KeyPressEventHandler(txt_correo_registro_KeyPress);
+            this.txt_correo_registro.KeyPress += new KeyPressEventHandler(txt_correo_registro_TextChanged);
         }
 
-        private void txt_telefono_registro_TextChanged(object sender, EventArgs e)
+        private void txt_correo_registro_TextChanged(object sender, EventArgs e)
         {
             //Bloquea espacios en blanco que se pegan
 
@@ -210,14 +194,17 @@ namespace ProyectoFinal
             }
 
             //Limpia los errores si ya no existen
-            if(txt_telefono_registro.Text.Any(ch => char.IsDigit(ch) && char.IsWhiteSpace(ch)) && txt_telefono_registro.Text.Length == 8)
+            if(txt_correo_registro.Text.Any(ch => char.IsDigit(ch) && char.IsWhiteSpace(ch)))
             {
-                LimpiarErrores(txt_telefono_registro, lbl_informacion_telefono, error_provider_telefono, borde_telefono, ref valido);
+                LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_telefono, borde_correo, ref valido);
             }
+
+            
+
         }
 
 
-        private void txt_telefono_registro_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_correo_registro_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Bloquea los espacios en blanco escritos desde el teclado
 
@@ -227,7 +214,7 @@ namespace ProyectoFinal
             }
         }
 
-        private void lbl_telefono_registro_Click(object sender, EventArgs e)
+        private void lbl_correo_registro_Click(object sender, EventArgs e)
         {
 
         }
@@ -248,9 +235,14 @@ namespace ProyectoFinal
                 textBox.Text = sinEspacios;
                 textBox.SelectionStart = pos > 0 ? pos - 1 : 0;
             }
+            //Validar longitud de la contraseña
+            if (txt_contraseña_registro.Text.Length < 8)
+            {
+                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "La contraseña debe contener minimo 8 caracteres.", borde_contraseña, ref valido);
 
+            }
             //Limpia los errores si ya no existen
-            if (txt_contraseña_registro.Text.Length > 8)
+            if (!string.IsNullOrWhiteSpace(txt_contraseña_registro.Text) && txt_contraseña_registro.Text.Length > 8)
             {
                 LimpiarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, borde_contraseña, ref valido);
             }
@@ -289,6 +281,13 @@ namespace ProyectoFinal
             if(!string.IsNullOrWhiteSpace(txt_usuario_registro.Text) && txt_usuario_registro.Text.Length < 10) { 
             LimpiarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, borde_usuario, ref valido);
             }
+
+            //Validacion de cantidad de caracteres del nombre de usuario
+            if (txt_usuario_registro.Text.Length > 10)
+            {
+                MostrarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, "Usuario demasiado largo, maximo 10 caracteres.", borde_usuario, ref valido);
+
+            }
         }
 
         private void txt_usuario_registro_KeyPress(object sender, KeyPressEventArgs e)
@@ -309,7 +308,16 @@ namespace ProyectoFinal
 
         private void txt_nombre_registro_TextChanged(object sender, EventArgs e)
         {
-            if(!string.IsNullOrWhiteSpace(txt_nombre_registro.Text) && txt_nombre_registro.Text.All(ch => char.IsLetter(ch) || char.IsWhiteSpace(ch) && !char.IsDigit(ch)))
+            //Validacion los caracteres especiaales en el nombre
+            if (txt_nombre_registro.Text.Any(ch => !char.IsLetter(ch) && !char.IsWhiteSpace(ch)))
+            {
+                MostrarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, "El nombre solo puede contener letras.", borde_nombre, ref valido);
+
+
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(txt_nombre_registro.Text) && txt_nombre_registro.Text.All(ch => char.IsLetter(ch) || char.IsWhiteSpace(ch) && !char.IsDigit(ch)))
             {
                 LimpiarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, borde_nombre, ref valido);
             }
