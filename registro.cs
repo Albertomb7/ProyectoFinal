@@ -206,7 +206,7 @@ namespace ProyectoFinal
 
         private void txt_correo_registro_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Bloquea los espacios en blanco escritos desde el teclado
+            //Bloquea los espacios en blanco escritos desde el teclado 
 
             if (e.KeyChar == ' ')
             {
