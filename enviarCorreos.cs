@@ -20,7 +20,7 @@ namespace ProyectoFinal
         public string codigo { get; set; }
 
             public CodigoVerificacion() { }
-
+               
         public CodigoVerificacion(string codigo)
         {
             this.codigo = codigo;

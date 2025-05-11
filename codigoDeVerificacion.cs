@@ -27,7 +27,7 @@ namespace ProyectoFinal
         {
             InitializeComponent();
         }
-
+         
 
         private void txt1_TextChanged(object sender, EventArgs e)
         {
