@@ -1,54 +1,91 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Forms;
+using CalendarioApp;
 
-namespace ProyectoFinal
+namespace ProyectoFinal.Calendario
 {
     public partial class Inicio : Form
     {
-        private login _login;
-        public Inicio(login login)
+        int mes, año;
+        private Form formularioLogin; // Almacena el formulario login
+
+        public Inicio()
+        {
+            InitializeComponent(); 
+        }
+
+        public Inicio(Form login)
         {
             InitializeComponent();
-            _login = login;
-
-    
-
-           
+            formularioLogin = login;
         }
-
-        private void Calendario_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            DateTime fechaSeleccionada = e.Start;
-            MessageBox.Show("Seleccionaste: " + fechaSeleccionada.ToShortDateString());
-        }
-
-        
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            _login.Hide();
-            
+            DateTime hoy = DateTime.Today;
+            mes = hoy.Month;
+            año = hoy.Year;
+            MostrarDias();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void MostrarDias()
         {
+            flDays.Controls.Clear();
 
+            DateTime primerDiaDelMes = new DateTime(año, mes, 1);
+            int diasEnMes = DateTime.DaysInMonth(año, mes);
+            int diaSemana = (int)primerDiaDelMes.DayOfWeek;
+
+            // Ajustar para que lunes sea el primer día (0 = lunes, ..., 6 = domingo)
+            diaSemana = diaSemana == 0 ? 6 : diaSemana - 1;
+
+            lblFecha.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes).ToUpper() + " " + año;
+
+            // Espacios vacíos antes del primer día del mes
+            for (int i = 0; i < diaSemana; i++)
+            {
+                UcDias espacio = new UcDias();
+                espacio.Dia = "";
+                espacio.Width = 90; // Ajusta estos valores a tu diseño
+                espacio.Height = 80;
+                flDays.Controls.Add(espacio);
+            }
+
+            // Agregar los días reales del mes
+            for (int dia = 1; dia <= diasEnMes; dia++)
+            {
+                UcDias diaControl = new UcDias();
+                diaControl.Dia = dia.ToString();
+                diaControl.Width = 90;  // Asegúrate que el tamaño sea consistente
+                diaControl.Height = 80;
+                flDays.Controls.Add(diaControl);
+            }
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private void pbAnterior_Click(object sender, EventArgs e)
         {
-
+            mes--;
+            if (mes < 1)
+            {
+                mes = 12;
+                año--;
+            }
+            MostrarDias();
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
+        private void pbSiguiente_Click(object sender, EventArgs e)
+        {
+            mes++;
+            if (mes > 12)
+            {
+                mes = 1;
+                año++;
+            }
+            MostrarDias();
+        }
+
+        private void lblMartes_Click(object sender, EventArgs e)
         {
 
         }

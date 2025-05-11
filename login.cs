@@ -82,7 +82,7 @@ namespace ProyectoFinal
 
                 if (ePass == persona.ePass)
                 {
-                    Form FormInicio = new Inicio(this);
+                    Form FormInicio = new Calendario.Inicio(this);
                     FormInicio.Show();
                     this.Hide();
                 }
