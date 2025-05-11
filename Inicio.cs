@@ -12,7 +12,7 @@ namespace ProyectoFinal.Calendario
 
         public Inicio()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         public Inicio(Form login)
