@@ -33,8 +33,6 @@ namespace ProyectoFinal
         }
 
 
-        
-
         //Crea usuario nuevo en la base de datos
         public static int CrearUsuario(Persona persona)
         {

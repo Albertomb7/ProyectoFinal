@@ -19,10 +19,17 @@ namespace ProyectoFinal
 {
     public partial class registro : Form
     {
+   
+
         public registro()
         {
             InitializeComponent();
         }
+
+        public string TextoNombre => txt_nombre_registro.Text;
+        public string TextoUsuario => txt_usuario_registro.Text;
+        public string TextoCorreo => txt_correo_registro.Text;
+        public string TextoContraseña => txt_contraseña_registro.Text;
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -68,6 +75,7 @@ namespace ProyectoFinal
                 
             }
 
+
             //Validacion espacio en blanco en el usuario 
             if (string.IsNullOrWhiteSpace(txt_usuario_registro.Text))
             {
@@ -94,54 +102,18 @@ namespace ProyectoFinal
                 MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, "Direccion de correo invalida.", borde_correo, ref valido);
             }
 
+            //Se cumple cuando pasa todas las validaciones y envia el codigo al correo ingresado
             else if (valido)
             {
-                enviarCorreos.EnviarCorreo(txt_correo_registro.Text);
+                enviarCodigo.EnviarCorreo(txt_correo_registro.Text);
+
+                //Abre el formulario de verificacion
+                codigoDeVerificacion formVerificacion = new codigoDeVerificacion(this); 
+                formVerificacion.Show();
+
             }
 
-            //Se cumple cuando pasa todas las validaciones
 
-            //else if (valido)
-            //{
-            //    lbl_informacion_nombre.Visible = false;
-
-            //    Persona persona = new Persona();
-
-            //    persona.usuario = txt_usuario_registro.Text;
-
-            //    persona.nombre = txt_nombre_registro.Text;
-
-            //    persona.correo = txt_correo_registro.Text;
-
-            //    string Pass = txt_contraseña_registro.Text;
-
-            //    persona.ePass = encrip.GetShga256(Pass);
-
-            //    int UsuarioExistente = VerificarUsuarioExistente(persona);
-
-            //    if (UsuarioExistente == 1)
-            //    {
-            //        int registro1 = datosUsuarios.CrearUsuario(persona);
-            //        if (registro1 == 1)
-            //        {
-            //            MessageBox.Show("Usuario registrado con exito", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            Form registro = new login();
-            //            registro.Show();
-            //            this.Close();
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Hubo un error al crear el usuario");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("El usuario ingresado ya existe, ingrese uno diferente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        txt_usuario_registro.Select();
-            //    }
-            //}
-
-            
         }
 
         

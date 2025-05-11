@@ -9,15 +9,40 @@ using System.Windows.Forms;
 
 namespace ProyectoFinal
 {
-    public class enviarCorreos
+    public class enviarCodigo
     {
+        //Variable publica para compararla en el formulario
+        public static string CodigoEnviado;
+        
+
+        //Creacion del atributo codigo
+        public class CodigoVerificacion { 
+        public string codigo { get; set; }
+
+            public CodigoVerificacion() { }
+
+        public CodigoVerificacion(string codigo)
+        {
+            this.codigo = codigo;
+        }
+
+        }
+
+
+        //Funcion que envia el correo
         public static void EnviarCorreo(string correo)
         {
-            string email = "yoempresa123@gmail.com"; 
-            string password = "oquq imcw fjys lwhd"; 
-            string toEmail = correo; 
-            string asunto = "Codigo de confirmacion"; 
-            string body = "El codgio es 12345";
+            string email = "yoempresa123@gmail.com";
+            string password = "oquq imcw fjys lwhd";
+            string toEmail = correo;
+            string asunto = "Codigo de confirmacion";
+        
+            Random rand = new Random();
+            int a = rand.Next(1000, 9000);
+            
+            CodigoEnviado = a.ToString();
+
+            string body = $"El codigo es {CodigoEnviado}";
 
             MailMessage mail = new MailMessage(); 
             mail.From = new MailAddress(email);
@@ -29,8 +54,7 @@ namespace ProyectoFinal
             smtp.Credentials = new NetworkCredential(email, password);
             smtp.EnableSsl = true;
             smtp.Send(mail);
-            codigoDeVerificacion VerificacionForm = new codigoDeVerificacion();
-            VerificacionForm.Show();
+            
             
         }
 
