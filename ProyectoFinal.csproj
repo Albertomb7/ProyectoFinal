@@ -165,6 +165,13 @@
     <Compile Include="conexionSql.cs" />
     <Compile Include="datosUsuarios.cs" />
     <Compile Include="encrip.cs" />
+    <Compile Include="enviarCorreos.cs" />
+    <Compile Include="codigoDeVerificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="codigoDeVerificacion.Designer.cs">
+      <DependentUpon>codigoDeVerificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +192,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="codigoDeVerificacion.resx">
+      <DependentUpon>codigoDeVerificacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>

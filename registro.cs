@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -57,8 +58,8 @@ namespace ProyectoFinal
             LimpiarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, borde_nombre, ref valido);
             LimpiarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, borde_usuario, ref valido);
             LimpiarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, borde_contraseña, ref valido);
-            LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_telefono, borde_correo, ref valido);
-
+            LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, borde_correo, ref valido);
+            bool CorreoValido = VerificarCorreo(txt_correo_registro.Text);
 
             //Validacion de espacios en blanco en el nombre
             if (string.IsNullOrWhiteSpace(txt_nombre_registro.Text))
@@ -66,7 +67,6 @@ namespace ProyectoFinal
                 MostrarErrores(txt_nombre_registro, lbl_informacion_nombre, error_provider_nombre, "Este campo es obligatorio.", borde_nombre, ref valido);              
                 
             }
-
 
             //Validacion espacio en blanco en el usuario 
             if (string.IsNullOrWhiteSpace(txt_usuario_registro.Text))
@@ -85,64 +85,78 @@ namespace ProyectoFinal
             //Validacion de espacios en blanco en el telefono
             if (string.IsNullOrWhiteSpace(txt_correo_registro.Text))
             {
-                MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_telefono, "Este campo es obligatorio.", borde_correo, ref valido);
+                MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, "Este campo es obligatorio.", borde_correo, ref valido);
 
             }
             
-            
+            else if(CorreoValido == false)
+            {
+                MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, "Direccion de correo invalida.", borde_correo, ref valido);
+            }
 
-
-
-            
-
-            
-
-            
-
-
-            //Se cumple cuando pasa todas las validaciones
             else if (valido)
             {
-                lbl_informacion_nombre.Visible = false;
-
-                Persona persona = new Persona();
-
-                persona.usuario = txt_usuario_registro.Text;
-
-                persona.nombre = txt_nombre_registro.Text;
-
-                persona.correo = txt_correo_registro.Text;
-
-                string Pass = txt_contraseña_registro.Text;
-
-                persona.ePass = encrip.GetShga256(Pass);
-
-                int UsuarioExistente = VerificarUsuarioExistente(persona);
-
-                if (UsuarioExistente == 1)
-                {
-                    int registro1 = datosUsuarios.CrearUsuario(persona);
-                    if (registro1 == 1)
-                    {
-                        MessageBox.Show("Usuario registrado con exito", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Form registro = new login();
-                        registro.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hubo un error al crear el usuario");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El usuario ingresado ya existe, ingrese uno diferente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txt_usuario_registro.Select();
-                }
+                enviarCorreos.EnviarCorreo(txt_correo_registro.Text);
             }
+
+            //Se cumple cuando pasa todas las validaciones
+
+            //else if (valido)
+            //{
+            //    lbl_informacion_nombre.Visible = false;
+
+            //    Persona persona = new Persona();
+
+            //    persona.usuario = txt_usuario_registro.Text;
+
+            //    persona.nombre = txt_nombre_registro.Text;
+
+            //    persona.correo = txt_correo_registro.Text;
+
+            //    string Pass = txt_contraseña_registro.Text;
+
+            //    persona.ePass = encrip.GetShga256(Pass);
+
+            //    int UsuarioExistente = VerificarUsuarioExistente(persona);
+
+            //    if (UsuarioExistente == 1)
+            //    {
+            //        int registro1 = datosUsuarios.CrearUsuario(persona);
+            //        if (registro1 == 1)
+            //        {
+            //            MessageBox.Show("Usuario registrado con exito", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //            Form registro = new login();
+            //            registro.Show();
+            //            this.Close();
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Hubo un error al crear el usuario");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("El usuario ingresado ya existe, ingrese uno diferente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        txt_usuario_registro.Select();
+            //    }
+            //}
 
             
         }
+
+        
+        private bool VerificarCorreo(string correo)
+        {
+            try
+            {
+                var direccion = new MailAddress(correo);
+                return true;
+            }
+            catch { 
+                return false;
+            }
+        }
+
 
         //Funcion para mostrar errores en los datos ingresados 
         private void MostrarErrores(System.Windows.Forms.TextBox txt, Label lbl, ErrorProvider error, string mensaje, Panel borde, ref bool valido)
@@ -193,10 +207,17 @@ namespace ProyectoFinal
                 textBox.SelectionStart = pos > 0 ? pos - 1 : 0;
             }
 
+
+            bool CorreoValido = VerificarCorreo(txt_correo_registro.Text); 
+
             //Limpia los errores si ya no existen
             if(txt_correo_registro.Text.Any(ch => char.IsDigit(ch) && char.IsWhiteSpace(ch)))
             {
-                LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_telefono, borde_correo, ref valido);
+                LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, borde_correo, ref valido);
+            }
+            if(CorreoValido == true)
+            {
+                LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, borde_correo, ref valido);
             }
 
             

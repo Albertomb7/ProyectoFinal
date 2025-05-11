@@ -55,13 +55,13 @@
             this.error_provider_nombre = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_provider_usuario = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_provider_contraseña = new System.Windows.Forms.ErrorProvider(this.components);
-            this.error_provider_telefono = new System.Windows.Forms.ErrorProvider(this.components);
+            this.error_provider_correo = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_provider_nombre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_provider_usuario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_provider_contraseña)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.error_provider_telefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_correo)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -373,10 +373,10 @@
             this.error_provider_contraseña.BlinkRate = 500;
             this.error_provider_contraseña.ContainerControl = this;
             // 
-            // error_provider_telefono
+            // error_provider_correo
             // 
-            this.error_provider_telefono.BlinkRate = 500;
-            this.error_provider_telefono.ContainerControl = this;
+            this.error_provider_correo.BlinkRate = 500;
+            this.error_provider_correo.ContainerControl = this;
             // 
             // registro
             // 
@@ -395,7 +395,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.error_provider_nombre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_provider_usuario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.error_provider_contraseña)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.error_provider_telefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_provider_correo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -420,7 +420,7 @@
         private System.Windows.Forms.ErrorProvider error_provider_nombre;
         private System.Windows.Forms.ErrorProvider error_provider_usuario;
         private System.Windows.Forms.ErrorProvider error_provider_contraseña;
-        private System.Windows.Forms.ErrorProvider error_provider_telefono;
+        private System.Windows.Forms.ErrorProvider error_provider_correo;
         private System.Windows.Forms.Label lbl_informacion_correo;
         private System.Windows.Forms.Label lbl_informacion_contraseña;
         private System.Windows.Forms.Label lbl_informacion_usuario;
