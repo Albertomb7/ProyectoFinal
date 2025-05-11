@@ -162,6 +162,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calendario.Designer.cs">
+      <DependentUpon>Calendario.cs</DependentUpon>
+    </Compile>
     <Compile Include="conexionSql.cs" />
     <Compile Include="datosUsuarios.cs" />
     <Compile Include="login.cs">
@@ -178,6 +184,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Calendario.resx">
+      <DependentUpon>Calendario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
