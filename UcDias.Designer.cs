@@ -12,7 +12,7 @@ namespace CalendarioApp
             if (disposing && (components != null)) components.Dispose();
             base.Dispose(disposing);
         }
-
+           
         private void InitializeComponent()
         {
             this.lblDia = new System.Windows.Forms.Label();
