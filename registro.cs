@@ -96,8 +96,8 @@ namespace ProyectoFinal
                 MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, "Este campo es obligatorio.", borde_correo, ref valido);
 
             }
-            
-            else if(CorreoValido == false)
+
+            else if (CorreoValido == false)
             {
                 MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, "Direccion de correo invalida.", borde_correo, ref valido);
             }
@@ -105,14 +105,36 @@ namespace ProyectoFinal
             //Se cumple cuando pasa todas las validaciones y envia el codigo al correo ingresado
             else if (valido)
             {
-                enviarCodigo.EnviarCorreo(txt_correo_registro.Text);
+                Persona persona = new Persona();
 
-                //Abre el formulario de verificacion
-                codigoDeVerificacion formVerificacion = new codigoDeVerificacion(this); 
-                formVerificacion.Show();
+                persona.usuario = txt_usuario_registro.Text;
+                persona.correo = txt_correo_registro.Text;
 
+                int UsuarioExistente = VerificarUsuarioExistente(persona);
+                int CorreoExistente = VerificarCorreoExistente(persona);
+
+                if (UsuarioExistente == 1 && CorreoExistente == 1)
+                {
+
+                    enviarCodigo.EnviarCodigo(txt_correo_registro.Text);
+
+                    //Abre el formulario de verificacion
+                    codigoDeVerificacion formVerificacion = new codigoDeVerificacion(this);
+                    formVerificacion.Show();
+                    this.Hide();
+
+                   
+                    formVerificacion.FormClosed += (s, args) => this.Show();
+                    this.Hide();
+                }
+                if(UsuarioExistente == 0)
+                {
+                     MostrarErrores(txt_usuario_registro, lbl_informacion_usuario, error_provider_usuario, "El usuario ya existe, ingrese uno diferente.", borde_usuario, ref valido);
+                }
+                if(CorreoExistente == 0){
+                    MostrarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, "El correo electronico ya esta registrado, ingrese uno diferente.", borde_correo, ref valido);
+                }
             }
-
 
         }
 
@@ -136,7 +158,7 @@ namespace ProyectoFinal
             lbl.Text = mensaje;
             lbl.Visible = true; 
             borde.Visible = true;
-            error.SetError(txt, mensaje);
+            error.SetError(txt, "error");
             AjustarLabel(lbl);
             valido = false;
         }
@@ -158,7 +180,7 @@ namespace ProyectoFinal
             this.txt_usuario_registro.KeyPress += new KeyPressEventHandler(txt_usuario_registro_TextChanged);
 
             this.txt_contraseña_registro.KeyPress += new KeyPressEventHandler(txt_contrasenia_registro_KeyPress);
-            this.txt_contraseña_registro.KeyPress += new KeyPressEventHandler(txt_contrasenia_registro_TextChanged);
+            this.txt_contraseña_registro.KeyPress += new KeyPressEventHandler(txt_contraseña_registro_TextChanged);
 
             this.txt_correo_registro.KeyPress += new KeyPressEventHandler(txt_correo_registro_KeyPress);
             this.txt_correo_registro.KeyPress += new KeyPressEventHandler(txt_correo_registro_TextChanged);
@@ -187,6 +209,7 @@ namespace ProyectoFinal
             {
                 LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, borde_correo, ref valido);
             }
+
             if(CorreoValido == true)
             {
                 LimpiarErrores(txt_correo_registro, lbl_informacion_correo, error_provider_correo, borde_correo, ref valido);
@@ -214,7 +237,7 @@ namespace ProyectoFinal
 
 
 
-        private void txt_contrasenia_registro_TextChanged(object sender, EventArgs e)
+        private void txt_contraseña_registro_TextChanged(object sender, EventArgs e)
         {
             //Bloquea espacios en blanco que se pegan
 
@@ -229,9 +252,9 @@ namespace ProyectoFinal
                 textBox.SelectionStart = pos > 0 ? pos - 1 : 0;
             }
             //Validar longitud de la contraseña
-            if (txt_contraseña_registro.Text.Length < 8)
+            if (txt_contraseña_registro.Text.Length < 7)
             {
-                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "La contraseña debe contener minimo 8 caracteres.", borde_contraseña, ref valido);
+                MostrarErrores(txt_contraseña_registro, lbl_informacion_contraseña, error_provider_contraseña, "Contraseña insegura.", borde_contraseña, ref valido);
 
             }
             //Limpia los errores si ya no existen
@@ -334,7 +357,7 @@ namespace ProyectoFinal
         //Funcion para centrar el label de informacion
         private void AjustarLabel(Label lbl)
         {
-            int Ubicacion_centrar = 218; 
+            int Ubicacion_centrar = 205; 
             lbl.AutoSize = true; 
             lbl.Left = Ubicacion_centrar - (lbl.Width / 2);
         }
@@ -355,6 +378,11 @@ namespace ProyectoFinal
                 rutaImagen = Path.GetFullPath(rutaImagen);
                 btn_ver_contraseña_registro.Image = Image.FromFile(rutaImagen);
             }
+        }
+
+        private void registro_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

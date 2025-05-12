@@ -19,7 +19,9 @@ namespace ProyectoFinal
         public codigoDeVerificacion(registro registro)
         {
             InitializeComponent();
-            _registro = registro;           
+            _registro = registro;
+            lbl_correo.Text = _registro.TextoCorreo;
+            
         }
 
 
@@ -64,7 +66,9 @@ namespace ProyectoFinal
 
         private void btn_verificar_Click(object sender, EventArgs e)
         {
-
+            // Etiqueta para mostrar el correo ingresado
+            
+              
             //Codigo ingresado en las cajas de texto
             string codigo = txt1.Text + txt2.Text + txt3.Text + txt4.Text;
 
@@ -87,35 +91,41 @@ namespace ProyectoFinal
 
                 persona.ePass = encrip.GetShga256(Pass);
 
-                int UsuarioExistente = VerificarUsuarioExistente(persona);
-
-                if (UsuarioExistente == 1)
-                {
+                
                     int registro1 = datosUsuarios.CrearUsuario(persona);
                     if (registro1 == 1)
                     {
-                        MessageBox.Show("Usuario registrado con exito", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Form login = new login();
-                        login.Show();
+                        MessageBox.Show("Usuario registrado con exito.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                         _registro.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Hubo un error al crear el usuario");
+                        MessageBox.Show("Hubo un error al crear el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("El usuario ingresado ya existe, ingrese uno diferente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    
-                }
+                
+                
             }
             else
             {
-                MessageBox.Show("el codigo ingresado no coincide", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("el codigo ingresado no es valido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
+        }
+
+        private void codigoDeVerificacion_Load(object sender, EventArgs e)
+        {
+             
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_correo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

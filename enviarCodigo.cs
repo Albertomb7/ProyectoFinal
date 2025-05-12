@@ -30,7 +30,7 @@ namespace ProyectoFinal
 
 
         //Funcion que envia el correo
-        public static void EnviarCorreo(string correo)
+        public static void EnviarCodigo(string correo)
         {
             string email = "yoempresa123@gmail.com";
             string password = "oquq imcw fjys lwhd";

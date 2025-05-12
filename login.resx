@@ -121,7 +121,7 @@
   <data name="btn_ver_contraseña.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
-        MAAA6mAAADqYAAAXcJy6UTwAAAAJcEhZcwAAHr0AAB69ATwDrxMAAAAHdElNRQfpBB4IHwR8/f25AAAA
+        MAAA6mAAADqYAAAXcJy6UTwAAAAJcEhZcwAAHrwAAB68Ae5ETfcAAAAHdElNRQfpBB4IHwR8/f25AAAA
         GXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAWJJREFUOE+llD0vBFEUhldBfDSSrWj0
         eoWECpUgEj+ARqFfodT6FUTodBRqKv6BTiQ2UQoi8fHIw7nZ2ckYs5mTvNm757zvO3PuPXMbjUwARRgA
         RgOu8/WsRSdypH5gGtgDzoCbwHnkrMkpNs2ZTQIHwBPwDtwB1wHX5qzJkdttmjNbBG5DdAosA2PAYMD1
@@ -415,5 +415,11 @@
   </data>
   <metadata name="fileSystemWatcher1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="error_usuario.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>175, 17</value>
+  </metadata>
+  <metadata name="error_contraseña.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>304, 17</value>
   </metadata>
 </root>

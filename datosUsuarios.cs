@@ -150,5 +150,32 @@ namespace ProyectoFinal
 
         }
 
+        public static int VerificarCorreoExistente(Persona persona)
+        {
+            int retorna = 0;
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                string query = "SELECT * FROM CorreosElectronicos WHERE CorreoElectronico = @CorreoElectronico";
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@CorreoElectronico", persona.correo);
+
+                    using (Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (!reader.HasRows)
+                        {
+                            retorna = 1;
+                        }
+                        else
+                        {
+                            retorna = 0;
+                        }
+                    }
+                }
+            }
+            return retorna;
+
+        }
+
     }
 }

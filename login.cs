@@ -28,12 +28,20 @@ namespace ProyectoFinal
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            //Limpia los errores si ya no existen
+            if (!string.IsNullOrWhiteSpace(txt_usuario.Text))
+            {
+                LimpiarErrores(txt_usuario, error_usuario, borde_usuario, ref valido);
+            }
         }
 
         private void txt_password_TextChanged(object sender, EventArgs e)
         {
-
+            //Limpia los errores si ya no existen
+            if (!string.IsNullOrWhiteSpace(txt_contraseña.Text))
+            {
+                LimpiarErrores(txt_contraseña, error_contraseña, borde_contraseña, ref valido);
+            }
         }
 
         private void lbl_inicio_Click(object sender, EventArgs e)
@@ -61,44 +69,83 @@ namespace ProyectoFinal
 
         }
 
+        static bool valido = true;
         private void button1_Click(object sender, EventArgs e)
         {
-            //Hashea la contraseña ingresada
-            string ePass = encrip.GetShga256(txt_contrasenia.Text);
-
-            Persona persona = new Persona();
-            persona.usuario = txt_usuario.Text;
-
-            //Obtiene el valor que retorna la funcion para verificar el usuario existente
-            int UsuarioExistente = VerificarUsuarioExistente(persona);
+            LimpiarErrores(txt_usuario, error_usuario, borde_usuario, ref valido);
+            LimpiarErrores(txt_contraseña, error_contraseña, borde_contraseña, ref valido);
 
 
-            //Si el usuario si existe permite continuar
-            if(UsuarioExistente == 0)
+            //Validacion espacio en blanco en el usuario 
+            if (string.IsNullOrWhiteSpace(txt_usuario.Text))
             {
-             
-               datosUsuarios.IniciarSesion(persona);
+                MostrarErrores(txt_usuario, error_usuario, "Este campo es obligatorio.", borde_usuario, ref valido);
+
+            }
+
+            //Validacion de espacios en blanco en contraseña
+            if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
+            {
+                MostrarErrores(txt_contraseña, error_contraseña, "Este campo es obligatorio.", borde_contraseña, ref valido);
+
+            }
 
 
-                if (ePass == persona.ePass)
+            else if (valido)
+            {
+                //Hashea la contraseña ingresada
+                string ePass = encrip.GetShga256(txt_contraseña.Text);
+
+                Persona persona = new Persona();
+                persona.usuario = txt_usuario.Text;
+
+                //Obtiene el valor que retorna la funcion para verificar el usuario existente
+                int UsuarioExistente = VerificarUsuarioExistente(persona);
+
+
+                //Si el usuario si existe permite continuar
+                if (UsuarioExistente == 0)
                 {
-                    Form FormInicio = new Calendario.Inicio(this);
-                    FormInicio.Show();
-                    this.Hide();
+
+                    datosUsuarios.IniciarSesion(persona);
+
+
+                    if (ePass == persona.ePass)
+                    {
+                        Form FormInicio = new Calendario.Inicio(this);
+                        FormInicio.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Contraseña incorrecta, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txt_usuario.Select();
+                    }
                 }
+
+                //Si el usuario no existe muestra el mensaje de error 
                 else
                 {
-                    MessageBox.Show("Datos incorrectos, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El usuario ingresado no existe, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
-            //Si el usuario no existe muestra el mensaje de error 
-            else
-            {
-                MessageBox.Show("El usuario no existe, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
         }
+
+        private void MostrarErrores(System.Windows.Forms.TextBox txt, ErrorProvider error, string mensaje, Panel borde, ref bool valido)
+        {
+            borde.Visible = true;
+            error.SetError(txt, mensaje);
+            valido = false;
+        }
+
+        //Funcion para ocultar la informacion de los errores 
+        private void LimpiarErrores(System.Windows.Forms.TextBox txt, ErrorProvider error, Panel borde, ref bool valido)
+        {
+            borde.Visible = false;
+            error.SetError(txt, "");
+            valido = true;
+        }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -122,16 +169,15 @@ namespace ProyectoFinal
             this.Hide();
 
             RegistroForm.FormClosed += (s, args) => this.Show();
-
             this.Hide();       
              
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            txt_contrasenia.UseSystemPasswordChar = !txt_contrasenia.UseSystemPasswordChar;
+            txt_contraseña.UseSystemPasswordChar = !txt_contraseña.UseSystemPasswordChar;
 
-            if(txt_contrasenia.UseSystemPasswordChar == false)
+            if(txt_contraseña.UseSystemPasswordChar == false)
             {
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\..\Recursos\Imagenes\icon_ocultar.png");
                 rutaImagen = Path.GetFullPath(rutaImagen);

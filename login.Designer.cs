@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
             this.lbl_inicio = new System.Windows.Forms.Label();
             this.txt_usuario = new System.Windows.Forms.TextBox();
-            this.txt_contrasenia = new System.Windows.Forms.TextBox();
+            this.txt_contraseña = new System.Windows.Forms.TextBox();
             this.lbl_usuario = new System.Windows.Forms.Label();
             this.lbl_contrasenia = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -42,9 +43,15 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_iniciar_sesion = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.error_usuario = new System.Windows.Forms.ErrorProvider(this.components);
+            this.error_contraseña = new System.Windows.Forms.ErrorProvider(this.components);
+            this.borde_usuario = new System.Windows.Forms.Panel();
+            this.borde_contraseña = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_usuario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_contraseña)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_inicio
@@ -72,18 +79,18 @@
             this.txt_usuario.TabIndex = 1;
             this.txt_usuario.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // txt_contrasenia
+            // txt_contraseña
             // 
-            this.txt_contrasenia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.txt_contrasenia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_contrasenia.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
-            this.txt_contrasenia.ForeColor = System.Drawing.Color.White;
-            this.txt_contrasenia.Location = new System.Drawing.Point(38, 234);
-            this.txt_contrasenia.Name = "txt_contrasenia";
-            this.txt_contrasenia.Size = new System.Drawing.Size(250, 26);
-            this.txt_contrasenia.TabIndex = 2;
-            this.txt_contrasenia.UseSystemPasswordChar = true;
-            this.txt_contrasenia.TextChanged += new System.EventHandler(this.txt_password_TextChanged);
+            this.txt_contraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.txt_contraseña.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_contraseña.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.txt_contraseña.ForeColor = System.Drawing.Color.White;
+            this.txt_contraseña.Location = new System.Drawing.Point(38, 234);
+            this.txt_contraseña.Name = "txt_contraseña";
+            this.txt_contraseña.Size = new System.Drawing.Size(250, 26);
+            this.txt_contraseña.TabIndex = 2;
+            this.txt_contraseña.UseSystemPasswordChar = true;
+            this.txt_contraseña.TextChanged += new System.EventHandler(this.txt_password_TextChanged);
             // 
             // lbl_usuario
             // 
@@ -114,6 +121,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel2.Controls.Add(this.borde_contraseña);
+            this.panel2.Controls.Add(this.borde_usuario);
             this.panel2.Controls.Add(this.btn_ver_contraseña);
             this.panel2.Controls.Add(this.linklbl_registrarse);
             this.panel2.Controls.Add(this.lbl_pregunta);
@@ -121,7 +130,7 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.btn_iniciar_sesion);
             this.panel2.Controls.Add(this.lbl_inicio);
-            this.panel2.Controls.Add(this.txt_contrasenia);
+            this.panel2.Controls.Add(this.txt_contraseña);
             this.panel2.Controls.Add(this.lbl_contrasenia);
             this.panel2.Controls.Add(this.txt_usuario);
             this.panel2.Controls.Add(this.lbl_usuario);
@@ -219,6 +228,34 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // error_usuario
+            // 
+            this.error_usuario.BlinkRate = 500;
+            this.error_usuario.ContainerControl = this;
+            // 
+            // error_contraseña
+            // 
+            this.error_contraseña.BlinkRate = 500;
+            this.error_contraseña.ContainerControl = this;
+            // 
+            // borde_usuario
+            // 
+            this.borde_usuario.BackColor = System.Drawing.Color.Red;
+            this.borde_usuario.Location = new System.Drawing.Point(40, 190);
+            this.borde_usuario.Name = "borde_usuario";
+            this.borde_usuario.Size = new System.Drawing.Size(246, 1);
+            this.borde_usuario.TabIndex = 12;
+            this.borde_usuario.Visible = false;
+            // 
+            // borde_contraseña
+            // 
+            this.borde_contraseña.BackColor = System.Drawing.Color.Red;
+            this.borde_contraseña.Location = new System.Drawing.Point(40, 261);
+            this.borde_contraseña.Name = "borde_contraseña";
+            this.borde_contraseña.Size = new System.Drawing.Size(246, 1);
+            this.borde_contraseña.TabIndex = 13;
+            this.borde_contraseña.Visible = false;
+            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,7 +264,8 @@
             this.ClientSize = new System.Drawing.Size(657, 429);
             this.Controls.Add(this.panel2);
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Log in";
@@ -236,6 +274,8 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_usuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error_contraseña)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -244,7 +284,7 @@
 
         private System.Windows.Forms.Label lbl_inicio;
         private System.Windows.Forms.TextBox txt_usuario;
-        private System.Windows.Forms.TextBox txt_contrasenia;
+        private System.Windows.Forms.TextBox txt_contraseña;
         private System.Windows.Forms.Label lbl_usuario;
         private System.Windows.Forms.Label lbl_contrasenia;
         private System.Windows.Forms.Panel panel2;
@@ -255,6 +295,10 @@
         private System.Windows.Forms.LinkLabel linklbl_registrarse;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Button btn_ver_contraseña;
+        private System.Windows.Forms.ErrorProvider error_usuario;
+        private System.Windows.Forms.ErrorProvider error_contraseña;
+        private System.Windows.Forms.Panel borde_usuario;
+        private System.Windows.Forms.Panel borde_contraseña;
     }
 }
 

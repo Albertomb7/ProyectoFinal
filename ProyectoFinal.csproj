@@ -165,7 +165,7 @@
     <Compile Include="conexionSql.cs" />
     <Compile Include="datosUsuarios.cs" />
     <Compile Include="encrip.cs" />
-    <Compile Include="enviarCorreos.cs" />
+    <Compile Include="enviarCodigo.cs" />
     <Compile Include="codigoDeVerificacion.cs">
       <SubType>Form</SubType>
     </Compile>
