@@ -17,7 +17,7 @@ namespace CalendarioApp
         {
             this.lblDia = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //  
             // lblDia
             // 
             this.lblDia.Dock = System.Windows.Forms.DockStyle.Fill;
