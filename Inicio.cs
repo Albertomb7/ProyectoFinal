@@ -1,10 +1,13 @@
 ﻿// Inicio.cs  son las 3 de la mañana y no tengo sueño
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using CalendarioApp; // Namespace de UcDias
+using System.Drawing.Drawing2D;
+
 
 // D3:34
 using ProyectoFinal.Calendario;
@@ -50,7 +53,7 @@ namespace ProyectoFinal.Calendario
 
         private void MostrarDias()
         {
-            if (flDays == null || lblFecha == null) return; 
+            if (flDays == null || lblFecha == null) return;
 
             flDays.Controls.Clear();
 
@@ -64,7 +67,7 @@ namespace ProyectoFinal.Calendario
 
             // Cálculo del tamaño de las celdas 
             int scrollBarWidthApproximation = 0;
-            if (flDays.Controls.Count > (flDays.Height / 80) * 7) 
+            if (flDays.Controls.Count > (flDays.Height / 80) * 7)
             {
                 scrollBarWidthApproximation = SystemInformation.VerticalScrollBarWidth + 5;
             }
@@ -72,11 +75,11 @@ namespace ProyectoFinal.Calendario
             int availableWidth = flDays.ClientRectangle.Width - flDays.Padding.Horizontal - scrollBarWidthApproximation;
             int availableHeight = flDays.ClientRectangle.Height - flDays.Padding.Vertical;
 
-            int anchoDia = availableWidth / 7 - 3; 
-            int altoDia = availableHeight / 6 - 3; 
+            int anchoDia = availableWidth / 7 - 3;
+            int altoDia = availableHeight / 6 - 3;
 
-            if (anchoDia <= 10) anchoDia = 90; 
-            if (altoDia <= 10) altoDia = 70; 
+            if (anchoDia <= 10) anchoDia = 90;
+            if (altoDia <= 10) altoDia = 70;
 
             // Espacios vacíos antes del primer día y el ultomo xd
             for (int i = 0; i < espaciosVacios; i++)
@@ -91,7 +94,7 @@ namespace ProyectoFinal.Calendario
                 flDays.Controls.Add(panelVacio);
             }
 
-            // Días del mes y año xd
+            // Días del mes y año xd DE. modifiquue esto para que se vea mas redodiandos los bordes
             for (int dia = 1; dia <= diasEnMes; dia++)
             {
                 UcDias diaControl = new UcDias();
@@ -102,6 +105,39 @@ namespace ProyectoFinal.Calendario
                 diaControl.Width = anchoDia;
                 diaControl.Height = altoDia;
 
+                // Redondear los bordes del control
+                GraphicsPath path = new GraphicsPath();
+                int radio = 15;
+                path.AddArc(0, 0, radio, radio, 180, 90); // Esquina superior izquierda
+                path.AddArc(anchoDia - radio, 0, radio, radio, 270, 90); // Superior derecha
+                path.AddArc(anchoDia - radio, altoDia - radio, radio, radio, 0, 90); // Inferior derecha
+                path.AddArc(0, altoDia - radio, radio, radio, 90, 90); // Inferior izquierda
+                path.CloseFigure();
+                diaControl.Region = new Region(path);
+                diaControl.BackColor = System.Drawing.Color.FromArgb(40, 43, 50);  // Color de fondo para los días
+
+                // Cambiar la apariencia visual con un borde redondeado en el evento Paint
+                diaControl.Paint += (sender, e) =>
+                {
+                    Graphics g = e.Graphics;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // Suavizar bordes
+                    g.FillRectangle(new SolidBrush(diaControl.BackColor), 0, 0, anchoDia, altoDia);  // Rellenar el fondo
+                    g.DrawRectangle(new Pen(System.Drawing.Color.FromArgb(100, 100, 100)), 0, 0, anchoDia - 1, altoDia - 1);  // Borde redondeado
+                };
+
+                // Resaltar al pasar el mouse
+                diaControl.MouseEnter += (sender, e) =>
+                {
+                    diaControl.BackColor = System.Drawing.Color.FromArgb(60, 63, 70);  // Color más claro al pasar el mouse
+                };
+
+                // Volver al color original cuando el mouse salga
+                diaControl.MouseLeave += (sender, e) =>
+                {
+                    diaControl.BackColor = System.Drawing.Color.FromArgb(40, 43, 50);  // Color original
+                };
+
+                // Verificar si el día tiene evento
                 if (listaDeEventosGlobal.Any(ev => ev.Fecha.Date == fechaActualCelda.Date))
                 {
                     diaControl.TieneEvento = true;
@@ -111,10 +147,24 @@ namespace ProyectoFinal.Calendario
                     diaControl.TieneEvento = false;
                 }
 
+                // Colores personalizados de eventos
+                var eventoDelDia = listaDeEventosGlobal.FirstOrDefault(ev => ev.Fecha.Date == fechaActualCelda.Date);
+                if (eventoDelDia != null)
+                {
+                    diaControl.TieneEvento = true;
+
+                    if (eventoDelDia.ColorPersonalizado.HasValue)
+                    {
+                        diaControl.BackColor = eventoDelDia.ColorPersonalizado.Value;
+                    }
+                }
+
                 diaControl.DiaClickeado += UcDias_DiaClickeado;
                 flDays.Controls.Add(diaControl);
             }
         }
+
+
 
         private void UcDias_DiaClickeado(object sender, EventArgs e)
         {

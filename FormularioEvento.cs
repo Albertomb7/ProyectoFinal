@@ -1,6 +1,7 @@
 ﻿// FormularioEvento.cs
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -63,12 +64,14 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 
         private void chkUsarHora_CheckedChanged(object sender, EventArgs e)
         {
+
             if (dtpHoraEvento != null && chkUsarHora != null)
                 dtpHoraEvento.Enabled = chkUsarHora.Checked;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
             if (txtDescripcionEvento == null || string.IsNullOrWhiteSpace(txtDescripcionEvento.Text))
             {
                 MessageBox.Show("La descripción no puede estar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -79,21 +82,29 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
             {
                 hora = dtpHoraEvento.Value.TimeOfDay;
+                
+
             }
 
             if (_eventoSeleccionadoEnLista != null)
             {
                 _eventoSeleccionadoEnLista.Descripcion = txtDescripcionEvento.Text;
                 _eventoSeleccionadoEnLista.Hora = hora;
+                _eventoSeleccionadoEnLista.ColorPersonalizado = _colorSeleccionado; // nuevo
                 EventoCreadoOModificado = _eventoSeleccionadoEnLista;
             }
             else
             {
-                EventoCreadoOModificado = new Evento(_fechaActual, txtDescripcionEvento.Text, hora);
+                EventoCreadoOModificado = new Evento(_fechaActual, txtDescripcionEvento.Text, hora, _colorSeleccionado); // evento color 
             }
+
+
+
+
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -109,6 +120,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 _eventoSeleccionadoEnLista = evento;
                 if (txtDescripcionEvento != null) txtDescripcionEvento.Text = evento.Descripcion;
                 if (chkUsarHora != null) chkUsarHora.Checked = evento.Hora.HasValue;
+
                 if (dtpHoraEvento != null)
                 {
                     if (evento.Hora.HasValue)
@@ -120,12 +132,31 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                         dtpHoraEvento.Value = DateTime.Now;
                     }
                 }
+
+                _colorSeleccionado = evento.ColorPersonalizado; // <<< Agregado
+                PanelColor.BackColor = evento.ColorPersonalizado ?? SystemColors.Control; // <<< Agregado
+
                 if (btnGuardar != null) btnGuardar.Text = "Actualizar";
                 if (btnEliminar != null) btnEliminar.Enabled = true;
             }
             else
             {
                 LimpiarCamposNuevaEntrada();
+            }
+        }
+
+
+        private Color? _colorSeleccionado = null; // agrege una funcion para la vista del color
+
+        private void btnSeleccionarColor_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    _colorSeleccionado = colorDialog.Color;
+                    PanelColor.BackColor = colorDialog.Color;
+                }
             }
         }
 
@@ -141,6 +172,12 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                     this.Close();
                 }
             }
+        }
+
+
+        private void btnSeleccionarColor_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

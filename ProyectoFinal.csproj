@@ -208,6 +208,9 @@
     <EmbeddedResource Include="codigoDeVerificacion.resx">
       <DependentUpon>codigoDeVerificacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormularioEvento.resx">
+      <DependentUpon>FormularioEvento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
