@@ -1,25 +1,33 @@
-﻿using System;
+﻿// UcDias.cs
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace CalendarioApp
-{
+namespace CalendarioApp 
+{                         // Gay el que revise esto xdddddddddddd
     public partial class UcDias : UserControl
     {
         private string _dia;
+        public DateTime FechaCelda { get; set; }
+        private bool _tieneEvento;
 
         public UcDias()
         {
-            InitializeComponent();
+            InitializeComponent(); // Esta línea llama al código en UcDias.Designer.cs
 
-            // Establecer tamaño fijo del control para que encajen exactamente 7 por fila
-            this.Width = 100;
-            this.Height = 80;
+            // Configuraciones  para el tema oscuro:
+            this.Width = 100; // Ancho que usas en Inicio.cs
+            this.Height = 80; // Alto que usas en Inicio.cs
+            this.Margin = new Padding(1);
+            this.BackColor = Color.FromArgb(30, 30, 40);
+            if (lblDia != null) // lblDia se crea en InitializeComponent()
+            {
+                lblDia.ForeColor = Color.White;
+                
+                this.lblDia.Click += (s, e) => this.OnClick(e);
+            }
 
-            // Quitar márgenes para que no se desajuste el grid
-            this.Margin = new Padding(0);
-
-            // Opcional: para ver visualmente el tamaño si estás diseñando
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.Click += new EventHandler(UcDias_Click);
         }
 
         public string Dia
@@ -28,13 +36,36 @@ namespace CalendarioApp
             set
             {
                 _dia = value;
-                lblDia.Text = value;
+                if (lblDia != null) lblDia.Text = value;
+            }
+        }
+
+        public bool TieneEvento
+        {
+            get { return _tieneEvento; }
+            set
+            {
+                _tieneEvento = value;
+                this.BackColor = _tieneEvento ? Color.FromArgb(70, 90, 120) : Color.FromArgb(30, 30, 40);
+            }
+        }
+
+        public event EventHandler DiaClickeado;
+
+        private void UcDias_Click(object sender, EventArgs e)
+        {
+            // Solo invocar si el día no está vacío 
+            if (!string.IsNullOrEmpty(this.Dia))
+            {
+                DiaClickeado?.Invoke(this, e);
             }
         }
 
         private void lblDia_Click(object sender, EventArgs e)
         {
-            // Aquí puedes manejar eventos si quieres hacer algo al hacer clic
+
         }
+
+       // tu ere mi papa ?
     }
 }

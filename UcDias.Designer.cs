@@ -12,19 +12,19 @@ namespace CalendarioApp
             if (disposing && (components != null)) components.Dispose();
             base.Dispose(disposing);
         }
-           
+
         private void InitializeComponent()
         {
             this.lblDia = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            //  
+            
             // lblDia
-            // 
+             
             this.lblDia.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDia.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblDia.Location = new System.Drawing.Point(0, 0);
             this.lblDia.Name = "lblDia";
-            this.lblDia.Size = new System.Drawing.Size(90, 90);
+            this.lblDia.Size = new System.Drawing.Size(98, 78);
             this.lblDia.TabIndex = 0;
             this.lblDia.Text = "1";
             this.lblDia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -33,11 +33,12 @@ namespace CalendarioApp
             // UcDias
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.lblDia);
             this.Name = "UcDias";
-            this.Size = new System.Drawing.Size(90, 90);
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; // útil para depuración
+            this.Size = new System.Drawing.Size(98, 78);
             this.ResumeLayout(false);
+
         }
     }
 }

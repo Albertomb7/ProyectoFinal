@@ -172,6 +172,13 @@
     <Compile Include="codigoDeVerificacion.Designer.cs">
       <DependentUpon>codigoDeVerificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Evento.cs" />
+    <Compile Include="FormularioEvento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularioEvento.Designer.cs">
+      <DependentUpon>FormularioEvento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
