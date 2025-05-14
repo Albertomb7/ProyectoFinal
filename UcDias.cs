@@ -9,11 +9,6 @@ namespace CalendarioApp
         private string _dia;
         private bool _tieneEvento;
         private Color? _colorPersonalizado;
-        private Timer hoverTimer;
-        private Color colorInicio;
-        private Color colorDestino;
-        private int pasoAnimacion;
-        private const int pasosTotales = 10;
         private Color colorBaseActual = Color.FromArgb(30, 30, 40); // Color base por defecto
 
         public DateTime FechaCelda { get; set; }
@@ -31,20 +26,11 @@ namespace CalendarioApp
             {
                 lblDia.ForeColor = Color.White;
                 lblDia.BackColor = Color.Transparent;
-                //linea hija ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd xd
             }
 
             this.Click += new EventHandler(UcDias_Click);
-
-            this.MouseEnter += (s, e) =>
-            {
-                IniciarTransicion(Color.FromArgb(60, 63, 70)); // Hover
-            };
-
-            this.MouseLeave += (s, e) =>
-            {
-                IniciarTransicion(colorBaseActual); // Vuelve al color base (puede ser personalizado)
-            };
+            this.MouseEnter += UcDias_MouseEnter;
+            this.MouseLeave += UcDias_MouseLeave;
         }
 
         public string Dia
@@ -99,35 +85,27 @@ namespace CalendarioApp
             UcDias_Click(sender, e);
         }
 
-        private void IniciarTransicion(Color destino)
+        //no tocar
+        private void UcDias_MouseEnter(object sender, EventArgs e)
         {
-            colorInicio = this.BackColor;
-            colorDestino = destino;
-            pasoAnimacion = 0;
-
-            if (hoverTimer == null)
-            {
-                hoverTimer = new Timer();
-                hoverTimer.Interval = 15;
-                hoverTimer.Tick += (s, e) =>
-                {
-                    pasoAnimacion++;
-                    float progreso = pasoAnimacion / (float)pasosTotales;
-
-                    int r = (int)(colorInicio.R + (colorDestino.R - colorInicio.R) * progreso);
-                    int g = (int)(colorInicio.G + (colorDestino.G - colorInicio.G) * progreso);
-                    int b = (int)(colorInicio.B + (colorDestino.B - colorInicio.B) * progreso);
-
-                    this.BackColor = Color.FromArgb(r, g, b);
-
-                    if (pasoAnimacion >= pasosTotales)
-                    {
-                        hoverTimer.Stop();
-                    }
-                };
-            }
-
-            hoverTimer.Start();
+            this.BackColor = Color.FromArgb(60, 63, 70); // color resaltado al pasar el mouse
         }
+
+        private void UcDias_MouseLeave(object sender, EventArgs e)
+        {
+            this.BackColor = colorBaseActual; // volver al color original
+        }
+        private void lblDia_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.BackColor = Color.FromArgb(60, 63, 70); // mismo color de resaltado
+        }
+
+        private void lblDia_MouseLeave(object sender, EventArgs e)
+        {
+            this.BackColor = colorBaseActual;
+        }
+
     }
 }
+
+

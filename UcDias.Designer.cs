@@ -17,9 +17,9 @@ namespace CalendarioApp
         {
             this.lblDia = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            
+            // 
             // lblDia
-             
+            // 
             this.lblDia.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDia.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblDia.Location = new System.Drawing.Point(0, 0);
@@ -29,6 +29,8 @@ namespace CalendarioApp
             this.lblDia.Text = "1";
             this.lblDia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDia.Click += new System.EventHandler(this.lblDia_Click);
+            this.lblDia.MouseLeave += new System.EventHandler(this.lblDia_MouseLeave);
+            this.lblDia.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblDia_MouseMove);
             // 
             // UcDias
             // 
