@@ -122,7 +122,6 @@ namespace CalendarioApp
                     int g = (int)(colorInicio.G + (colorDestino.G - colorInicio.G) * progreso);
                     int b = (int)(colorInicio.B + (colorDestino.B - colorInicio.B) * progreso);
 
-                    this.BackColor = Color.FromArgb(r, g, b);
 
                     if (pasoAnimacion >= pasosTotales)
                     {
