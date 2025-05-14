@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 {
     public partial class FormularioEvento : Form
-    {
+    {              
         public Evento EventoCreadoOModificado { get; private set; }
         public Evento EventoAEliminar { get; private set; }
         private DateTime _fechaActual;
@@ -21,16 +21,18 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             _fechaActual = fecha;
             _eventosExistentesEnElDia = eventosDelDia;
 
-            
+
             if (lblFechaSeleccionada != null) lblFechaSeleccionada.Text = fecha.ToString("D");
             if (dtpHoraEvento != null)
             {
                 dtpHoraEvento.Format = DateTimePickerFormat.Time;
                 dtpHoraEvento.ShowUpDown = true;
                 dtpHoraEvento.Value = DateTime.Now;
-                if (chkUsarHora != null) dtpHoraEvento.Enabled = chkUsarHora.Checked;   
+                if (chkUsarHora != null) dtpHoraEvento.Enabled = chkUsarHora.Checked;
             }
-
+            if (dtpHoraEvento == null)
+            
+                                               
             CargarEventosEnLista();
         }
 

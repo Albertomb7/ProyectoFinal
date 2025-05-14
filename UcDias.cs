@@ -31,7 +31,7 @@ namespace CalendarioApp
             {
                 lblDia.ForeColor = Color.White;
                 lblDia.BackColor = Color.Transparent;
-                lblDia.Click += (s, e) => this.OnClick(e);
+                //linea hija ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd xd
             }
 
             this.Click += new EventHandler(UcDias_Click);
