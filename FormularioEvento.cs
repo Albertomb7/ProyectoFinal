@@ -28,7 +28,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 dtpHoraEvento.Format = DateTimePickerFormat.Time;
                 dtpHoraEvento.ShowUpDown = true;
                 dtpHoraEvento.Value = DateTime.Now;
-                if (chkUsarHora != null) dtpHoraEvento.Enabled = chkUsarHora.Checked;
+                if (chkUsarHora != null) dtpHoraEvento.Enabled = chkUsarHora.Checked;   
             }
 
             CargarEventosEnLista();
@@ -48,6 +48,8 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             else
             {
                 lstEventosDelDia.Items.Add("No hay eventos para este día.");
+                lstEventosDelDia.ClearSelected();
+
             }
             LimpiarCamposNuevaEntrada();
         }
@@ -95,7 +97,8 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             }
             else
             {
-                EventoCreadoOModificado = new Evento(_fechaActual, txtDescripcionEvento.Text, hora, _colorSeleccionado); // evento color 
+                EventoCreadoOModificado = new Evento(_fechaActual, txtDescripcionEvento.Text, hora, _colorSeleccionado);
+                // evento color 
             }
 
 
@@ -115,6 +118,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 
         private void lstEventosDelDia_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             if (lstEventosDelDia != null && lstEventosDelDia.SelectedItem is Evento evento)
             {
                 _eventoSeleccionadoEnLista = evento;
@@ -138,6 +142,11 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 
                 if (btnGuardar != null) btnGuardar.Text = "Actualizar";
                 if (btnEliminar != null) btnEliminar.Enabled = true;
+                if (PanelColor != null)
+                {
+                    PanelColor.BackColor = evento.ColorPersonalizado ?? SystemColors.Control;
+                }
+
             }
             else
             {
@@ -172,12 +181,6 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                     this.Close();
                 }
             }
-        }
-
-
-        private void btnSeleccionarColor_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

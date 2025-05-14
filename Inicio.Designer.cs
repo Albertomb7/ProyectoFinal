@@ -51,7 +51,7 @@
             this.lblFecha.Location = new System.Drawing.Point(64, 14);
             this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(0, 42);
+            this.lblFecha.Size = new System.Drawing.Size(0, 54);
             this.lblFecha.TabIndex = 0;
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -88,7 +88,7 @@
             this.lblLunes.Location = new System.Drawing.Point(106, 129);
             this.lblLunes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLunes.Name = "lblLunes";
-            this.lblLunes.Size = new System.Drawing.Size(77, 24);
+            this.lblLunes.Size = new System.Drawing.Size(99, 29);
             this.lblLunes.TabIndex = 4;
             this.lblLunes.Text = "LUNES ";
             this.lblLunes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,7 +100,7 @@
             this.lblMartes.Location = new System.Drawing.Point(236, 129);
             this.lblMartes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMartes.Name = "lblMartes";
-            this.lblMartes.Size = new System.Drawing.Size(89, 24);
+            this.lblMartes.Size = new System.Drawing.Size(113, 29);
             this.lblMartes.TabIndex = 5;
             this.lblMartes.Text = "MARTES";
             this.lblMartes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,7 +113,7 @@
             this.lblViernes.Location = new System.Drawing.Point(649, 129);
             this.lblViernes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblViernes.Name = "lblViernes";
-            this.lblViernes.Size = new System.Drawing.Size(92, 24);
+            this.lblViernes.Size = new System.Drawing.Size(117, 29);
             this.lblViernes.TabIndex = 6;
             this.lblViernes.Text = "VIERNES";
             this.lblViernes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -125,7 +125,7 @@
             this.lblMiercoles.Location = new System.Drawing.Point(361, 129);
             this.lblMiercoles.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMiercoles.Name = "lblMiercoles";
-            this.lblMiercoles.Size = new System.Drawing.Size(119, 24);
+            this.lblMiercoles.Size = new System.Drawing.Size(153, 29);
             this.lblMiercoles.TabIndex = 6;
             this.lblMiercoles.Text = "MIERCOLES";
             this.lblMiercoles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,7 +138,7 @@
             this.lblJueves.Location = new System.Drawing.Point(514, 129);
             this.lblJueves.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblJueves.Name = "lblJueves";
-            this.lblJueves.Size = new System.Drawing.Size(83, 24);
+            this.lblJueves.Size = new System.Drawing.Size(105, 29);
             this.lblJueves.TabIndex = 7;
             this.lblJueves.Text = "JUEVES";
             this.lblJueves.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,7 +151,7 @@
             this.lblSabado.Location = new System.Drawing.Point(785, 129);
             this.lblSabado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSabado.Name = "lblSabado";
-            this.lblSabado.Size = new System.Drawing.Size(88, 24);
+            this.lblSabado.Size = new System.Drawing.Size(111, 29);
             this.lblSabado.TabIndex = 6;
             this.lblSabado.Text = "SABADO";
             this.lblSabado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -163,7 +163,7 @@
             this.lblDomingo.Location = new System.Drawing.Point(917, 129);
             this.lblDomingo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDomingo.Name = "lblDomingo";
-            this.lblDomingo.Size = new System.Drawing.Size(101, 24);
+            this.lblDomingo.Size = new System.Drawing.Size(130, 29);
             this.lblDomingo.TabIndex = 6;
             this.lblDomingo.Text = "DOMINGO";
             this.lblDomingo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -176,10 +176,11 @@
             this.flDays.Name = "flDays";
             this.flDays.Size = new System.Drawing.Size(960, 565);
             this.flDays.TabIndex = 1;
+            this.flDays.Paint += new System.Windows.Forms.PaintEventHandler(this.flDays_Paint);
             // 
             // Inicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.ClientSize = new System.Drawing.Size(1370, 749);

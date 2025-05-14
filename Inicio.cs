@@ -226,6 +226,12 @@ namespace ProyectoFinal.Calendario
         // tuuuuu ere mi papa?  Abajo conjuntos vacios  xd
         private void lblJueves_Click(object sender, EventArgs e) { }
         private void lblMiercoles_Click(object sender, EventArgs e) { }
+
+        private void flDays_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void lblMartes_Click(object sender, EventArgs e) { }
     }
 }

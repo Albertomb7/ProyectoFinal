@@ -166,18 +166,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 20);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Descripción:";
-            // 
-            // btnSeleccionarColor
-            // 
-            this.btnSeleccionarColor.ForeColor = System.Drawing.Color.Black;
-            this.btnSeleccionarColor.Location = new System.Drawing.Point(242, 280);
-            this.btnSeleccionarColor.Name = "btnSeleccionarColor";
-            this.btnSeleccionarColor.Size = new System.Drawing.Size(75, 24);
-            this.btnSeleccionarColor.TabIndex = 10;
-            this.btnSeleccionarColor.Text = "Color";
-            this.btnSeleccionarColor.UseVisualStyleBackColor = true;
-            this.btnSeleccionarColor.Click += new System.EventHandler(this.btnSeleccionarColor_Click_1);
+            this.label2.Text = "Descripción:";           
+            
             // 
             // PanelColor
             // 

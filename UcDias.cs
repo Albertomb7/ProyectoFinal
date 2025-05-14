@@ -14,42 +14,37 @@ namespace CalendarioApp
         private Color colorDestino;
         private int pasoAnimacion;
         private const int pasosTotales = 10;
-
+        private Color colorBaseActual = Color.FromArgb(30, 30, 40); // Color base por defecto
 
         public DateTime FechaCelda { get; set; }
 
         public UcDias()
-
         {
-
             InitializeComponent();
 
-            // Tema oscuro por defecto
             this.Width = 100;
             this.Height = 80;
             this.Margin = new Padding(1);
-            this.BackColor = Color.FromArgb(30, 30, 40); // Default
+            this.BackColor = colorBaseActual;
 
             if (lblDia != null)
             {
                 lblDia.ForeColor = Color.White;
-                lblDia.BackColor = Color.Transparent; // Para que se vea bien sobre el fondo
+                lblDia.BackColor = Color.Transparent;
                 lblDia.Click += (s, e) => this.OnClick(e);
             }
 
             this.Click += new EventHandler(UcDias_Click);
 
-            // Eventos de mouse para resaltar al pasar sobre el día
             this.MouseEnter += (s, e) =>
             {
-                IniciarTransicion(Color.FromArgb(60, 63, 70)); // Color cuando pasa el mouse
+                IniciarTransicion(Color.FromArgb(60, 63, 70)); // Hover
             };
 
             this.MouseLeave += (s, e) =>
             {
-                IniciarTransicion(Color.FromArgb(30, 30, 40)); // Color original
+                IniciarTransicion(colorBaseActual); // Vuelve al color base (puede ser personalizado)
             };
-
         }
 
         public string Dia
@@ -84,8 +79,9 @@ namespace CalendarioApp
 
         private void AplicarColores()
         {
-            this.BackColor = Color.FromArgb(30, 30, 40); // Color oscuro por defecto SIEMPRE
-            this.Invalidate(); // Forzar repintado (llama a OnPaint para mostrar el círculo si hay evento)
+            colorBaseActual = _colorPersonalizado ?? Color.FromArgb(30, 30, 40);
+            this.BackColor = colorBaseActual;
+            this.Invalidate();
         }
 
         public event EventHandler DiaClickeado;
@@ -100,10 +96,10 @@ namespace CalendarioApp
 
         private void lblDia_Click(object sender, EventArgs e)
         {
-            // Delegamos el clic a la celda
             UcDias_Click(sender, e);
         }
-        private void IniciarTransicion(Color destino) //trancicion de movimiento
+
+        private void IniciarTransicion(Color destino)
         {
             colorInicio = this.BackColor;
             colorDestino = destino;
@@ -122,6 +118,7 @@ namespace CalendarioApp
                     int g = (int)(colorInicio.G + (colorDestino.G - colorInicio.G) * progreso);
                     int b = (int)(colorInicio.B + (colorDestino.B - colorInicio.B) * progreso);
 
+                    this.BackColor = Color.FromArgb(r, g, b);
 
                     if (pasoAnimacion >= pasosTotales)
                     {
@@ -131,28 +128,6 @@ namespace CalendarioApp
             }
 
             hoverTimer.Start();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-
-            if (_tieneEvento && _colorPersonalizado.HasValue)
-            {
-                Graphics g = e.Graphics;
-                Color color = _colorPersonalizado.Value;
-
-                int radio = 10;
-                int margen = 5;
-                int x = this.Width - radio - margen;
-                int y = margen;
-
-                using (SolidBrush brush = new SolidBrush(color))
-                {
-                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    g.FillEllipse(brush, x, y, radio, radio);
-                }
-            }
         }
     }
 }
