@@ -217,7 +217,7 @@
             this.btnSeleccionarColor.TabIndex = 10;
             this.btnSeleccionarColor.Text = "Color";
             this.btnSeleccionarColor.UseVisualStyleBackColor = true;
-            this.btnSeleccionarColor.Click += new System.EventHandler(this.btnSeleccionarColor_Click); // <-- AÑADE ESTA LÍNEA
+            
 
 
         }

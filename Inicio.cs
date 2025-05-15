@@ -149,6 +149,7 @@ namespace ProyectoFinal.Calendario
 
                 // Colores personalizados de eventos
                 var eventoDelDia = listaDeEventosGlobal.FirstOrDefault(ev => ev.Fecha.Date == fechaActualCelda.Date);
+
                 if (eventoDelDia != null)
                 {
                     diaControl.TieneEvento = true;

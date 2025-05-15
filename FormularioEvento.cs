@@ -103,10 +103,6 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 // evento color 
             }
 
-
-
-
-
             this.DialogResult = DialogResult.OK;
             this.Close();
 
