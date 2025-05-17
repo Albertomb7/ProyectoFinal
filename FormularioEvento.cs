@@ -85,9 +85,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             TimeSpan? hora = null;
             if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
             {
-                hora = dtpHoraEvento.Value.TimeOfDay;
-                
-
+                hora = dtpHoraEvento.Value.TimeOfDay;              
             }
 
             if (_eventoSeleccionadoEnLista != null)
@@ -179,6 +177,11 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                     this.Close();
                 }
             }
+        }
+
+        private void txtDescripcionEvento_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

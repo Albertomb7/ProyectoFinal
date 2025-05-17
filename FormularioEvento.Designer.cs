@@ -40,7 +40,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSeleccionarColor = new System.Windows.Forms.Button();
             this.PanelColor = new System.Windows.Forms.Panel();
-            this.btnSeleccionarColor.Click += new System.EventHandler(this.btnSeleccionarColor_Click);
             this.SuspendLayout();
             // 
             // lblFechaSeleccionada
@@ -63,6 +62,7 @@
             this.txtDescripcionEvento.Name = "txtDescripcionEvento";
             this.txtDescripcionEvento.Size = new System.Drawing.Size(356, 60);
             this.txtDescripcionEvento.TabIndex = 4;
+            this.txtDescripcionEvento.TextChanged += new System.EventHandler(this.txtDescripcionEvento_TextChanged);
             // 
             // chkUsarHora
             // 
@@ -166,8 +166,18 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 20);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Descripción:";           
-            
+            this.label2.Text = "Descripción:";
+            // 
+            // btnSeleccionarColor
+            // 
+            this.btnSeleccionarColor.ForeColor = System.Drawing.Color.Black;
+            this.btnSeleccionarColor.Location = new System.Drawing.Point(242, 280);
+            this.btnSeleccionarColor.Name = "btnSeleccionarColor";
+            this.btnSeleccionarColor.Size = new System.Drawing.Size(75, 24);
+            this.btnSeleccionarColor.TabIndex = 10;
+            this.btnSeleccionarColor.Text = "Color";
+            this.btnSeleccionarColor.UseVisualStyleBackColor = true;
+            this.btnSeleccionarColor.Click += new System.EventHandler(this.btnSeleccionarColor_Click);
             // 
             // PanelColor
             // 
@@ -207,18 +217,6 @@
             this.Text = "Gestionar Evento";
             this.ResumeLayout(false);
             this.PerformLayout();
-            // 
-            // btnSeleccionarColor
-            // 
-            this.btnSeleccionarColor.ForeColor = System.Drawing.Color.Black;
-            this.btnSeleccionarColor.Location = new System.Drawing.Point(242, 280);
-            this.btnSeleccionarColor.Name = "btnSeleccionarColor";
-            this.btnSeleccionarColor.Size = new System.Drawing.Size(75, 24);
-            this.btnSeleccionarColor.TabIndex = 10;
-            this.btnSeleccionarColor.Text = "Color";
-            this.btnSeleccionarColor.UseVisualStyleBackColor = true;
-            
-
 
         }
 

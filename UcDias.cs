@@ -82,28 +82,49 @@ namespace CalendarioApp
 
         private void lblDia_Click(object sender, EventArgs e)
         {
-            UcDias_Click(sender, e);
+            UcDias_Click(sender, e);           
         }
 
-        //no tocar
+        //no tocar----- los // fueron remplanzados
+        //private void UcDias_MouseEnter(object sender, EventArgs e)
+        //{
+        //  this.BackColor = Color.FromArgb(60, 63, 70); // color resaltado al pasar el mouse
+        //}
+
+        //private void UcDias_MouseLeave(object sender, EventArgs e)
+        //{
+        //   this.BackColor = colorBaseActual; // volver al color original
+        //}
         private void UcDias_MouseEnter(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(60, 63, 70); // color resaltado al pasar el mouse
+            this.BackColor = Color.FromArgb(60, 63, 70); // solo cambia visualmente
         }
 
         private void UcDias_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = colorBaseActual; // volver al color original
+            this.BackColor = colorBaseActual; // restaura el color personalizado
         }
+
+        //private void lblDia_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //  this.BackColor = Color.FromArgb(60, 63, 70); // mismo color de resaltado
+        //}
+
+        //private void lblDia_MouseLeave(object sender, EventArgs e)
+        //{
+        //   this.BackColor = colorBaseActual;
+        //}
         private void lblDia_MouseMove(object sender, MouseEventArgs e)
         {
-            this.BackColor = Color.FromArgb(60, 63, 70); // mismo color de resaltado
+            this.BackColor = Color.FromArgb(60, 63, 70); // efecto hover
         }
 
         private void lblDia_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = colorBaseActual;
+            this.BackColor = colorBaseActual; // vuelve al color original
         }
+
+
 
     }
 }

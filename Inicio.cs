@@ -125,7 +125,7 @@ namespace ProyectoFinal.Calendario
                     g.DrawRectangle(new Pen(System.Drawing.Color.FromArgb(100, 100, 100)), 0, 0, anchoDia - 1, altoDia - 1);  // Borde redondeado
                 };
 
-                // Resaltar al pasar el mouse
+                /* Resaltar al pasar el mouse
                 diaControl.MouseEnter += (sender, e) =>
                 {
                     diaControl.BackColor = System.Drawing.Color.FromArgb(60, 63, 70);  // Color más claro al pasar el mouse
@@ -136,7 +136,7 @@ namespace ProyectoFinal.Calendario
                 {
                     diaControl.BackColor = System.Drawing.Color.FromArgb(40, 43, 50);  // Color original
                 };
-
+                */
                 // Verificar si el día tiene evento
                 if (listaDeEventosGlobal.Any(ev => ev.Fecha.Date == fechaActualCelda.Date))
                 {
@@ -156,9 +156,10 @@ namespace ProyectoFinal.Calendario
 
                     if (eventoDelDia.ColorPersonalizado.HasValue)
                     {
-                        diaControl.BackColor = eventoDelDia.ColorPersonalizado.Value;
+                        diaControl.ColorPersonalizado = eventoDelDia.ColorPersonalizado.Value; //se uso la propiedad // razon por la que no guadaba el color
                     }
                 }
+
 
                 diaControl.DiaClickeado += UcDias_DiaClickeado;
                 flDays.Controls.Add(diaControl);
