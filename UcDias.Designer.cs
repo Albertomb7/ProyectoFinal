@@ -20,6 +20,7 @@ namespace CalendarioApp
             // 
             // lblDia
             // 
+            this.lblDia.BackColor = System.Drawing.SystemColors.Window;
             this.lblDia.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDia.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblDia.Location = new System.Drawing.Point(0, 0);
