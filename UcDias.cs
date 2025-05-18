@@ -9,9 +9,12 @@ namespace CalendarioApp
         private string _dia;
         private bool _tieneEvento;
         private Color? _colorPersonalizado;
-        private Color colorBaseActual = Color.FromArgb(30, 30, 40); // Color base por defecto // R,S.
+        private Color colorBaseActual = Color.FromArgb(30, 30, 40); // Color base oscuro predeterminado // R,S. Estilo visual uniforme
 
         public DateTime FechaCelda { get; set; }
+
+        // NUEVA propiedad para saber cuántos eventos tiene un día // R,S.
+        public int CantidadEventos { get; set; } = 0; // R,S. Nos permite mostrar un número de eventos si hay más de uno
 
         public UcDias()
         {
@@ -65,10 +68,10 @@ namespace CalendarioApp
 
         private void AplicarColores()
         {
-            // Siempre usamos el fondo oscuro, sin pintar por el evento // R,S.
+            // Siempre usar fondo base oscuro, no sobrescribir con color del evento // R,S. Mantiene la estética uniforme del calendario
             colorBaseActual = Color.FromArgb(30, 30, 40); // R,S.
             this.BackColor = colorBaseActual; // R,S.
-            this.Invalidate(); // Para que se dibuje el círculo si tiene evento // R,S.
+            this.Invalidate(); // Redibuja el control para que se muestre el círculo de evento // R,S.
         }
 
         public event EventHandler DiaClickeado;
@@ -88,41 +91,58 @@ namespace CalendarioApp
 
         private void UcDias_MouseEnter(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(60, 63, 70); // solo cambia visualmente
+            this.BackColor = Color.FromArgb(60, 63, 70); // Color más claro al hacer hover
         }
 
         private void UcDias_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = colorBaseActual; // restaura el color personalizado
+            this.BackColor = colorBaseActual; // Restaurar color original del control
         }
 
         private void lblDia_MouseMove(object sender, MouseEventArgs e)
         {
-            this.BackColor = Color.FromArgb(60, 63, 70); // efecto hover
+            this.BackColor = Color.FromArgb(60, 63, 70); // Hover sobre el número del día
         }
 
         private void lblDia_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = colorBaseActual; // vuelve al color original
+            this.BackColor = colorBaseActual;
         }
 
-        //NUEVO MÉTODO: Dibuja un círculo en la esquina si el día tiene evento // R,S.
-        protected override void OnPaint(PaintEventArgs e) 
+        // PERSONALIZACIÓN: Dibuja círculo superior derecho si el día tiene evento // R,S.
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e); // R,S.
+            base.OnPaint(e);
 
-            if (TieneEvento && ColorPersonalizado.HasValue) 
+            if (TieneEvento && ColorPersonalizado.HasValue) // Validamos si se debe dibujar // R,S.
             {
-                int tamañoCirculo = 12; 
-                int margen = 6; 
-                Color colorCirculo = ColorPersonalizado.Value; 
+                int tamañoCirculo = 14; // Tamaño del círculo visual // R,S.
+                int margen = 6; // Separación del borde // R,S.
+                Color colorCirculo = ColorPersonalizado.Value;
 
-                using (SolidBrush brush = new SolidBrush(colorCirculo)) 
+                int x = this.Width - tamañoCirculo - margen;
+                int y = margen; // Parte superior (antes era parte inferior) // R,S.
+
+                using (SolidBrush brush = new SolidBrush(colorCirculo))
                 {
-                    int x = this.Width - tamañoCirculo - margen;
-                    int y = margen; //Esto coloca en la parte superior el punto// R,S.
-                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; 
-                    e.Graphics.FillEllipse(brush, x, y, tamañoCirculo, tamañoCirculo); 
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    e.Graphics.FillEllipse(brush, x, y, tamañoCirculo, tamañoCirculo); // Dibujar el círculo de notificación // R,S.
+                }
+
+                // Si hay más de un evento, mostramos un número dentro del círculo // R,S.
+                if (CantidadEventos > 1)
+                {
+                    using (Font fuente = new Font("Segoe UI", 7, FontStyle.Bold))
+                    using (Brush textoBrush = new SolidBrush(Color.White))
+                    {
+                        string texto = CantidadEventos.ToString();
+                        SizeF tamañoTexto = e.Graphics.MeasureString(texto, fuente);
+
+                        float textoX = x + (tamañoCirculo - tamañoTexto.Width) / 2;
+                        float textoY = y + (tamañoCirculo - tamañoTexto.Height) / 2;
+
+                        e.Graphics.DrawString(texto, fuente, textoBrush, textoX, textoY); // Número centrado dentro del círculo // R,S.
+                    }
                 }
             }
         }
