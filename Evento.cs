@@ -59,36 +59,7 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
         }
 
 
-        public static List<string> ObtenerEventos(DateTime fecha, List<Evento> eventos)
-        {
-            eventos = new List<Evento>();
-
-            
-            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
-            {
-                string query = "SELECT Descripcion FROM Eventos WHERE Fecha = @fecha";
-                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
-                {
-                    comando.Parameters.AddWithValue("@fecha", fecha.Date);
-
-                    Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader();
-
-                    
-
-                    while (reader.Read())
-                    {
-                       
-                        string descripcion = reader["Descripcion"].ToString();
-                        Evento evento = new Evento();
-                        evento.Descripcion = descripcion;
-                        eventos.Add(evento.Descripcion);
-                    }
-
-                    
-                }
-            }
-            return eventos;
+        
 
         }
     }
-}

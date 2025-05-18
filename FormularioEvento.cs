@@ -113,6 +113,8 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             {
                 // _fechaActual ya tiene la fecha correcta con hora 00:00:00 del día seleccionado.
                 EventoCreadoOModificado = new Evento(_fechaActual.Date, txtDescripcionEvento.Text, hora, _colorSeleccionado);
+                Evento.CrearEvento(EventoCreadoOModificado);
+
             }
 
             this.DialogResult = DialogResult.OK;
