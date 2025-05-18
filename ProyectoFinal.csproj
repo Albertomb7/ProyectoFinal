@@ -162,6 +162,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SesionActual.cs" />
     <Compile Include="conexionSql.cs" />
     <Compile Include="datosUsuarios.cs" />
     <Compile Include="encrip.cs" />

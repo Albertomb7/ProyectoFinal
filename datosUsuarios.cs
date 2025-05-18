@@ -62,27 +62,27 @@ namespace ProyectoFinal
                     transaccion.Commit();
                 }
             }
-            catch (Microsoft.Data.SqlClient.SqlException )
+            catch (Microsoft.Data.SqlClient.SqlException)
             {
                 throw;
             }
             return retorna;
         }
 
-  
+
         //Actualizar datos de usuario
         public static int ActualizarUsuario(Persona persona)
         {
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = ("update usuarios set usuario = '"+persona.usuario+ "',nombre = '"+persona.nombre+ "', ePass = '" + persona.ePass+"',  where id = "+persona.id+"");
+                string query = ("update usuarios set usuario = '" + persona.usuario + "',nombre = '" + persona.nombre + "', ePass = '" + persona.ePass + "',  where id = " + persona.id + "");
                 Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
                 retorna = comando.ExecuteNonQuery();
             }
             return retorna;
         }
-        
+
 
         //Eliminar usuario de la base de datos
         public static int EliminarUsuario(Persona persona)
@@ -90,7 +90,7 @@ namespace ProyectoFinal
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = ("delete from usuarios where id = "+persona.id+"");
+                string query = ("delete from usuarios where id = " + persona.id + "");
                 Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
                 retorna = comando.ExecuteNonQuery();
             }
@@ -114,7 +114,7 @@ namespace ProyectoFinal
                         {
 
                             persona.ePass = reader.GetString(0);
-                            retorna = 1; 
+                            retorna = 1;
                         }
                     }
                 }
@@ -177,5 +177,25 @@ namespace ProyectoFinal
 
         }
 
+        public static int ObtenerInformacionSesion(string usuario)
+        {
+            int IdUsuario = -1;
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                string query = "SELECT Id FROM usuarios WHERE usuario = @usuario";
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@usuario", usuario);
+
+                    object resultado = comando.ExecuteScalar();
+
+                    if (resultado != null)
+                    {
+                        IdUsuario = Convert.ToInt32(resultado);
+                    }
+                }
+            }
+            return IdUsuario;
+        }
     }
 }

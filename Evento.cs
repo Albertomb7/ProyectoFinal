@@ -1,6 +1,9 @@
 ﻿// Evento.cs
 using System;
-using System.Drawing; // agrege este nuevo using, deja usar los colores 
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using CalendarioApp; // agrege este nuevo using, deja usar los colores 
 
 
 namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta, ajusta este namespace
@@ -29,6 +32,63 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
                 return $"{Hora.Value:hh\\:mm} - {Descripcion}";
             }
             return Descripcion;
+        }
+
+
+        //Crea un evento nuevo en la base de datos
+        public static int CrearEvento(Evento evento)
+        {
+            int retorna = 0;
+            try
+            {
+                using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+                {
+
+                    string query = ("Insert into Eventos values('" + SesionActual.IdUsuario + "', '" + evento.Descripcion + "', '" + evento.Fecha + "','" + evento.Hora + "', '" + "activo" + "')");
+                    Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
+                    retorna = comando.ExecuteNonQuery();
+
+                    
+                }
+            }
+            catch (Microsoft.Data.SqlClient.SqlException)
+            {
+                throw;
+            }
+            return retorna;
+        }
+
+
+        public static List<string> ObtenerEventos(DateTime fecha, List<Evento> eventos)
+        {
+            eventos = new List<Evento>();
+
+            
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                string query = "SELECT Descripcion FROM Eventos WHERE Fecha = @fecha";
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@fecha", fecha.Date);
+
+                    Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader();
+
+                    
+
+                    while (reader.Read())
+                    {
+                       
+                        string descripcion = reader["Descripcion"].ToString();
+                        Evento evento = new Evento();
+                        evento.Descripcion = descripcion;
+                        eventos.Add(evento.Descripcion);
+                    }
+
+                    
+                }
+            }
+            return eventos;
+
         }
     }
 }

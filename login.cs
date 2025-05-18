@@ -112,6 +112,10 @@ namespace ProyectoFinal
 
                     if (ePass == persona.ePass)
                     {
+                        int id = ObtenerInformacionSesion(txt_usuario.Text);
+
+                        SesionActual.IdUsuario = id;
+
                         Form FormInicio = new Calendario.Inicio(this);
                         FormInicio.Show();
                         this.Hide();
