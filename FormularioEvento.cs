@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 {
     public partial class FormularioEvento : Form
-    {              
+    {
         public Evento EventoCreadoOModificado { get; private set; }
         public Evento EventoAEliminar { get; private set; }
         private DateTime _fechaActual;
@@ -19,7 +19,8 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
         {
             InitializeComponent(); // Esta línea llama al código en FormularioEvento.Designer.cs
             _fechaActual = fecha;
-            _eventosExistentesEnElDia = eventosDelDia;
+           
+            _eventosExistentesEnElDia = eventosDelDia ?? new List<Evento>();
 
 
             if (lblFechaSeleccionada != null) lblFechaSeleccionada.Text = fecha.ToString("D");
@@ -27,21 +28,25 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             {
                 dtpHoraEvento.Format = DateTimePickerFormat.Time;
                 dtpHoraEvento.ShowUpDown = true;
-                dtpHoraEvento.Value = DateTime.Now;
+                dtpHoraEvento.Value = DateTime.Now; 
                 if (chkUsarHora != null) dtpHoraEvento.Enabled = chkUsarHora.Checked;
             }
-            if (dtpHoraEvento == null)
-            
-                                               
+            // El if (dtpHoraEvento == null) {} es un bloque vacío, no afecta.
+
             CargarEventosEnLista();
         }
 
         private void CargarEventosEnLista()
         {
-            if (lstEventosDelDia == null) return; // Seguridad por si el control no está listo
+            if (lstEventosDelDia == null) return;
+
             lstEventosDelDia.Items.Clear();
+
+            // nuevo _eventosExistentesEnElDia
             if (_eventosExistentesEnElDia != null && _eventosExistentesEnElDia.Any())
             {
+                
+
                 foreach (var ev in _eventosExistentesEnElDia.OrderBy(e => e.Hora ?? TimeSpan.MaxValue).ThenBy(e => e.Descripcion))
                 {
                     lstEventosDelDia.Items.Add(ev);
@@ -49,10 +54,14 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             }
             else
             {
+                // System.Diagnostics.Debug.WriteLine($"No hay eventos para cargar en el ListBox para {_fechaActual.ToShortDateString()}");
                 lstEventosDelDia.Items.Add("No hay eventos para este día.");
-                lstEventosDelDia.ClearSelected();
-
+                lstEventosDelDia.ClearSelected(); 
             }
+
+            // MODIFICACIÓN: Forzar un refresco visual del ListBox
+            
+            // El LimpiarCamposNuevaEntrada() al final está bien resetea los campos para una nueva entrada o estado por defecto.
             LimpiarCamposNuevaEntrada();
         }
 
@@ -60,22 +69,27 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
         {
             if (txtDescripcionEvento != null) txtDescripcionEvento.Clear();
             if (chkUsarHora != null) chkUsarHora.Checked = false;
-            if (dtpHoraEvento != null) dtpHoraEvento.Value = DateTime.Now;
+            if (dtpHoraEvento != null)
+            {
+                // Resetea la hora al mediodía de la fecha actual
+                dtpHoraEvento.Value = _fechaActual.Date.AddHours(12);
+               
+            }
             _eventoSeleccionadoEnLista = null;
             if (btnGuardar != null) btnGuardar.Text = "Guardar Nuevo";
             if (btnEliminar != null) btnEliminar.Enabled = false;
+            if (PanelColor != null) PanelColor.BackColor = SystemColors.Control; // Resetear el color del panel
+            _colorSeleccionado = null; // Resetear el color seleccionado
         }
 
         private void chkUsarHora_CheckedChanged(object sender, EventArgs e)
         {
-
             if (dtpHoraEvento != null && chkUsarHora != null)
                 dtpHoraEvento.Enabled = chkUsarHora.Checked;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
             if (txtDescripcionEvento == null || string.IsNullOrWhiteSpace(txtDescripcionEvento.Text))
             {
                 MessageBox.Show("La descripción no puede estar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -85,25 +99,24 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             TimeSpan? hora = null;
             if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
             {
-                hora = dtpHoraEvento.Value.TimeOfDay;              
+                hora = dtpHoraEvento.Value.TimeOfDay;
             }
 
-            if (_eventoSeleccionadoEnLista != null)
+            if (_eventoSeleccionadoEnLista != null) // Modificando
             {
                 _eventoSeleccionadoEnLista.Descripcion = txtDescripcionEvento.Text;
                 _eventoSeleccionadoEnLista.Hora = hora;
-                _eventoSeleccionadoEnLista.ColorPersonalizado = _colorSeleccionado; // nuevo
+                _eventoSeleccionadoEnLista.ColorPersonalizado = _colorSeleccionado;
                 EventoCreadoOModificado = _eventoSeleccionadoEnLista;
             }
-            else
+            else // Creando nuevo Evento
             {
-                EventoCreadoOModificado = new Evento(_fechaActual, txtDescripcionEvento.Text, hora, _colorSeleccionado);
-                // evento color 
+                // _fechaActual ya tiene la fecha correcta con hora 00:00:00 del día seleccionado.
+                EventoCreadoOModificado = new Evento(_fechaActual.Date, txtDescripcionEvento.Text, hora, _colorSeleccionado);
             }
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -114,7 +127,6 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 
         private void lstEventosDelDia_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (lstEventosDelDia != null && lstEventosDelDia.SelectedItem is Evento evento)
             {
                 _eventoSeleccionadoEnLista = evento;
@@ -125,42 +137,49 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 {
                     if (evento.Hora.HasValue)
                     {
+                        // Asegura que la fecha base del DateTimePicker sea la fecha del evento actual, no la fecha de hoy.
                         dtpHoraEvento.Value = _fechaActual.Date + evento.Hora.Value;
                     }
                     else
                     {
-                        dtpHoraEvento.Value = DateTime.Now;
+                        // Si no hay hora resetea al mediodía de la fecha actual del formulario.
+                        dtpHoraEvento.Value = _fechaActual.Date.AddHours(12);
                     }
                 }
 
-                _colorSeleccionado = evento.ColorPersonalizado; // <<< Agregado
-                PanelColor.BackColor = evento.ColorPersonalizado ?? SystemColors.Control; // <<< Agregado
-
-                if (btnGuardar != null) btnGuardar.Text = "Actualizar";
-                if (btnEliminar != null) btnEliminar.Enabled = true;
+                _colorSeleccionado = evento.ColorPersonalizado;
                 if (PanelColor != null)
                 {
                     PanelColor.BackColor = evento.ColorPersonalizado ?? SystemColors.Control;
                 }
 
+
+                if (btnGuardar != null) btnGuardar.Text = "Actualizar";
+                if (btnEliminar != null) btnEliminar.Enabled = true;
             }
             else
             {
+                // Si se deselecciona o el ítem no es un Evento (ej. "No hay eventos..."), limpiar campos.
                 LimpiarCamposNuevaEntrada();
             }
         }
 
-
-        private Color? _colorSeleccionado = null; // agrege una funcion para la vista del color
+        private Color? _colorSeleccionado = null;
 
         private void btnSeleccionarColor_Click(object sender, EventArgs e)
         {
             using (ColorDialog colorDialog = new ColorDialog())
             {
+                // Opcional: establecer el color actual si ya hay uno seleccionado
+                if (_colorSeleccionado.HasValue)
+                {
+                    colorDialog.Color = _colorSeleccionado.Value;
+                }
+
                 if (colorDialog.ShowDialog() == DialogResult.OK)
                 {
                     _colorSeleccionado = colorDialog.Color;
-                    PanelColor.BackColor = colorDialog.Color;
+                    if (PanelColor != null) PanelColor.BackColor = colorDialog.Color;
                 }
             }
         }
@@ -173,12 +192,12 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                                     "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     EventoAEliminar = _eventoSeleccionadoEnLista;
-                    this.DialogResult = DialogResult.OK;
+                    this.DialogResult = DialogResult.OK; // Indica que la operación fue "exitosa" para que Inicio.cs procese la eliminación.
                     this.Close();
                 }
             }
         }
-
+        //Esta de mas si van agrear el evento en el designer lo borran
         private void txtDescripcionEvento_TextChanged(object sender, EventArgs e)
         {
 
