@@ -48,7 +48,7 @@
             // 
             this.lblFecha.AutoSize = true;
             this.lblFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFecha.Location = new System.Drawing.Point(64, 14);
+            this.lblFecha.Location = new System.Drawing.Point(44, 31);
             this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(0, 42);
@@ -59,7 +59,7 @@
             // 
             this.pbAnterior.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAnterior.Image = ((System.Drawing.Image)(resources.GetObject("pbAnterior.Image")));
-            this.pbAnterior.Location = new System.Drawing.Point(921, 31);
+            this.pbAnterior.Location = new System.Drawing.Point(877, 31);
             this.pbAnterior.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbAnterior.Name = "pbAnterior";
             this.pbAnterior.Size = new System.Drawing.Size(45, 46);
@@ -72,7 +72,7 @@
             // 
             this.pbSiguiente.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSiguiente.Image = ((System.Drawing.Image)(resources.GetObject("pbSiguiente.Image")));
-            this.pbSiguiente.Location = new System.Drawing.Point(975, 31);
+            this.pbSiguiente.Location = new System.Drawing.Point(931, 31);
             this.pbSiguiente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbSiguiente.Name = "pbSiguiente";
             this.pbSiguiente.Size = new System.Drawing.Size(45, 46);
@@ -85,7 +85,7 @@
             // 
             this.lblLunes.AutoSize = true;
             this.lblLunes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLunes.Location = new System.Drawing.Point(106, 129);
+            this.lblLunes.Location = new System.Drawing.Point(62, 129);
             this.lblLunes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLunes.Name = "lblLunes";
             this.lblLunes.Size = new System.Drawing.Size(77, 24);
@@ -97,7 +97,7 @@
             // 
             this.lblMartes.AutoSize = true;
             this.lblMartes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMartes.Location = new System.Drawing.Point(236, 129);
+            this.lblMartes.Location = new System.Drawing.Point(192, 129);
             this.lblMartes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMartes.Name = "lblMartes";
             this.lblMartes.Size = new System.Drawing.Size(89, 24);
@@ -110,7 +110,7 @@
             // 
             this.lblViernes.AutoSize = true;
             this.lblViernes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblViernes.Location = new System.Drawing.Point(649, 129);
+            this.lblViernes.Location = new System.Drawing.Point(605, 129);
             this.lblViernes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblViernes.Name = "lblViernes";
             this.lblViernes.Size = new System.Drawing.Size(92, 24);
@@ -122,7 +122,7 @@
             // 
             this.lblMiercoles.AutoSize = true;
             this.lblMiercoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMiercoles.Location = new System.Drawing.Point(361, 129);
+            this.lblMiercoles.Location = new System.Drawing.Point(317, 129);
             this.lblMiercoles.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMiercoles.Name = "lblMiercoles";
             this.lblMiercoles.Size = new System.Drawing.Size(119, 24);
@@ -135,7 +135,7 @@
             // 
             this.lblJueves.AutoSize = true;
             this.lblJueves.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJueves.Location = new System.Drawing.Point(514, 129);
+            this.lblJueves.Location = new System.Drawing.Point(470, 129);
             this.lblJueves.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblJueves.Name = "lblJueves";
             this.lblJueves.Size = new System.Drawing.Size(83, 24);
@@ -148,7 +148,7 @@
             // 
             this.lblSabado.AutoSize = true;
             this.lblSabado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSabado.Location = new System.Drawing.Point(785, 129);
+            this.lblSabado.Location = new System.Drawing.Point(741, 129);
             this.lblSabado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSabado.Name = "lblSabado";
             this.lblSabado.Size = new System.Drawing.Size(88, 24);
@@ -160,7 +160,7 @@
             // 
             this.lblDomingo.AutoSize = true;
             this.lblDomingo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDomingo.Location = new System.Drawing.Point(917, 129);
+            this.lblDomingo.Location = new System.Drawing.Point(873, 129);
             this.lblDomingo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDomingo.Name = "lblDomingo";
             this.lblDomingo.Size = new System.Drawing.Size(101, 24);
@@ -171,7 +171,7 @@
             // flDays
             // 
             this.flDays.AutoScroll = true;
-            this.flDays.Location = new System.Drawing.Point(76, 170);
+            this.flDays.Location = new System.Drawing.Point(32, 170);
             this.flDays.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.flDays.Name = "flDays";
             this.flDays.Size = new System.Drawing.Size(960, 565);
@@ -197,7 +197,9 @@
             this.Controls.Add(this.lblFecha);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
             this.Name = "Inicio";
             this.Text = "Calendario";
             this.Load += new System.EventHandler(this.Inicio_Load);

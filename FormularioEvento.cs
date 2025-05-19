@@ -17,11 +17,13 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
 
         public FormularioEvento(DateTime fecha, List<Evento> eventosDelDia)
         {
-            InitializeComponent(); // Esta línea llama al código en FormularioEvento.Designer.cs
+            InitializeComponent(); 
             _fechaActual = fecha;
-           
-            _eventosExistentesEnElDia = eventosDelDia ?? new List<Evento>();
 
+            //Agrega los eventos del dia haciendo una consulta a la base de datos 
+            _eventosExistentesEnElDia = Evento.ObtenerEventosExistentes(_fechaActual.Date); 
+
+           
 
             if (lblFechaSeleccionada != null) lblFechaSeleccionada.Text = fecha.ToString("D");
             if (dtpHoraEvento != null)
@@ -36,6 +38,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             CargarEventosEnLista();
         }
 
+        //Funcion para cargar eventos a la listbox y mostrarlos en el formulario
         private void CargarEventosEnLista()
         {
             if (lstEventosDelDia == null) return;
@@ -112,7 +115,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             else // Creando nuevo Evento
             {
                 // _fechaActual ya tiene la fecha correcta con hora 00:00:00 del día seleccionado.
-                EventoCreadoOModificado = new Evento(_fechaActual.Date, txtDescripcionEvento.Text, hora);
+                EventoCreadoOModificado = new Evento(1, _fechaActual.Date, txtDescripcionEvento.Text, hora);
                 Evento.CrearEvento(EventoCreadoOModificado);
 
             }
@@ -156,7 +159,12 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 }
 
 
-                if (btnGuardar != null) btnGuardar.Text = "Actualizar";
+                if (btnGuardar != null) 
+                { 
+                    btnGuardar.Visible = false; 
+                    btn_actuzalizar.Visible = true;
+                }
+
                 if (btnEliminar != null) btnEliminar.Enabled = true;
             }
             else
@@ -193,7 +201,10 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 if (MessageBox.Show($"¿Seguro que quieres eliminar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?",
                                     "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    EventoAEliminar = _eventoSeleccionadoEnLista;
+
+                    //Obtiene la descripcion del evento seleccionado en la lista para llamar a la funcion de eliminar
+                    Evento.EliminarEvento(_eventoSeleccionadoEnLista);
+                    MessageBox.Show("Evento eliminado con exito.", "Evento eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK; // Indica que la operación fue "exitosa" para que Inicio.cs procese la eliminación.
                     this.Close();
                 }
@@ -201,6 +212,42 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
         }
         //Esta de mas si van agrear el evento en el designer lo borran
         private void txtDescripcionEvento_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_actuzalizar_Click(object sender, EventArgs e)
+        {
+            if (_eventoSeleccionadoEnLista != null)
+            {
+                if (MessageBox.Show($"¿Seguro que quieres actualizar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?",
+                                    "Confirmar Actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+
+                    TimeSpan? hora = null;
+                    if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
+                    {
+                        hora = dtpHoraEvento.Value.TimeOfDay;
+                    }
+
+                    if (_eventoSeleccionadoEnLista != null) // Modificando
+                    {
+                        _eventoSeleccionadoEnLista.Descripcion = txtDescripcionEvento.Text;
+                        _eventoSeleccionadoEnLista.Hora = hora;
+      
+                    }
+
+                    //Obtiene la descripcion del evento seleccionado en la lista para llamar a la funcion de actualizar
+                    Evento.ActualizarEvento(_eventoSeleccionadoEnLista);
+                    MessageBox.Show("Evento actualizado con exito.", "Evento actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK; // Indica que la operación fue "exitosa" para que Inicio.cs procese la eliminación.
+                    this.Close();
+                }
+            }
+        }
+
+        private void dtpHoraEvento_ValueChanged(object sender, EventArgs e)
         {
 
         }

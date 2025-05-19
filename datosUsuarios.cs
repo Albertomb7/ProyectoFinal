@@ -76,7 +76,7 @@ namespace ProyectoFinal
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = ("update usuarios set usuario = '" + persona.usuario + "',nombre = '" + persona.nombre + "', ePass = '" + persona.ePass + "',  where id = " + persona.id + "");
+                string query = ("update Eventos set usuario = '" + persona.usuario + "',nombre = '" + persona.nombre + "', ePass = '" + persona.ePass + "',  where id = " + persona.id + "");
                 Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion);
                 retorna = comando.ExecuteNonQuery();
             }
