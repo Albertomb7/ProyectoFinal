@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CalendarioApp; // agrege este nuevo using, deja usar los colores 
 
@@ -79,7 +80,7 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
         }
 
 
-
+        // Leer evento existentes
         public static List<Evento> ObtenerEventosExistentes(DateTime fecha)
         {
             List<Evento> eventos = new List<Evento>();
@@ -146,6 +147,29 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
                 }
             }
             return retorna;
+        }
+
+        //Mostrar solo la descripcion del evento
+         public static async Task<string> MostrarEventoDescripcion()
+        {
+            List<Evento> eventos = new List<Evento>();
+            string descripcion = string.Empty;
+            string resultado = string.Empty;
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand())
+                {
+                    string query = "SELECT Descripcion FROM Eventos WHERE '"+SesionActual.IdUsuario+"'";
+
+                    using (Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        var valor = await reader.ReadAsync();
+                        resultado = valor.ToString() ?? string.Empty;
+                    }
+                }
+            }
+            return resultado;
         }
     }
 }

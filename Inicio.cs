@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using CalendarioApp; // Namespace de UcDias
 using System.Drawing.Drawing2D;
 using ProyectoFinal.Calendario;
+using System.Configuration;
 
 namespace ProyectoFinal.Calendario
 {
@@ -16,6 +17,17 @@ namespace ProyectoFinal.Calendario
     {
         int mes, año;
         private Form formularioLogin;
+        // Varible con el dia actual
+        DateTime diaActual = DateTime.Now;
+
+        //Varieble del boton ajustes
+        bool valorAjuste = false;
+
+        public Evento EventoCreadoOModificado { get; private set; }
+        public Evento EventoAEliminar { get; private set; }
+        private DateTime _fechaActual;
+        private List<Evento> _eventosExistentesEnElDia;
+        private Evento _eventoSeleccionadoEnLista;
 
         // Lista para almacenar todos los eventos de la aplicación
         private List<Evento> listaDeEventosGlobal = new List<Evento>();
@@ -35,6 +47,7 @@ namespace ProyectoFinal.Calendario
             if (lblViernes != null) lblViernes.ForeColor = Color.FromArgb(200, 200, 200);
             if (lblSabado != null) lblSabado.ForeColor = Color.FromArgb(200, 200, 200);
             if (lblDomingo != null) lblDomingo.ForeColor = Color.FromArgb(200, 200, 200);
+
         }
 
         public Inicio(Form login) : this()
@@ -48,6 +61,10 @@ namespace ProyectoFinal.Calendario
             mes = hoy.Month;
             año = hoy.Year;
             MostrarDias();
+            // lABEL CON LA FECHA ACTUAL
+            lblFechaDelEvento.Text = $"{diaActual.ToString("dd")} de {diaActual.ToString("MMMM", new CultureInfo("es-ES"))} {diaActual.ToString("yyyy")}";
+            //CONSULTA Y MUESTRA DE LOS EVENTOS PENDIENTES ESE DIA
+            lstMostrarEventosInicio.DataSource = Evento.ObtenerEventosExistentes(diaActual);
         }
 
         private void MostrarDias()
@@ -141,6 +158,7 @@ namespace ProyectoFinal.Calendario
 
         private void UcDias_DiaClickeado(object sender, EventArgs e)
         {
+            
             if (sender is UcDias diaControlClickeado)
             {
                 DateTime fechaSeleccionada = diaControlClickeado.FechaCelda;
@@ -172,6 +190,7 @@ namespace ProyectoFinal.Calendario
                     }
                 }
             }
+            
         }
 
         // 9 DE LA MAÑANA XD
@@ -201,6 +220,50 @@ namespace ProyectoFinal.Calendario
         private void lblJueves_Click(object sender, EventArgs e) { }
         private void lblMiercoles_Click(object sender, EventArgs e) { }
         private void lblMartes_Click(object sender, EventArgs e) { }
+
+        public void lblDescripcionDelEvento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstMostrarEventosInicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnAjustes_Click(object sender, EventArgs e)
+        {
+            pnConfiguracion.Visible = !valorAjuste;
+            bool valorAjuste1 = !valorAjuste;
+            valorAjuste = valorAjuste1;
+            
+        }
+
+        private void lblUsuarioInicial_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnConfiguracion_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSalirDelPanel_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void lblFechaDelEvento_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         private void flDays_Paint(object sender, PaintEventArgs e) { }
     }
 }
