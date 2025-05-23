@@ -1,16 +1,17 @@
-﻿namespace ProyectoFinal.Calendario
+﻿
+
+
+
+namespace ProyectoFinal.Calendario
 {
     partial class Inicio
     {
-        /// <summary>
-        /// Required designer variable.
+       
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+       
+        /// <param name="disposing"
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +23,7 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        // <summary> CODIGO GENERADO POR EL DISEÑADOR DE WINDOWS FORMS. NO LO MODIFIQUEN CON EL EDITOR DE CÓDIGO. XD </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
@@ -41,13 +39,13 @@
             this.lblDomingo = new System.Windows.Forms.Label();
             this.flDays = new System.Windows.Forms.FlowLayoutPanel();
             this.lblFechaDelEvento = new System.Windows.Forms.Label();
-            this.btnCrearEventoInicio = new System.Windows.Forms.Button();
+            this.btnGestionarEventosDia = new System.Windows.Forms.Button();
             this.lstMostrarEventosInicio = new System.Windows.Forms.ListBox();
             this.btnAjustes = new System.Windows.Forms.Button();
             this.pnConfiguracion = new System.Windows.Forms.Panel();
-            this.lblUsuarioInicial = new System.Windows.Forms.Label();
-            this.btnCambioDeColorFondo = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.btnCambioDeColorFondo = new System.Windows.Forms.Button();
+            this.lblUsuarioInicial = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnterior)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSiguiente)).BeginInit();
             this.pnConfiguracion.SuspendLayout();
@@ -60,12 +58,13 @@
             this.lblFecha.Location = new System.Drawing.Point(44, 31);
             this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(0, 42);
+            this.lblFecha.Size = new System.Drawing.Size(0, 54);
             this.lblFecha.TabIndex = 0;
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbAnterior
             // 
+            this.pbAnterior.BackColor = System.Drawing.Color.Silver;
             this.pbAnterior.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAnterior.Image = ((System.Drawing.Image)(resources.GetObject("pbAnterior.Image")));
             this.pbAnterior.Location = new System.Drawing.Point(877, 31);
@@ -79,6 +78,7 @@
             // 
             // pbSiguiente
             // 
+            this.pbSiguiente.BackColor = System.Drawing.Color.DarkGray;
             this.pbSiguiente.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSiguiente.Image = ((System.Drawing.Image)(resources.GetObject("pbSiguiente.Image")));
             this.pbSiguiente.Location = new System.Drawing.Point(931, 31);
@@ -97,7 +97,7 @@
             this.lblLunes.Location = new System.Drawing.Point(62, 129);
             this.lblLunes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLunes.Name = "lblLunes";
-            this.lblLunes.Size = new System.Drawing.Size(77, 24);
+            this.lblLunes.Size = new System.Drawing.Size(99, 29);
             this.lblLunes.TabIndex = 4;
             this.lblLunes.Text = "LUNES ";
             this.lblLunes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -109,7 +109,7 @@
             this.lblMartes.Location = new System.Drawing.Point(192, 129);
             this.lblMartes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMartes.Name = "lblMartes";
-            this.lblMartes.Size = new System.Drawing.Size(89, 24);
+            this.lblMartes.Size = new System.Drawing.Size(113, 29);
             this.lblMartes.TabIndex = 5;
             this.lblMartes.Text = "MARTES";
             this.lblMartes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,7 +122,7 @@
             this.lblViernes.Location = new System.Drawing.Point(605, 129);
             this.lblViernes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblViernes.Name = "lblViernes";
-            this.lblViernes.Size = new System.Drawing.Size(92, 24);
+            this.lblViernes.Size = new System.Drawing.Size(117, 29);
             this.lblViernes.TabIndex = 6;
             this.lblViernes.Text = "VIERNES";
             this.lblViernes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -134,7 +134,7 @@
             this.lblMiercoles.Location = new System.Drawing.Point(317, 129);
             this.lblMiercoles.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMiercoles.Name = "lblMiercoles";
-            this.lblMiercoles.Size = new System.Drawing.Size(119, 24);
+            this.lblMiercoles.Size = new System.Drawing.Size(153, 29);
             this.lblMiercoles.TabIndex = 6;
             this.lblMiercoles.Text = "MIERCOLES";
             this.lblMiercoles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,7 +147,7 @@
             this.lblJueves.Location = new System.Drawing.Point(470, 129);
             this.lblJueves.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblJueves.Name = "lblJueves";
-            this.lblJueves.Size = new System.Drawing.Size(83, 24);
+            this.lblJueves.Size = new System.Drawing.Size(105, 29);
             this.lblJueves.TabIndex = 7;
             this.lblJueves.Text = "JUEVES";
             this.lblJueves.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -160,7 +160,7 @@
             this.lblSabado.Location = new System.Drawing.Point(741, 129);
             this.lblSabado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSabado.Name = "lblSabado";
-            this.lblSabado.Size = new System.Drawing.Size(88, 24);
+            this.lblSabado.Size = new System.Drawing.Size(111, 29);
             this.lblSabado.TabIndex = 6;
             this.lblSabado.Text = "SABADO";
             this.lblSabado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -172,7 +172,7 @@
             this.lblDomingo.Location = new System.Drawing.Point(873, 129);
             this.lblDomingo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDomingo.Name = "lblDomingo";
-            this.lblDomingo.Size = new System.Drawing.Size(101, 24);
+            this.lblDomingo.Size = new System.Drawing.Size(130, 29);
             this.lblDomingo.TabIndex = 6;
             this.lblDomingo.Text = "DOMINGO";
             this.lblDomingo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -193,21 +193,22 @@
             this.lblFechaDelEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaDelEvento.Location = new System.Drawing.Point(1059, 93);
             this.lblFechaDelEvento.Name = "lblFechaDelEvento";
-            this.lblFechaDelEvento.Size = new System.Drawing.Size(382, 46);
+            this.lblFechaDelEvento.Size = new System.Drawing.Size(480, 58);
             this.lblFechaDelEvento.TabIndex = 8;
             this.lblFechaDelEvento.Text = "20 de Mayo de 2025";
             this.lblFechaDelEvento.Click += new System.EventHandler(this.lblFechaDelEvento_Click);
             // 
-            // btnCrearEventoInicio
+            // btnGestionarEventosDia
             // 
-            this.btnCrearEventoInicio.BackColor = System.Drawing.Color.Transparent;
-            this.btnCrearEventoInicio.ForeColor = System.Drawing.Color.White;
-            this.btnCrearEventoInicio.Location = new System.Drawing.Point(1326, 689);
-            this.btnCrearEventoInicio.Name = "btnCrearEventoInicio";
-            this.btnCrearEventoInicio.Size = new System.Drawing.Size(102, 37);
-            this.btnCrearEventoInicio.TabIndex = 10;
-            this.btnCrearEventoInicio.Text = "Actualizar ";
-            this.btnCrearEventoInicio.UseVisualStyleBackColor = false;
+            this.btnGestionarEventosDia.BackColor = System.Drawing.Color.Transparent;
+            this.btnGestionarEventosDia.ForeColor = System.Drawing.Color.Gray;
+            this.btnGestionarEventosDia.Location = new System.Drawing.Point(566, 31);
+            this.btnGestionarEventosDia.Name = "btnGestionarEventosDia";
+            this.btnGestionarEventosDia.Size = new System.Drawing.Size(195, 66);
+            this.btnGestionarEventosDia.TabIndex = 10;
+            this.btnGestionarEventosDia.Text = "AGREGAR \r\nEVENTOS";
+            this.btnGestionarEventosDia.UseVisualStyleBackColor = false;
+            this.btnGestionarEventosDia.Click += new System.EventHandler(this.btnGestionarEventosDia_Click);
             // 
             // lstMostrarEventosInicio
             // 
@@ -216,11 +217,12 @@
             this.lstMostrarEventosInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMostrarEventosInicio.ForeColor = System.Drawing.Color.White;
             this.lstMostrarEventosInicio.FormattingEnabled = true;
-            this.lstMostrarEventosInicio.ItemHeight = 25;
-            this.lstMostrarEventosInicio.Location = new System.Drawing.Point(1067, 142);
+            this.lstMostrarEventosInicio.ItemHeight = 29;
+            this.lstMostrarEventosInicio.Location = new System.Drawing.Point(1069, 154);
             this.lstMostrarEventosInicio.Name = "lstMostrarEventosInicio";
-            this.lstMostrarEventosInicio.Size = new System.Drawing.Size(333, 525);
+            this.lstMostrarEventosInicio.Size = new System.Drawing.Size(333, 522);
             this.lstMostrarEventosInicio.TabIndex = 11;
+            this.lstMostrarEventosInicio.Click += new System.EventHandler(this.lblDescripcionDelEvento_Click);
             this.lstMostrarEventosInicio.SelectedIndexChanged += new System.EventHandler(this.lstMostrarEventosInicio_SelectedIndexChanged);
             // 
             // btnAjustes
@@ -248,26 +250,6 @@
             this.pnConfiguracion.Visible = false;
             this.pnConfiguracion.Paint += new System.Windows.Forms.PaintEventHandler(this.pnConfiguracion_Paint);
             // 
-            // lblUsuarioInicial
-            // 
-            this.lblUsuarioInicial.AutoSize = true;
-            this.lblUsuarioInicial.Location = new System.Drawing.Point(3, 9);
-            this.lblUsuarioInicial.Name = "lblUsuarioInicial";
-            this.lblUsuarioInicial.Size = new System.Drawing.Size(116, 20);
-            this.lblUsuarioInicial.TabIndex = 0;
-            this.lblUsuarioInicial.Text = "Marvin Cabrera";
-            this.lblUsuarioInicial.Click += new System.EventHandler(this.lblUsuarioInicial_Click);
-            // 
-            // btnCambioDeColorFondo
-            // 
-            this.btnCambioDeColorFondo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-            this.btnCambioDeColorFondo.Location = new System.Drawing.Point(7, 50);
-            this.btnCambioDeColorFondo.Name = "btnCambioDeColorFondo";
-            this.btnCambioDeColorFondo.Size = new System.Drawing.Size(112, 62);
-            this.btnCambioDeColorFondo.TabIndex = 1;
-            this.btnCambioDeColorFondo.Text = "Modo: Oscuro";
-            this.btnCambioDeColorFondo.UseVisualStyleBackColor = false;
-            // 
             // btnCerrarSesion
             // 
             this.btnCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -280,16 +262,37 @@
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
+            // btnCambioDeColorFondo
+            // 
+            this.btnCambioDeColorFondo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+            this.btnCambioDeColorFondo.Location = new System.Drawing.Point(7, 50);
+            this.btnCambioDeColorFondo.Name = "btnCambioDeColorFondo";
+            this.btnCambioDeColorFondo.Size = new System.Drawing.Size(112, 62);
+            this.btnCambioDeColorFondo.TabIndex = 1;
+            this.btnCambioDeColorFondo.Text = "Modo: Oscuro";
+            this.btnCambioDeColorFondo.UseVisualStyleBackColor = false;
+            this.btnCambioDeColorFondo.Click += new System.EventHandler(this.btnCambioDeColorFondo_Click);
+            // 
+            // lblUsuarioInicial
+            // 
+            this.lblUsuarioInicial.AutoSize = true;
+            this.lblUsuarioInicial.Location = new System.Drawing.Point(3, 9);
+            this.lblUsuarioInicial.Name = "lblUsuarioInicial";
+            this.lblUsuarioInicial.Size = new System.Drawing.Size(147, 25);
+            this.lblUsuarioInicial.TabIndex = 0;
+            this.lblUsuarioInicial.Text = "Marvin Cabrera";
+            this.lblUsuarioInicial.Click += new System.EventHandler(this.lblUsuarioInicial_Click);
+            // 
             // Inicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.ClientSize = new System.Drawing.Size(1437, 749);
             this.Controls.Add(this.pnConfiguracion);
             this.Controls.Add(this.btnAjustes);
             this.Controls.Add(this.lstMostrarEventosInicio);
-            this.Controls.Add(this.btnCrearEventoInicio);
+            this.Controls.Add(this.btnGestionarEventosDia);
             this.Controls.Add(this.lblFechaDelEvento);
             this.Controls.Add(this.lblJueves);
             this.Controls.Add(this.lblMiercoles);
@@ -333,7 +336,7 @@
         private System.Windows.Forms.Label lblDomingo;
         private System.Windows.Forms.FlowLayoutPanel flDays;
         private System.Windows.Forms.Label lblFechaDelEvento;
-        private System.Windows.Forms.Button btnCrearEventoInicio;
+        private System.Windows.Forms.Button btnGestionarEventosDia;
         private System.Windows.Forms.ListBox lstMostrarEventosInicio;
         private System.Windows.Forms.Button btnAjustes;
         private System.Windows.Forms.Panel pnConfiguracion;

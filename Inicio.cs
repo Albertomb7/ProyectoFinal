@@ -1,5 +1,4 @@
-﻿// Inicio.cs  son las 3 de la mañana y no tengo sueño
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,8 +7,8 @@ using System.Linq;
 using System.Windows.Forms;
 using CalendarioApp; // Namespace de UcDias
 using System.Drawing.Drawing2D;
-using ProyectoFinal.Calendario;
-using System.Configuration;
+using ProyectoFinal.Calendario; 
+
 
 namespace ProyectoFinal.Calendario
 {
@@ -17,37 +16,44 @@ namespace ProyectoFinal.Calendario
     {
         int mes, año;
         private Form formularioLogin;
-        // Varible con el dia actual
         DateTime diaActual = DateTime.Now;
-
-        //Varieble del boton ajustes
         bool valorAjuste = false;
+
+        // --- Inicio de cambios para el Tema ---
+        private bool isDarkMode = true; // Por defecto el modo oscuro está activado
+
+        // Colores Modo Oscuro
+        private readonly Color dark_FormBackColor = Color.FromArgb(14, 17, 23);
+        private readonly Color dark_FormForeColor = Color.White;
+        private readonly Color dark_LabelDayNamesColor = Color.FromArgb(200, 200, 200);
+        private readonly Color dark_UcDiasEmptyBackColor = Color.FromArgb(20, 22, 28);
+        private readonly Color dark_ListBoxBackColor = Color.FromArgb(14, 17, 23);
+        private readonly Color dark_PanelConfiguracionBackColor = Color.FromArgb(14, 17, 23);
+        private readonly Color dark_ButtonBackColor = Color.FromArgb(14, 17, 23); // Para botones como el de tema
+
+        // Colores Modo Claro
+        private readonly Color light_FormBackColor = SystemColors.Control;
+        private readonly Color light_FormForeColor = Color.Black;
+        private readonly Color light_LabelDayNamesColor = Color.FromArgb(70, 70, 70);
+        private readonly Color light_UcDiasEmptyBackColor = Color.FromArgb(240, 240, 240);
+        private readonly Color light_ListBoxBackColor = SystemColors.Window;
+        private readonly Color light_PanelConfiguracionBackColor = SystemColors.ControlLight;
+        private readonly Color light_ButtonBackColor = SystemColors.ControlLight; // Para botones como el de tema
+        // --- Fin de cambios para el Tema ---
+
 
         public Evento EventoCreadoOModificado { get; private set; }
         public Evento EventoAEliminar { get; private set; }
         private DateTime _fechaActual;
-        private List<Evento> _eventosExistentesEnElDia;
-        private Evento _eventoSeleccionadoEnLista;
+        private List<Evento> _eventosExistentesEnElDia; 
+        private Evento _eventoSeleccionadoEnLista; 
 
-        // Lista para almacenar todos los eventos de la aplicación
         private List<Evento> listaDeEventosGlobal = new List<Evento>();
 
         public Inicio()
         {
-            InitializeComponent(); // Llama al código en Inicio.Designer.cs
-
-            // Personalización de colores para el tema oscuro como el tuyo @roman xd
-            this.BackColor = Color.FromArgb(14, 17, 23);
-
-            if (lblFecha != null) lblFecha.ForeColor = Color.White;
-            if (lblLunes != null) lblLunes.ForeColor = Color.FromArgb(200, 200, 200);
-            if (lblMartes != null) lblMartes.ForeColor = Color.FromArgb(200, 200, 200);
-            if (lblMiercoles != null) lblMiercoles.ForeColor = Color.FromArgb(200, 200, 200);
-            if (lblJueves != null) lblJueves.ForeColor = Color.FromArgb(200, 200, 200);
-            if (lblViernes != null) lblViernes.ForeColor = Color.FromArgb(200, 200, 200);
-            if (lblSabado != null) lblSabado.ForeColor = Color.FromArgb(200, 200, 200);
-            if (lblDomingo != null) lblDomingo.ForeColor = Color.FromArgb(200, 200, 200);
-
+            InitializeComponent();
+            // Se eliminarán las configuraciones de color directas de aquí, AplicarTema() las manejará.
         }
 
         public Inicio(Form login) : this()
@@ -60,12 +66,134 @@ namespace ProyectoFinal.Calendario
             DateTime hoy = DateTime.Today;
             mes = hoy.Month;
             año = hoy.Year;
-            MostrarDias();
-            // lABEL CON LA FECHA ACTUAL
-            lblFechaDelEvento.Text = $"{diaActual.ToString("dd")} de {diaActual.ToString("MMMM", new CultureInfo("es-ES"))} {diaActual.ToString("yyyy")}";
-            //CONSULTA Y MUESTRA DE LOS EVENTOS PENDIENTES ESE DIA
-            lstMostrarEventosInicio.DataSource = Evento.ObtenerEventosExistentes(diaActual);
+
+            AplicarTema(); // Aplicar el tema inicial (oscuro por defecto)
+
+            ActualizarVistaEventosHoy(); // Muestra eventos para el día actual y actualiza la etiqueta de fecha.
+            MostrarDias(); // Dibuja el calendario.
         }
+
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código existente en Inicio.cs) ...
+
+        private void ActualizarVistaEventosHoy()
+        {
+            if (lblFechaDelEvento != null)
+            {
+                lblFechaDelEvento.Text = $"{diaActual.ToString("dd")} de {diaActual.ToString("MMMM", new CultureInfo("es-ES"))} {diaActual.ToString("yyyy")}";
+            }
+            if (lstMostrarEventosInicio != null)
+            {
+                lstMostrarEventosInicio.DataSource = null; // Limpiar DataSource anterior
+                List<Evento> eventosDelDia = Evento.ObtenerEventosExistentes(diaActual.Date); //
+
+                if (eventosDelDia.Any()) // Verifica si hay algún evento en la lista
+                {
+                    lstMostrarEventosInicio.DataSource = eventosDelDia;
+                    
+                }
+                else
+                {
+                    // Si no hay eventos, limpiar la lista y mostrar un mensaje.
+                    lstMostrarEventosInicio.DataSource = null; // Asegurar que no hay fuente de datos
+                    lstMostrarEventosInicio.Items.Clear();    // Limpiar cualquier ítem manual
+                    lstMostrarEventosInicio.Items.Add("No hay eventos para este día.");
+                }
+            }
+        }
+
+        // ... (resto del código de Inicio.cs) ...
+
+        // --- Inicio de cambios para el Tema ---
+        private void AplicarTema()
+        {
+            Color formBackColor, formForeColor, labelDayNamesColor, listBoxBackColor, panelConfigBackColor, buttonBackColor;
+
+            if (isDarkMode)
+            {
+                formBackColor = dark_FormBackColor;
+                formForeColor = dark_FormForeColor;
+                labelDayNamesColor = dark_LabelDayNamesColor;
+                listBoxBackColor = dark_ListBoxBackColor;
+                panelConfigBackColor = dark_PanelConfiguracionBackColor;
+                buttonBackColor = dark_ButtonBackColor;
+
+                if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo: Oscuro";
+            }
+            else
+            {
+                formBackColor = light_FormBackColor;
+                formForeColor = light_FormForeColor;
+                labelDayNamesColor = light_LabelDayNamesColor;
+                listBoxBackColor = light_ListBoxBackColor;
+                panelConfigBackColor = light_PanelConfiguracionBackColor;
+                buttonBackColor = light_ButtonBackColor;
+
+                if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo: Claro";
+            }
+
+            // Aplicar colores al Formulario Principal
+            this.BackColor = formBackColor;
+            this.ForeColor = formForeColor; // Color de texto por defecto para controles sin ForeColor específico
+
+            // Labels principales
+            if (lblFecha != null) lblFecha.ForeColor = formForeColor;
+            if (lblFechaDelEvento != null) lblFechaDelEvento.ForeColor = formForeColor;
+            if (lblUsuarioInicial != null) lblUsuarioInicial.ForeColor = formForeColor; // Dentro del panel de configuración
+
+            // Labels de los días de la semana
+            if (lblLunes != null) lblLunes.ForeColor = labelDayNamesColor;
+            if (lblMartes != null) lblMartes.ForeColor = labelDayNamesColor;
+            if (lblMiercoles != null) lblMiercoles.ForeColor = labelDayNamesColor;
+            if (lblJueves != null) lblJueves.ForeColor = labelDayNamesColor;
+            if (lblViernes != null) lblViernes.ForeColor = labelDayNamesColor;
+            if (lblSabado != null) lblSabado.ForeColor = labelDayNamesColor;
+            if (lblDomingo != null) lblDomingo.ForeColor = labelDayNamesColor;
+
+            // FlowLayoutPanel para los días (el fondo de los días en sí se maneja en UcDias)
+            if (flDays != null) flDays.BackColor = formBackColor; 
+
+            // ListBox para mostrar eventos
+            if (lstMostrarEventosInicio != null)
+            {
+                lstMostrarEventosInicio.BackColor = listBoxBackColor;
+                lstMostrarEventosInicio.ForeColor = formForeColor;
+            }
+
+            // Panel de Configuración
+            if (pnConfiguracion != null)
+            {
+                pnConfiguracion.BackColor = panelConfigBackColor;
+            }
+
+            // Botones dentro del Panel de Configuración
+            if (btnCambioDeColorFondo != null)
+            {
+                btnCambioDeColorFondo.BackColor = buttonBackColor; 
+                btnCambioDeColorFondo.ForeColor = formForeColor;
+            }
+            // btnCerrarSesion tiene un color de fondo roj, solo ajustE el ForeColor si es necesario.
+            if (btnCerrarSesion != null)
+            {
+                btnCerrarSesion.ForeColor = isDarkMode ? Color.Black : Color.White; // Texto negro sobre rojo en oscuro, blanco sobre rojo en claro
+            }
+
+            // Otros botones principales
+            if (btnAjustes != null) btnAjustes.ForeColor = formForeColor; // Asumiendo que su BackColor es transparente o se adapta
+            if (btnGestionarEventosDia != null) btnGestionarEventosDia.ForeColor = formForeColor; // Idem
+
+            // Actualizar controles que dependen del tema
+            MostrarDias(); // Para que los UcDias y paneles vacíos se redibujen con el nuevo tema
+            ActualizarVistaEventosHoy(); // Para refrescar la lista de eventos con los nuevos colores de texto/fondo
+        }
+
+        private void btnCambioDeColorFondo_Click(object sender, EventArgs e)
+        {
+            isDarkMode = !isDarkMode; // Alternar el estado del tema
+            AplicarTema();
+        }
+        // --- Fin de cambios para el Tema ---
+
 
         private void MostrarDias()
         {
@@ -76,13 +204,12 @@ namespace ProyectoFinal.Calendario
             DateTime primerDiaDelMes = new DateTime(año, mes, 1);
             int diasEnMes = DateTime.DaysInMonth(año, mes);
             int diaSemanaPrimerDia = (int)primerDiaDelMes.DayOfWeek;
-
             int espaciosVacios = (diaSemanaPrimerDia == 0) ? 6 : diaSemanaPrimerDia - 1;
 
             lblFecha.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes).ToUpper() + " " + año;
 
             int scrollBarWidthApproximation = 0;
-            if (flDays.Controls.Count > (flDays.Height / 80) * 7)
+            if (flDays.Controls.Count > (flDays.Height / 80) * 7) 
             {
                 scrollBarWidthApproximation = SystemInformation.VerticalScrollBarWidth + 5;
             }
@@ -90,10 +217,10 @@ namespace ProyectoFinal.Calendario
             int availableWidth = flDays.ClientRectangle.Width - flDays.Padding.Horizontal - scrollBarWidthApproximation;
             int availableHeight = flDays.ClientRectangle.Height - flDays.Padding.Vertical;
 
-            int anchoDia = availableWidth / 7 - 3;
-            int altoDia = availableHeight / 6 - 3;
+            int anchoDia = Math.Max(10, availableWidth / 7 - 3); // Asegurar un ancho mínimo
+            int altoDia = Math.Max(10, availableHeight / 6 - 3); // Asegurar un alto mínimo
 
-            if (anchoDia <= 10) anchoDia = 90;
+            if (anchoDia <= 10) anchoDia = 90; // Valores por defecto si el cálculo es muy pequeño
             if (altoDia <= 10) altoDia = 70;
 
             // Espacios vacíos antes del primer día
@@ -104,12 +231,14 @@ namespace ProyectoFinal.Calendario
                     Width = anchoDia,
                     Height = altoDia,
                     Margin = new Padding(1),
-                    BackColor = Color.FromArgb(20, 22, 28)
+                    // --- Inicio de cambios para el Tema ---
+                    BackColor = isDarkMode ? dark_UcDiasEmptyBackColor : light_UcDiasEmptyBackColor
+                    // --- Fin de cambios para el Tema ---
                 };
                 flDays.Controls.Add(panelVacio);
             }
 
-            // Días del mes y año xd. Modifiqué esto para que se vea más redondeado los bordes
+            // Días del mes
             for (int dia = 1; dia <= diasEnMes; dia++)
             {
                 UcDias diaControl = new UcDias();
@@ -120,7 +249,12 @@ namespace ProyectoFinal.Calendario
                 diaControl.Width = anchoDia;
                 diaControl.Height = altoDia;
 
-                // Redondear bordes del control
+                // --- Inicio de cambios para el Tema ---
+                diaControl.AplicarTema(isDarkMode); // Aplicar el tema al control UcDias
+                // --- Fin de cambios para el Tema ---
+
+
+                // Redondear bordes (esto es independiente del tema)
                 GraphicsPath path = new GraphicsPath();
                 int radio = 15;
                 path.AddArc(0, 0, radio, radio, 180, 90);
@@ -129,21 +263,18 @@ namespace ProyectoFinal.Calendario
                 path.AddArc(0, altoDia - radio, radio, radio, 90, 90);
                 path.CloseFigure();
                 diaControl.Region = new Region(path);
-                diaControl.BackColor = Color.FromArgb(40, 43, 50);  // Color de fondo para los días
+                // El BackColor base de UcDias ahora se establece mediante diaControl.AplicarTema()
 
-                // Verificar si el día tiene eventos
-                var eventosDelDia = listaDeEventosGlobal.Where(ev => ev.Fecha.Date == fechaActualCelda.Date).ToList(); // R,S. Recolecta todos los eventos de ese día
-                diaControl.CantidadEventos = eventosDelDia.Count; // R,S. Guarda la cantidad de eventos para mostrar el número si es necesario
-
-                var eventoDelDia = eventosDelDia.FirstOrDefault(); // R,S. Se usa solo uno para tomar su color
+                var eventosDelDia = listaDeEventosGlobal.Where(ev => ev.Fecha.Date == fechaActualCelda.Date).ToList();
+                diaControl.CantidadEventos = eventosDelDia.Count;
+                var eventoDelDia = eventosDelDia.FirstOrDefault();
 
                 if (eventoDelDia != null)
                 {
                     diaControl.TieneEvento = true;
-
                     if (eventoDelDia.ColorPersonalizado.HasValue)
                     {
-                        diaControl.ColorPersonalizado = eventoDelDia.ColorPersonalizado.Value; // se usó la propiedad — razón por la que no guardaba el color
+                        diaControl.ColorPersonalizado = eventoDelDia.ColorPersonalizado.Value;
                     }
                 }
                 else
@@ -156,44 +287,36 @@ namespace ProyectoFinal.Calendario
             }
         }
 
+        // Este método va dentro de la clase Inicio en tu archivo Inicio.cs NO LO TOQUEN
+
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código existente en Inicio.cs) ...
+
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código de tu clase Inicio) ...
+
         private void UcDias_DiaClickeado(object sender, EventArgs e)
         {
-            
             if (sender is UcDias diaControlClickeado)
             {
                 DateTime fechaSeleccionada = diaControlClickeado.FechaCelda;
 
-                List<Evento> eventosDelDiaSeleccionado = listaDeEventosGlobal
-                    .Where(ev => ev.Fecha.Date == fechaSeleccionada.Date)
-                    .ToList(); // Crea una nueva lista con los eventos filtrados para ese día y la noche
+                // 1. Actualizar 'diaActual' para que refleje el día en el que se hizo clic.
+                this.diaActual = fechaSeleccionada;
 
-                using (FormularioEvento frmEvento = new FormularioEvento(fechaSeleccionada, eventosDelDiaSeleccionado))
-                {
-                    DialogResult resultado = frmEvento.ShowDialog(this);
+                // 2. Actualizar la lista de la derecha (lstMostrarEventosInicio) y 
+                //    la etiqueta de fecha (lblFechaDelEvento).
+                //    El método ActualizarVistaEventosHoy() usa this.diaActual y
+                //    ya obtiene los eventos de la BD. Si no hay eventos, mostrará la lista vacía.
+                ActualizarVistaEventosHoy(); //
 
-                    if (resultado == DialogResult.OK)
-                    {
-                        if (frmEvento.EventoAEliminar != null)
-                        {
-                            // Eliminar el evento de la lista
-                            listaDeEventosGlobal.Remove(frmEvento.EventoAEliminar);
-                        }
-                        else if (frmEvento.EventoCreadoOModificado != null)
-                        {
-                            if (!listaDeEventosGlobal.Contains(frmEvento.EventoCreadoOModificado))
-                            {
-                                listaDeEventosGlobal.Add(frmEvento.EventoCreadoOModificado);
-                            }
-                        }
-
-                        MostrarDias(); // Refrescar el calendario pa estar fachero perro xd
-                    }
-                }
+                // Ya NO abrimos FormularioEvento aquí.
             }
-            
         }
 
-        // 9 DE LA MAÑANA XD
+
+        // ... (otro código de tu clase Inicio) ...
+        // ... (resto del código de Inicio.cs) ...
         private void pbAnterior_Click(object sender, EventArgs e)
         {
             mes--;
@@ -216,54 +339,66 @@ namespace ProyectoFinal.Calendario
             MostrarDias();
         }
 
-        // tuuuuu ere mi papa?  Abajo conjuntos vacíos xd
+        private void btnAjustes_Click(object sender, EventArgs e)
+        {
+            if (pnConfiguracion != null)
+            {
+                pnConfiguracion.Visible = !pnConfiguracion.Visible; // Alternar visibilidad directamente
+            }
+        }
+
+        // Eventos vacíos que pueden eliminarse si no se usan
         private void lblJueves_Click(object sender, EventArgs e) { }
         private void lblMiercoles_Click(object sender, EventArgs e) { }
         private void lblMartes_Click(object sender, EventArgs e) { }
-
-        public void lblDescripcionDelEvento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lstMostrarEventosInicio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnAjustes_Click(object sender, EventArgs e)
-        {
-            pnConfiguracion.Visible = !valorAjuste;
-            bool valorAjuste1 = !valorAjuste;
-            valorAjuste = valorAjuste1;
-            
-        }
-
-        private void lblUsuarioInicial_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnConfiguracion_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        public void lblDescripcionDelEvento_Click(object sender, EventArgs e) { }
+        private void lstMostrarEventosInicio_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void lblUsuarioInicial_Click(object sender, EventArgs e) { }
+        private void pnConfiguracion_Paint(object sender, PaintEventArgs e) { }
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-
+            // Lógica para cerrar sesión
+            this.Close(); // Cierra el formulario actual (Inicio)
+            formularioLogin?.Show(); // Muestra el formulario de login si existe
         }
-
-        private void btnSalirDelPanel_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void lblFechaDelEvento_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+        private void lblFechaDelEvento_Click(object sender, EventArgs e) { }
         private void flDays_Paint(object sender, PaintEventArgs e) { }
+
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código de tu clase Inicio)
+
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código existente en Inicio.cs) ...
+
+        private void btnGestionarEventosDia_Click(object sender, EventArgs e)
+        {
+            // Usamos this.diaActual, que debería estar actualizado con el último día
+            // en el que el usuario hizo clic en el calendario, o el día de hoy por defecto.
+
+            // 1. Obtener los eventos para el día actual (this.diaActual) para pasarlos al diálogo.
+            List<Evento> eventosParaDialogo = Evento.ObtenerEventosExistentes(this.diaActual.Date); //
+
+            // 2. Abrir el FormularioEvento.
+            using (FormularioEvento frmEvento = new FormularioEvento(this.diaActual, eventosParaDialogo)) //
+            {
+                DialogResult resultado = frmEvento.ShowDialog(this);
+
+                // 3. Procesar el resultado si se hicieron cambios en FormularioEvento.
+                if (resultado == DialogResult.OK)
+                {
+                    // Actualizar 'listaDeEventosGlobal' para que los indicadores del calendario sean correctos.
+                    listaDeEventosGlobal.RemoveAll(ev => ev.Fecha.Date == this.diaActual.Date);
+                    List<Evento> eventosActualizadosDelDia = Evento.ObtenerEventosExistentes(this.diaActual.Date); //
+                    listaDeEventosGlobal.AddRange(eventosActualizadosDelDia);
+
+                    ActualizarVistaEventosHoy(); //
+                    MostrarDias(); //
+                }
+            }
+        }
+
+        // ... (resto del código de Inicio.cs) ...
+
     }
+
 }
