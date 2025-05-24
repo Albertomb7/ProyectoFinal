@@ -46,6 +46,7 @@ namespace ProyectoFinal.Calendario
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnCambioDeColorFondo = new System.Windows.Forms.Button();
             this.lblUsuarioInicial = new System.Windows.Forms.Label();
+            this.btnEditarEvento = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnterior)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSiguiente)).BeginInit();
             this.pnConfiguracion.SuspendLayout();
@@ -283,12 +284,23 @@ namespace ProyectoFinal.Calendario
             this.lblUsuarioInicial.Text = "Marvin Cabrera";
             this.lblUsuarioInicial.Click += new System.EventHandler(this.lblUsuarioInicial_Click);
             // 
+            // btnEditarEvento
+            // 
+            this.btnEditarEvento.Location = new System.Drawing.Point(361, 53);
+            this.btnEditarEvento.Name = "btnEditarEvento";
+            this.btnEditarEvento.Size = new System.Drawing.Size(154, 44);
+            this.btnEditarEvento.TabIndex = 14;
+            this.btnEditarEvento.Text = "Editar";
+            this.btnEditarEvento.UseVisualStyleBackColor = true;
+            this.btnEditarEvento.Click += new System.EventHandler(this.btnEditarEvento_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.ClientSize = new System.Drawing.Size(1437, 749);
+            this.Controls.Add(this.btnEditarEvento);
             this.Controls.Add(this.pnConfiguracion);
             this.Controls.Add(this.btnAjustes);
             this.Controls.Add(this.lstMostrarEventosInicio);
@@ -343,5 +355,6 @@ namespace ProyectoFinal.Calendario
         private System.Windows.Forms.Label lblUsuarioInicial;
         private System.Windows.Forms.Button btnCambioDeColorFondo;
         private System.Windows.Forms.Button btnCerrarSesion;
+        private System.Windows.Forms.Button btnEditarEvento;
     }
 }

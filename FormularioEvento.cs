@@ -1,55 +1,66 @@
-﻿// FormularioEvento.cs
+﻿// {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/FormularioEvento.cs}}
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
+namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con el de tu proyecto
 {
     public partial class FormularioEvento : Form
     {
         public Evento EventoCreadoOModificado { get; private set; }
-        public Evento EventoAEliminar { get; private set; }
+        public Evento EventoAEliminar { get; private set; } // Para notificar a Inicio.cs si se eliminó un evento
         private DateTime _fechaActual;
-        private List<Evento> _eventosExistentesEnElDia;
-        private Evento _eventoSeleccionadoEnLista;
+        private List<Evento> _eventosExistentesEnElDia; // Lista de eventos para el día actual mostrada en el ListBox
+        private Evento _eventoSeleccionadoEnLista; // El evento que se está editando o el seleccionado en la lista
+        private Color? _colorSeleccionado = null; // Color seleccionado para el evento
 
+        // Constructor original (para agregar nuevo evento o simplemente ver la lista del día)
         public FormularioEvento(DateTime fecha, List<Evento> eventosDelDia)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             _fechaActual = fecha;
-
-            //Agrega los eventos del dia haciendo una consulta a la base de datos 
-            _eventosExistentesEnElDia = Evento.ObtenerEventosExistentes(_fechaActual.Date); 
-
-           
+            // La lista 'eventosDelDia' que se pasa aquí es la que se cargó en Inicio.cs desde la BD.
+            // La usaremos para poblar el ListBox del FormularioEvento.
+            // También obtenemos una copia fresca de la BD para asegurar consistencia interna si es necesario.
+            _eventosExistentesEnElDia = Evento.ObtenerEventosExistentes(_fechaActual.Date); //
 
             if (lblFechaSeleccionada != null) lblFechaSeleccionada.Text = fecha.ToString("D");
             if (dtpHoraEvento != null)
             {
                 dtpHoraEvento.Format = DateTimePickerFormat.Time;
                 dtpHoraEvento.ShowUpDown = true;
-                dtpHoraEvento.Value = DateTime.Now; 
+                // Establecer la hora a la actual del día seleccionado
+                dtpHoraEvento.Value = _fechaActual.Date.AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
                 if (chkUsarHora != null) dtpHoraEvento.Enabled = chkUsarHora.Checked;
             }
-            // El if (dtpHoraEvento == null) {} es un bloque vacío, no afecta.
 
-            CargarEventosEnLista();
+            CargarEventosEnLista(); // Carga los eventos en lstEventosDelDia
+            LimpiarCamposNuevaEntrada(); // Configura el formulario para una nueva entrada por defecto
         }
 
-        //Funcion para cargar eventos a la listbox y mostrarlos en el formulario
+        // NUEVO CONSTRUCTOR para editar un evento específico
+        public FormularioEvento(DateTime fecha, List<Evento> eventosDelDia, Evento eventoAEditar)
+            : this(fecha, eventosDelDia) // Llama al constructor anterior para la inicialización base
+        {
+            // El constructor base ya inicializó componentes, fecha, _eventosExistentesEnElDia, etc.
+            // y llamó a CargarEventosEnLista y LimpiarCamposNuevaEntrada.
+            // Ahora, cargamos el evento específico que se va a editar.
+            if (eventoAEditar != null)
+            {
+                CargarEventoParaEdicion(eventoAEditar);
+            }
+        }
+
         private void CargarEventosEnLista()
         {
             if (lstEventosDelDia == null) return;
 
             lstEventosDelDia.Items.Clear();
 
-            // nuevo _eventosExistentesEnElDia
             if (_eventosExistentesEnElDia != null && _eventosExistentesEnElDia.Any())
             {
-                
-
                 foreach (var ev in _eventosExistentesEnElDia.OrderBy(e => e.Hora ?? TimeSpan.MaxValue).ThenBy(e => e.Descripcion))
                 {
                     lstEventosDelDia.Items.Add(ev);
@@ -57,32 +68,44 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             }
             else
             {
-                // System.Diagnostics.Debug.WriteLine($"No hay eventos para cargar en el ListBox para {_fechaActual.ToShortDateString()}");
                 lstEventosDelDia.Items.Add("No hay eventos para este día.");
-                lstEventosDelDia.ClearSelected(); 
             }
-
-            // MODIFICACIÓN: Forzar un refresco visual del ListBox
-            
-            // El LimpiarCamposNuevaEntrada() al final está bien resetea los campos para una nueva entrada o estado por defecto.
-            LimpiarCamposNuevaEntrada();
+            lstEventosDelDia.ClearSelected();
         }
 
+        // MÉTODO MODIFICADO
         private void LimpiarCamposNuevaEntrada()
         {
             if (txtDescripcionEvento != null) txtDescripcionEvento.Clear();
-            if (chkUsarHora != null) chkUsarHora.Checked = false;
+            if (chkUsarHora != null) chkUsarHora.Checked = false; // Esto también afectará dtpHoraEvento.Enabled
+
             if (dtpHoraEvento != null)
             {
-                // Resetea la hora al mediodía de la fecha actual
-                dtpHoraEvento.Value = _fechaActual.Date.AddHours(12);
-               
+                // Establecer la hora a mediodía o la hora actual, como prefieras para un nuevo evento
+                dtpHoraEvento.Value = _fechaActual.Date.AddHours(12); // Mediodía por defecto
+                // dtpHoraEvento.Enabled se maneja por el evento CheckedChanged de chkUsarHora
             }
+
             _eventoSeleccionadoEnLista = null;
-            if (btnGuardar != null) btnGuardar.Text = "Guardar Nuevo";
-            if (btnEliminar != null) btnEliminar.Enabled = false;
-            if (PanelColor != null) PanelColor.BackColor = SystemColors.Control; // Resetear el color del panel
-            _colorSeleccionado = null; // Resetear el color seleccionado
+
+            _colorSeleccionado = null;
+            if (PanelColor != null) PanelColor.BackColor = SystemColors.Control;
+
+            if (btnGuardar != null) // Botón para "Guardar Nuevo"
+            {
+                btnGuardar.Text = "Guardar Nuevo";
+                btnGuardar.Visible = true;
+            }
+            if (btn_actuzalizar != null) // Botón para "Actualizar" o "Guardar Cambios"
+            {
+                btn_actuzalizar.Visible = false;
+            }
+            if (btnEliminar != null)
+            {
+                btnEliminar.Enabled = false;
+            }
+
+            if (lstEventosDelDia != null) lstEventosDelDia.ClearSelected();
         }
 
         private void chkUsarHora_CheckedChanged(object sender, EventArgs e)
@@ -91,7 +114,7 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 dtpHoraEvento.Enabled = chkUsarHora.Checked;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e) // Botón "Guardar Nuevo"
         {
             if (txtDescripcionEvento == null || string.IsNullOrWhiteSpace(txtDescripcionEvento.Text))
             {
@@ -105,23 +128,22 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 hora = dtpHoraEvento.Value.TimeOfDay;
             }
 
-            if (_eventoSeleccionadoEnLista != null) // Modificando
-            {
-                _eventoSeleccionadoEnLista.Descripcion = txtDescripcionEvento.Text;
-                _eventoSeleccionadoEnLista.Hora = hora;
-                _eventoSeleccionadoEnLista.ColorPersonalizado = _colorSeleccionado;
-                EventoCreadoOModificado = _eventoSeleccionadoEnLista;
-            }
-            else // Creando nuevo Evento
-            {
-                // _fechaActual ya tiene la fecha correcta con hora 00:00:00 del día seleccionado.
-                EventoCreadoOModificado = new Evento(1, _fechaActual.Date, txtDescripcionEvento.Text, hora);
-                Evento.CrearEvento(EventoCreadoOModificado);
+            // Creando nuevo Evento
+            // El IdEvento se asignará automáticamente por la base de datos (si es autoincremental)
+            // o se puede manejar de otra forma si es necesario. Aquí pasamos 0 o un valor por defecto.
+            EventoCreadoOModificado = new Evento(0, _fechaActual.Date, txtDescripcionEvento.Text, hora, _colorSeleccionado);
+            int resultadoCreacion = Evento.CrearEvento(EventoCreadoOModificado); //
 
+            if (resultadoCreacion > 0)
+            {
+                MessageBox.Show("Evento creado con éxito.", "Evento Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            else
+            {
+                MessageBox.Show("Error al crear el evento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -130,57 +152,73 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
             this.Close();
         }
 
+        // MÉTODO MODIFICADO
         private void lstEventosDelDia_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstEventosDelDia != null && lstEventosDelDia.SelectedItem is Evento evento)
             {
-                _eventoSeleccionadoEnLista = evento;
-                if (txtDescripcionEvento != null) txtDescripcionEvento.Text = evento.Descripcion;
-                if (chkUsarHora != null) chkUsarHora.Checked = evento.Hora.HasValue;
-
-                if (dtpHoraEvento != null)
+                // Solo cargar para edición si no es el mismo que ya se está editando (evitar recargas innecesarias si ya está cargado)
+                // o si _eventoSeleccionadoEnLista es null (es la primera vez que se selecciona algo).
+                if (_eventoSeleccionadoEnLista == null || !_eventoSeleccionadoEnLista.Equals(evento))
                 {
-                    if (evento.Hora.HasValue)
-                    {
-                        // Asegura que la fecha base del DateTimePicker sea la fecha del evento actual, no la fecha de hoy.
-                        dtpHoraEvento.Value = _fechaActual.Date + evento.Hora.Value;
-                    }
-                    else
-                    {
-                        // Si no hay hora resetea al mediodía de la fecha actual del formulario.
-                        dtpHoraEvento.Value = _fechaActual.Date.AddHours(12);
-                    }
+                    CargarEventoParaEdicion(evento);
                 }
-
-                _colorSeleccionado = evento.ColorPersonalizado;
-                if (PanelColor != null)
-                {
-                    PanelColor.BackColor = evento.ColorPersonalizado ?? SystemColors.Control;
-                }
-
-
-                if (btnGuardar != null) 
-                { 
-                    btnGuardar.Visible = false; 
-                    btn_actuzalizar.Visible = true;
-                }
-
-                if (btnEliminar != null) btnEliminar.Enabled = true;
             }
-            else
-            {
-                // Si se deselecciona o el ítem no es un Evento (ej. "No hay eventos..."), limpiar campos.
-                LimpiarCamposNuevaEntrada();
-            }
+            // No limpiamos los campos aquí para permitir al usuario ver la lista y luego decidir.
+            // Si se deselecciona explícitamente (SelectedItem es null), se podría llamar a LimpiarCamposNuevaEntrada.
         }
 
-        private Color? _colorSeleccionado = null;
+        // NUEVO MÉTODO
+        private void CargarEventoParaEdicion(Evento evento)
+        {
+            _eventoSeleccionadoEnLista = evento;
+
+            if (txtDescripcionEvento != null) txtDescripcionEvento.Text = evento.Descripcion;
+
+            if (chkUsarHora != null) chkUsarHora.Checked = evento.Hora.HasValue;
+
+            if (dtpHoraEvento != null)
+            {
+                if (evento.Hora.HasValue)
+                {
+                    dtpHoraEvento.Value = _fechaActual.Date + evento.Hora.Value;
+                }
+                else
+                {
+                    dtpHoraEvento.Value = _fechaActual.Date.AddHours(12); // Mediodía por defecto
+                }
+                // dtpHoraEvento.Enabled se actualiza con chkUsarHora_CheckedChanged
+            }
+
+            _colorSeleccionado = evento.ColorPersonalizado;
+            if (PanelColor != null)
+            {
+                PanelColor.BackColor = evento.ColorPersonalizado ?? SystemColors.Control;
+            }
+
+            // Configurar botones para el modo edición
+            if (btnGuardar != null) // Botón "Guardar Nuevo"
+            {
+                btnGuardar.Visible = false;
+            }
+            if (btn_actuzalizar != null) // Botón "Actualizar" o "Guardar Cambios"
+            {
+                btn_actuzalizar.Visible = true;
+                btn_actuzalizar.Text = "Guardar Cambios";
+            }
+            if (btnEliminar != null)
+            {
+                btnEliminar.Enabled = true;
+            }
+
+            // No es necesario seleccionar en lstEventosDelDia aquí, porque este método
+            // usualmente se llama *desde* la selección en lstEventosDelDia.
+        }
 
         private void btnSeleccionarColor_Click(object sender, EventArgs e)
         {
             using (ColorDialog colorDialog = new ColorDialog())
             {
-                // Opcional: establecer el color actual si ya hay uno seleccionado
                 if (_colorSeleccionado.HasValue)
                 {
                     colorDialog.Color = _colorSeleccionado.Value;
@@ -201,53 +239,79 @@ namespace ProyectoFinal.Calendario // AJUSTA EL NAMESPACE UWU
                 if (MessageBox.Show($"¿Seguro que quieres eliminar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?",
                                     "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-
-                    //Obtiene la descripcion del evento seleccionado en la lista para llamar a la funcion de eliminar
-                    Evento.EliminarEvento(_eventoSeleccionadoEnLista);
-                    MessageBox.Show("Evento eliminado con exito.", "Evento eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK; // Indica que la operación fue "exitosa" para que Inicio.cs procese la eliminación.
-                    this.Close();
+                    int resultadoEliminacion = Evento.EliminarEvento(_eventoSeleccionadoEnLista); //
+                    if (resultadoEliminacion > 0)
+                    {
+                        MessageBox.Show("Evento eliminado con exito.", "Evento eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        EventoAEliminar = _eventoSeleccionadoEnLista; // Para que Inicio.cs sepa cuál se eliminó
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el evento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
-        //Esta de mas si van agrear el evento en el designer lo borran
+
         private void txtDescripcionEvento_TextChanged(object sender, EventArgs e)
         {
-
+            // Puedes agregar validaciones o lógica aquí si es necesario
         }
 
-        private void btn_actuzalizar_Click(object sender, EventArgs e)
+        // MÉTODO btn_actuzalizar_Click (ASEGÚRATE DE QUE ACTUALIZA _eventoSeleccionadoEnLista)
+        private void btn_actuzalizar_Click(object sender, EventArgs e) // Botón "Actualizar" o "Guardar Cambios"
         {
-            if (_eventoSeleccionadoEnLista != null)
+            if (_eventoSeleccionadoEnLista == null)
             {
-                if (MessageBox.Show($"¿Seguro que quieres actualizar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?",
-                                    "Confirmar Actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-
-
-                    TimeSpan? hora = null;
-                    if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
-                    {
-                        hora = dtpHoraEvento.Value.TimeOfDay;
-                    }
-
-                    if (_eventoSeleccionadoEnLista != null) // Modificando
-                    {
-                        _eventoSeleccionadoEnLista.Descripcion = txtDescripcionEvento.Text;
-                        _eventoSeleccionadoEnLista.Hora = hora;
-      
-                    }
-
-                    //Obtiene la descripcion del evento seleccionado en la lista para llamar a la funcion de actualizar
-                    Evento.ActualizarEvento(_eventoSeleccionadoEnLista);
-                    MessageBox.Show("Evento actualizado con exito.", "Evento actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK; // Indica que la operación fue "exitosa" para que Inicio.cs procese la eliminación.
-                    this.Close();
-                }
+                MessageBox.Show("No hay un evento seleccionado para actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            if (string.IsNullOrWhiteSpace(txtDescripcionEvento.Text))
+            {
+                MessageBox.Show("La descripción no puede estar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Confirmar antes de actualizar
+            // if (MessageBox.Show($"¿Seguro que quieres actualizar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?", //
+            //                     "Confirmar Actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // {
+            TimeSpan? hora = null;
+            if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
+            {
+                hora = dtpHoraEvento.Value.TimeOfDay;
+            }
+
+            // Actualizar las propiedades del objeto _eventoSeleccionadoEnLista CON LOS DATOS DE LOS CAMPOS DEL FORMULARIO
+            _eventoSeleccionadoEnLista.Descripcion = txtDescripcionEvento.Text;
+            _eventoSeleccionadoEnLista.Hora = hora;
+            _eventoSeleccionadoEnLista.ColorPersonalizado = _colorSeleccionado; // _colorSeleccionado se actualiza con btnSeleccionarColor_Click
+
+            int resultadoActualizacion = Evento.ActualizarEvento(_eventoSeleccionadoEnLista); //
+
+            if (resultadoActualizacion > 0)
+            {
+                MessageBox.Show("Evento actualizado con exito.", "Evento actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                EventoCreadoOModificado = _eventoSeleccionadoEnLista; // Para que Inicio.cs sepa cuál se modificó
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar el evento o no se realizaron cambios.", "Error/Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            // } // Fin del MessageBox de confirmación (opcional)
         }
 
         private void dtpHoraEvento_ValueChanged(object sender, EventArgs e)
+        {
+            // Lógica si es necesaria cuando cambia la hora
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

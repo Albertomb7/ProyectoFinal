@@ -13,7 +13,6 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Label label1; // Para "Eventos del día:"
         private System.Windows.Forms.Label label2; // Para "Descripción:"
 
         protected override void Dispose(bool disposing)
@@ -36,7 +35,6 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSeleccionarColor = new System.Windows.Forms.Button();
             this.PanelColor = new System.Windows.Forms.Panel();
@@ -48,9 +46,9 @@
             this.lblFechaSeleccionada.AutoSize = true;
             this.lblFechaSeleccionada.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaSeleccionada.ForeColor = System.Drawing.Color.White;
-            this.lblFechaSeleccionada.Location = new System.Drawing.Point(12, 9);
+            this.lblFechaSeleccionada.Location = new System.Drawing.Point(12, 24);
             this.lblFechaSeleccionada.Name = "lblFechaSeleccionada";
-            this.lblFechaSeleccionada.Size = new System.Drawing.Size(117, 20);
+            this.lblFechaSeleccionada.Size = new System.Drawing.Size(142, 25);
             this.lblFechaSeleccionada.TabIndex = 0;
             this.lblFechaSeleccionada.Text = "Fecha del día";
             // 
@@ -59,10 +57,10 @@
             this.txtDescripcionEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
             this.txtDescripcionEvento.CausesValidation = false;
             this.txtDescripcionEvento.ForeColor = System.Drawing.Color.White;
-            this.txtDescripcionEvento.Location = new System.Drawing.Point(16, 210);
+            this.txtDescripcionEvento.Location = new System.Drawing.Point(12, 103);
             this.txtDescripcionEvento.Multiline = true;
             this.txtDescripcionEvento.Name = "txtDescripcionEvento";
-            this.txtDescripcionEvento.Size = new System.Drawing.Size(356, 60);
+            this.txtDescripcionEvento.Size = new System.Drawing.Size(360, 127);
             this.txtDescripcionEvento.TabIndex = 4;
             this.txtDescripcionEvento.TextChanged += new System.EventHandler(this.txtDescripcionEvento_TextChanged);
             // 
@@ -72,7 +70,7 @@
             this.chkUsarHora.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chkUsarHora.Location = new System.Drawing.Point(16, 280);
             this.chkUsarHora.Name = "chkUsarHora";
-            this.chkUsarHora.Size = new System.Drawing.Size(101, 21);
+            this.chkUsarHora.Size = new System.Drawing.Size(117, 24);
             this.chkUsarHora.TabIndex = 5;
             this.chkUsarHora.Text = "Añadir hora";
             this.chkUsarHora.UseVisualStyleBackColor = true;
@@ -89,7 +87,7 @@
             this.dtpHoraEvento.Location = new System.Drawing.Point(115, 278);
             this.dtpHoraEvento.Name = "dtpHoraEvento";
             this.dtpHoraEvento.ShowUpDown = true;
-            this.dtpHoraEvento.Size = new System.Drawing.Size(100, 23);
+            this.dtpHoraEvento.Size = new System.Drawing.Size(100, 26);
             this.dtpHoraEvento.TabIndex = 6;
             this.dtpHoraEvento.ValueChanged += new System.EventHandler(this.dtpHoraEvento_ValueChanged);
             // 
@@ -99,11 +97,12 @@
             this.lstEventosDelDia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lstEventosDelDia.ForeColor = System.Drawing.Color.White;
             this.lstEventosDelDia.FormattingEnabled = true;
-            this.lstEventosDelDia.ItemHeight = 16;
-            this.lstEventosDelDia.Location = new System.Drawing.Point(16, 60);
+            this.lstEventosDelDia.ItemHeight = 20;
+            this.lstEventosDelDia.Location = new System.Drawing.Point(12, 103);
             this.lstEventosDelDia.Name = "lstEventosDelDia";
-            this.lstEventosDelDia.Size = new System.Drawing.Size(356, 100);
+            this.lstEventosDelDia.Size = new System.Drawing.Size(356, 84);
             this.lstEventosDelDia.TabIndex = 2;
+            this.lstEventosDelDia.Visible = false;
             this.lstEventosDelDia.SelectedIndexChanged += new System.EventHandler(this.lstEventosDelDia_SelectedIndexChanged);
             // 
             // btnGuardar
@@ -154,25 +153,16 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(13, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Eventos del día:";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(13, 190);
+            this.label2.Location = new System.Drawing.Point(13, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 17);
+            this.label2.Size = new System.Drawing.Size(104, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Descripción:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnSeleccionarColor
             // 
@@ -212,7 +202,7 @@
             // FormularioEvento
             // 
             this.AcceptButton = this.btnGuardar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
             this.CancelButton = this.btnCancelar;
@@ -228,7 +218,6 @@
             this.Controls.Add(this.txtDescripcionEvento);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lstEventosDelDia);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblFechaSeleccionada);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;

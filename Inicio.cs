@@ -352,7 +352,24 @@ namespace ProyectoFinal.Calendario
         private void lblMiercoles_Click(object sender, EventArgs e) { }
         private void lblMartes_Click(object sender, EventArgs e) { }
         public void lblDescripcionDelEvento_Click(object sender, EventArgs e) { }
-        private void lstMostrarEventosInicio_SelectedIndexChanged(object sender, EventArgs e) { }
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código de tu clase Inicio)
+
+        private void lstMostrarEventosInicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Habilitar el botón Editar solo si un evento real está seleccionado
+            // y no el mensaje "No hay eventos para este día."
+            if (lstMostrarEventosInicio.SelectedItem is Evento) // Verifica que el ítem seleccionado sea un objeto Evento
+            {
+                btnEditarEvento.Enabled = true;
+            }
+            else
+            {
+                btnEditarEvento.Enabled = false;
+            }
+        }
+
+        // ... (otro código de tu clase Inicio)
         private void lblUsuarioInicial_Click(object sender, EventArgs e) { }
         private void pnConfiguracion_Paint(object sender, PaintEventArgs e) { }
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -397,7 +414,53 @@ namespace ProyectoFinal.Calendario
             }
         }
 
-        // ... (resto del código de Inicio.cs) ...
+        // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
+        // ... (otro código existente)
+
+        private void btnEditarEvento_Click(object sender, EventArgs e)
+        {
+            if (lstMostrarEventosInicio.SelectedItem is Evento eventoSeleccionado)
+            {
+                // 'this.diaActual' ya debería corresponder al día de los eventos mostrados en la lista.
+                // Pasamos el eventoSeleccionado directamente o su información al FormularioEvento.
+                // FormularioEvento ya tiene lógica para cargar un evento si se le pasa uno.
+
+                // FormularioEvento espera una lista de eventos del día para su ListBox interna.
+                // Podemos pasar la lista actual de eventos del día.
+                List<Evento> eventosDelDiaActual = Evento.ObtenerEventosExistentes(this.diaActual.Date); //
+
+                // Para que FormularioEvento sepa qué evento editar y lo cargue en los campos,
+                // necesitarás pasar el 'eventoSeleccionado' y modificar FormularioEvento
+                // para que, si recibe un evento específico, lo cargue.
+                // Actualmente, FormularioEvento carga el primer evento de la lista o ninguno.
+                // Vamos a modificar FormularioEvento para que acepte un evento a editar.
+
+                using (FormularioEvento frmEvento = new FormularioEvento(this.diaActual, eventosDelDiaActual, eventoSeleccionado)) // NUEVO: pasamos eventoSeleccionado
+                {
+                    DialogResult resultado = frmEvento.ShowDialog(this);
+
+                    if (resultado == DialogResult.OK)
+                    {
+                        // Refrescar la vista, igual que después de agregar un nuevo evento
+                        listaDeEventosGlobal.RemoveAll(ev => ev.Fecha.Date == this.diaActual.Date);
+                        List<Evento> eventosActualizadosDelDia = Evento.ObtenerEventosExistentes(this.diaActual.Date); //
+                        listaDeEventosGlobal.AddRange(eventosActualizadosDelDia);
+
+                        ActualizarVistaEventosHoy();
+                        MostrarDias();
+
+                        // Después de editar, es bueno deshabilitar el botón de editar hasta nueva selección
+                        btnEditarEvento.Enabled = false;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Querido cliene agrege un evento para editarlo.", "Ningún evento seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+      
+        
 
     }
 
