@@ -4,39 +4,36 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CalendarioApp; // agrege este nuevo using, deja usar los colores 
+using CalendarioApp;
+using Microsoft.Data.SqlClient;
 
-
-namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta, ajusta este namespace
+namespace ProyectoFinal.Calendario
 {
     public class Evento
     {
         public int IdEvento { get; set; }
         public DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
-        public TimeSpan? Hora { get; set; } // Opcional: para la hora del evento
-        public Color? ColorPersonalizado { get; set; } // color xd
+        public TimeSpan? Hora { get; set; }
+        public Color? ColorPersonalizado { get; set; }
 
-        // Constructor
-        public Evento(int IdEvento, DateTime fecha, string descripcion, TimeSpan? hora = null, Color? color = null)
+        public Evento(DateTime fecha, string descripcion, TimeSpan? hora = null, Color? color = null)
         {
-            Fecha = fecha; // Guardamos solo la fecha, sin la hora, para comparaciones más sencillas
+            Fecha = fecha.Date;
             Descripcion = descripcion;
             Hora = hora;
-            ColorPersonalizado = color; 
+            ColorPersonalizado = color;
         }
 
-        // Constructor para eventos existentes (con Id)
-        public Evento(int idEvento, DateTime fecha, string descripcion, TimeSpan? hora)
+        public Evento(int idEvento, DateTime fecha, string descripcion, TimeSpan? hora, Color? color = null)
         {
             IdEvento = idEvento;
-            Fecha = fecha;
+            Fecha = fecha.Date;
             Descripcion = descripcion;
             Hora = hora;
-
+            ColorPersonalizado = color;
         }
 
-        // Guardamos solo la fecha, sin la hora, para comparaciones más sencillas
         public override string ToString()
         {
             if (Hora.HasValue)
@@ -46,8 +43,6 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
             return Descripcion;
         }
 
-
-        //Crea un evento nuevo en la base de datos
         public static int CrearEvento(Evento evento)
         {
             int retorna = 0;
@@ -55,39 +50,48 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
             {
                 using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
                 {
+                    // CAMBIO AQUÍ: Se usa ColorEvento en lugar de ColorEventos
                     string query = @"
-                INSERT INTO Eventos (IdUsuario, Descripcion, Fecha, Hora) 
-                VALUES (@idUsuario, @descripcion, @fecha, @hora)";
+                INSERT INTO Eventos (IdUsuario, Descripcion, Fecha, Hora, ColorEvento)
+                VALUES (@idUsuario, @descripcion, @fecha, @hora, @color)";
 
                     using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                     {
                         comando.Parameters.AddWithValue("@idUsuario", SesionActual.IdUsuario);
                         comando.Parameters.AddWithValue("@descripcion", evento.Descripcion);
-                        comando.Parameters.AddWithValue("@fecha", evento.Fecha.Date); //guarda solo la parte de fecha
+                        comando.Parameters.AddWithValue("@fecha", evento.Fecha.Date);
                         comando.Parameters.AddWithValue("@hora", (object)evento.Hora ?? DBNull.Value);
-                       
+
+                        if (evento.ColorPersonalizado.HasValue)
+                        {
+                            Color c = evento.ColorPersonalizado.Value;
+                            comando.Parameters.AddWithValue("@color", $"{c.A},{c.R},{c.G},{c.B}");
+                        }
+                        else
+                        {
+                            comando.Parameters.AddWithValue("@color", DBNull.Value);
+                        }
 
                         retorna = comando.ExecuteNonQuery();
                     }
                 }
             }
-            catch (Microsoft.Data.SqlClient.SqlException)
+            catch (Microsoft.Data.SqlClient.SqlException ex)
             {
-                throw; // o puedes loguearlo si lo prefieres
+                Console.WriteLine(ex.ToString());
+                throw;
             }
-
             return retorna;
         }
 
-
-        // Leer evento existentes
         public static List<Evento> ObtenerEventosExistentes(DateTime fecha)
         {
             List<Evento> eventos = new List<Evento>();
 
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = "SELECT IdEvento, Descripcion, Hora FROM Eventos WHERE CONVERT(date, Fecha) = @fecha AND IdUsuario = @IdUsuario AND Activo = 1";
+                // CAMBIO AQUÍ: Se usa ColorEvento en lugar de ColorEventos
+                string query = "SELECT IdEvento, Descripcion, Hora, ColorEvento FROM Eventos WHERE CONVERT(date, Fecha) = @fecha AND IdUsuario = @IdUsuario AND Activo = 1";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@fecha", fecha.Date);
@@ -97,13 +101,34 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
                     {
                         while (reader.Read())
                         {
-                            Evento evento = new Evento(
-                            Convert.ToInt32(reader["IdEvento"]),
-                            fecha,
-                            reader["Descripcion"].ToString(),
-                            reader["Hora"] != DBNull.Value ? (TimeSpan?)reader["Hora"] : null
-                            );
+                            Color? colorEvento = null;
+                            // CAMBIO AQUÍ: Se lee de ColorEvento
+                            if (reader["ColorEvento"] != DBNull.Value)
+                            {
+                                // CAMBIO AQUÍ: Se lee de ColorEvento
+                                string colorString = reader["ColorEvento"].ToString();
+                                string[] parts = colorString.Split(',');
+                                if (parts.Length == 4)
+                                {
+                                    try
+                                    {
+                                        colorEvento = Color.FromArgb(int.Parse(parts[0]), int.Parse(parts[1]), int.Parse(parts[2]), int.Parse(parts[3]));
+                                    }
+                                    catch (FormatException ex)
+                                    {
+                                        Console.WriteLine($"Error al parsear color: {colorString} - {ex.Message}");
+                                        colorEvento = null;
+                                    }
+                                }
+                            }
 
+                            Evento evento = new Evento(
+                                Convert.ToInt32(reader["IdEvento"]),
+                                fecha,
+                                reader["Descripcion"].ToString(),
+                                reader["Hora"] != DBNull.Value ? (TimeSpan?)reader["Hora"] : null,
+                                colorEvento
+                            );
                             eventos.Add(evento);
                         }
                     }
@@ -112,33 +137,40 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
             return eventos;
         }
 
-
-        //FUNCION PARA ACTUALIZAR UN EVENTO EXITOSO A LA BASE DE DATOS
         public static int ActualizarEvento(Evento evento)
         {
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = "update Eventos set Descripcion = @Descripcion, Hora = @Hora  where IdEvento = @IdEvento";
+                // CAMBIO AQUÍ: Se usa ColorEvento en lugar de ColorEventos
+                string query = "UPDATE Eventos SET Descripcion = @Descripcion, Hora = @Hora, ColorEvento = @Color WHERE IdEvento = @IdEvento";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@IdEvento", evento.IdEvento);
                     comando.Parameters.AddWithValue("@Descripcion", evento.Descripcion);
                     comando.Parameters.AddWithValue("@Hora", (object)evento.Hora ?? DBNull.Value);
+
+                    if (evento.ColorPersonalizado.HasValue)
+                    {
+                        Color c = evento.ColorPersonalizado.Value;
+                        comando.Parameters.AddWithValue("@Color", $"{c.A},{c.R},{c.G},{c.B}");
+                    }
+                    else
+                    {
+                        comando.Parameters.AddWithValue("@Color", DBNull.Value);
+                    }
                     retorna = comando.ExecuteNonQuery();
                 }
             }
             return retorna;
         }
 
-
-        //FUNCION PARA ELIMINAR EVENTOS DE LA BASE DE DATOS 
         public static int EliminarEvento(Evento evento)
         {
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = "update Eventos set Activo = 0 where IdEvento = @IdEvento";
+                string query = "UPDATE Eventos SET Activo = 0 WHERE IdEvento = @IdEvento";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@IdEvento", evento.IdEvento);
@@ -148,27 +180,10 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
             return retorna;
         }
 
-        //Mostrar solo la descripcion del evento
-         public static async Task<string> MostrarEventoDescripcion()
+        public static async Task<string> MostrarEventoDescripcion()
         {
-            List<Evento> eventos = new List<Evento>();
-            string descripcion = string.Empty;
-            string resultado = string.Empty;
-            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
-            {
-                
-                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand())
-                {
-                    string query = "SELECT Descripcion FROM Eventos WHERE '"+SesionActual.IdUsuario+"'";
-
-                    using (Microsoft.Data.SqlClient.SqlDataReader reader = comando.ExecuteReader())
-                    {
-                        var valor = await reader.ReadAsync();
-                        resultado = valor.ToString() ?? string.Empty;
-                    }
-                }
-            }
-            return resultado;
+            await Task.CompletedTask;
+            return "Función MostrarEventoDescripcion necesita ser refactorizada.";
         }
     }
 }

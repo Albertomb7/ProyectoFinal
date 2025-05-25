@@ -1,11 +1,11 @@
-﻿// {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/FormularioEvento.cs}}
+﻿
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con el de tu proyecto
+namespace ProyectoFinal.Calendario 
 {
     public partial class FormularioEvento : Form
     {
@@ -21,9 +21,7 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
         {
             InitializeComponent();
             _fechaActual = fecha;
-            // La lista 'eventosDelDia' que se pasa aquí es la que se cargó en Inicio.cs desde la BD.
-            // La usaremos para poblar el ListBox del FormularioEvento.
-            // También obtenemos una copia fresca de la BD para asegurar consistencia interna si es necesario.
+           
             _eventosExistentesEnElDia = Evento.ObtenerEventosExistentes(_fechaActual.Date); //
 
             if (lblFechaSeleccionada != null) lblFechaSeleccionada.Text = fecha.ToString("D");
@@ -44,9 +42,7 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
         public FormularioEvento(DateTime fecha, List<Evento> eventosDelDia, Evento eventoAEditar)
             : this(fecha, eventosDelDia) // Llama al constructor anterior para la inicialización base
         {
-            // El constructor base ya inicializó componentes, fecha, _eventosExistentesEnElDia, etc.
-            // y llamó a CargarEventosEnLista y LimpiarCamposNuevaEntrada.
-            // Ahora, cargamos el evento específico que se va a editar.
+           
             if (eventoAEditar != null)
             {
                 CargarEventoParaEdicion(eventoAEditar);
@@ -77,13 +73,13 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
         private void LimpiarCamposNuevaEntrada()
         {
             if (txtDescripcionEvento != null) txtDescripcionEvento.Clear();
-            if (chkUsarHora != null) chkUsarHora.Checked = false; // Esto también afectará dtpHoraEvento.Enabled
+            if (chkUsarHora != null) chkUsarHora.Checked = false; 
 
             if (dtpHoraEvento != null)
             {
-                // Establecer la hora a mediodía o la hora actual, como prefieras para un nuevo evento
+                // Establecer la hora a mediodía o la hora actual
                 dtpHoraEvento.Value = _fechaActual.Date.AddHours(12); // Mediodía por defecto
-                // dtpHoraEvento.Enabled se maneja por el evento CheckedChanged de chkUsarHora
+                
             }
 
             _eventoSeleccionadoEnLista = null;
@@ -128,9 +124,7 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
                 hora = dtpHoraEvento.Value.TimeOfDay;
             }
 
-            // Creando nuevo Evento
-            // El IdEvento se asignará automáticamente por la base de datos (si es autoincremental)
-            // o se puede manejar de otra forma si es necesario. Aquí pasamos 0 o un valor por defecto.
+           
             EventoCreadoOModificado = new Evento(0, _fechaActual.Date, txtDescripcionEvento.Text, hora, _colorSeleccionado);
             int resultadoCreacion = Evento.CrearEvento(EventoCreadoOModificado); //
 
@@ -157,15 +151,13 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
         {
             if (lstEventosDelDia != null && lstEventosDelDia.SelectedItem is Evento evento)
             {
-                // Solo cargar para edición si no es el mismo que ya se está editando (evitar recargas innecesarias si ya está cargado)
-                // o si _eventoSeleccionadoEnLista es null (es la primera vez que se selecciona algo).
+               
                 if (_eventoSeleccionadoEnLista == null || !_eventoSeleccionadoEnLista.Equals(evento))
                 {
                     CargarEventoParaEdicion(evento);
                 }
             }
-            // No limpiamos los campos aquí para permitir al usuario ver la lista y luego decidir.
-            // Si se deselecciona explícitamente (SelectedItem es null), se podría llamar a LimpiarCamposNuevaEntrada.
+          
         }
 
         // NUEVO MÉTODO
@@ -211,8 +203,7 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
                 btnEliminar.Enabled = true;
             }
 
-            // No es necesario seleccionar en lstEventosDelDia aquí, porque este método
-            // usualmente se llama *desde* la selección en lstEventosDelDia.
+            
         }
 
         private void btnSeleccionarColor_Click(object sender, EventArgs e)
@@ -257,10 +248,10 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
 
         private void txtDescripcionEvento_TextChanged(object sender, EventArgs e)
         {
-            // Puedes agregar validaciones o lógica aquí si es necesario
+            
         }
 
-        // MÉTODO btn_actuzalizar_Click (ASEGÚRATE DE QUE ACTUALIZA _eventoSeleccionadoEnLista)
+        // MÉTODO btn_actuzalizar_Click (
         private void btn_actuzalizar_Click(object sender, EventArgs e) // Botón "Actualizar" o "Guardar Cambios"
         {
             if (_eventoSeleccionadoEnLista == null)
@@ -275,10 +266,7 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
                 return;
             }
 
-            // Confirmar antes de actualizar
-            // if (MessageBox.Show($"¿Seguro que quieres actualizar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?", //
-            //                     "Confirmar Actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            // {
+            
             TimeSpan? hora = null;
             if (chkUsarHora != null && chkUsarHora.Checked && dtpHoraEvento != null)
             {
