@@ -234,7 +234,7 @@ namespace ProyectoFinal.Calendario
             this.lstMostrarEventosInicio.Name = "lstMostrarEventosInicio";
             this.lstMostrarEventosInicio.Size = new System.Drawing.Size(333, 493);
             this.lstMostrarEventosInicio.TabIndex = 11;
-            this.lstMostrarEventosInicio.Click += new System.EventHandler(this.lblDescripcionDelEvento_Click);
+           // this.lstMostrarEventosInicio.Click += new System.EventHandler(this.lblDescripcionDelEvento_Click);
             this.lstMostrarEventosInicio.SelectedIndexChanged += new System.EventHandler(this.lstMostrarEventosInicio_SelectedIndexChanged);
             // 
             // btnAjustes
