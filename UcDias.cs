@@ -132,7 +132,7 @@ namespace CalendarioApp
 
             if (TieneEvento && ColorPersonalizado.HasValue)
             {
-                int tamañoCirculo = 14;
+                int tamañoCirculo = 20;
                 int margen = 6;
                 Color colorCirculo = ColorPersonalizado.Value;
 
@@ -151,10 +151,10 @@ namespace CalendarioApp
                     Color textColorOnCircle;
                     // Heurística simple para elegir color de texto (negro o blanco) basado en la luminosidad del color del círculo
                     double luminancia = (0.299 * colorCirculo.R + 0.587 * colorCirculo.G + 0.114 * colorCirculo.B) / 255;
-                    textColorOnCircle = luminancia > 0.5 ? Color.Black : Color.White;
+                    textColorOnCircle = luminancia > 0.5 ? Color.White : Color.Black;
                     // --- Fin de cambios para el Tema ---
 
-                    using (Font fuente = new Font("Segoe UI", 7, FontStyle.Bold))
+                    using (Font fuente = new Font("Segoe UI", 10, FontStyle.Bold))
                     using (Brush textoBrush = new SolidBrush(textColorOnCircle)) // Usar el color de texto calculado
                     {
                         string texto = CantidadEventos.ToString();

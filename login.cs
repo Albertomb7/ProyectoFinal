@@ -18,7 +18,7 @@ namespace ProyectoFinal
         public login()
         {
             InitializeComponent();
-            
+            this.AcceptButton = btn_iniciar_sesion;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -130,7 +130,7 @@ namespace ProyectoFinal
                     else
                     {
                         MessageBox.Show("Contraseña incorrecta, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txt_usuario.Select();
+                        txt_contraseña.Select();
                     }
                 }
 
@@ -138,6 +138,7 @@ namespace ProyectoFinal
                 else
                 {
                     MessageBox.Show("El usuario ingresado no existe, intente nuevamente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_usuario.Select();
                 }
             }
         }
@@ -202,6 +203,11 @@ namespace ProyectoFinal
                 btn_ver_contraseña.Image = Image.FromFile(rutaImagen);
                 txt_contraseña.Select();
             }
+        }
+
+        private void btn_iniciar_sesion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

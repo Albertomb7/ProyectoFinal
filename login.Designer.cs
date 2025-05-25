@@ -36,6 +36,8 @@
             this.lbl_usuario = new System.Windows.Forms.Label();
             this.lbl_contrasenia = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.borde_contraseña = new System.Windows.Forms.Panel();
+            this.borde_usuario = new System.Windows.Forms.Panel();
             this.btn_ver_contraseña = new System.Windows.Forms.Button();
             this.linklbl_registrarse = new System.Windows.Forms.LinkLabel();
             this.lbl_pregunta = new System.Windows.Forms.Label();
@@ -45,8 +47,6 @@
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.error_usuario = new System.Windows.Forms.ErrorProvider(this.components);
             this.error_contraseña = new System.Windows.Forms.ErrorProvider(this.components);
-            this.borde_usuario = new System.Windows.Forms.Panel();
-            this.borde_contraseña = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -140,6 +140,24 @@
             this.panel2.TabIndex = 6;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // borde_contraseña
+            // 
+            this.borde_contraseña.BackColor = System.Drawing.Color.Red;
+            this.borde_contraseña.Location = new System.Drawing.Point(40, 261);
+            this.borde_contraseña.Name = "borde_contraseña";
+            this.borde_contraseña.Size = new System.Drawing.Size(246, 1);
+            this.borde_contraseña.TabIndex = 13;
+            this.borde_contraseña.Visible = false;
+            // 
+            // borde_usuario
+            // 
+            this.borde_usuario.BackColor = System.Drawing.Color.Red;
+            this.borde_usuario.Location = new System.Drawing.Point(40, 190);
+            this.borde_usuario.Name = "borde_usuario";
+            this.borde_usuario.Size = new System.Drawing.Size(246, 1);
+            this.borde_usuario.TabIndex = 12;
+            this.borde_usuario.Visible = false;
+            // 
             // btn_ver_contraseña
             // 
             this.btn_ver_contraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
@@ -222,6 +240,7 @@
             this.btn_iniciar_sesion.Text = "Iniciar sesión ";
             this.btn_iniciar_sesion.UseVisualStyleBackColor = false;
             this.btn_iniciar_sesion.Click += new System.EventHandler(this.button1_Click);
+            this.btn_iniciar_sesion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btn_iniciar_sesion_KeyPress);
             // 
             // fileSystemWatcher1
             // 
@@ -237,24 +256,6 @@
             // 
             this.error_contraseña.BlinkRate = 500;
             this.error_contraseña.ContainerControl = this;
-            // 
-            // borde_usuario
-            // 
-            this.borde_usuario.BackColor = System.Drawing.Color.Red;
-            this.borde_usuario.Location = new System.Drawing.Point(40, 190);
-            this.borde_usuario.Name = "borde_usuario";
-            this.borde_usuario.Size = new System.Drawing.Size(246, 1);
-            this.borde_usuario.TabIndex = 12;
-            this.borde_usuario.Visible = false;
-            // 
-            // borde_contraseña
-            // 
-            this.borde_contraseña.BackColor = System.Drawing.Color.Red;
-            this.borde_contraseña.Location = new System.Drawing.Point(40, 261);
-            this.borde_contraseña.Name = "borde_contraseña";
-            this.borde_contraseña.Size = new System.Drawing.Size(246, 1);
-            this.borde_contraseña.TabIndex = 13;
-            this.borde_contraseña.Visible = false;
             // 
             // login
             // 

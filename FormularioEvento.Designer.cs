@@ -59,7 +59,7 @@
             this.txtDescripcionEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcionEvento.CausesValidation = false;
             this.txtDescripcionEvento.ForeColor = System.Drawing.Color.White;
-            this.txtDescripcionEvento.Location = new System.Drawing.Point(12, 12);
+            this.txtDescripcionEvento.Location = new System.Drawing.Point(12, 103);
             this.txtDescripcionEvento.Multiline = true;
             this.txtDescripcionEvento.Name = "txtDescripcionEvento";
             this.txtDescripcionEvento.Size = new System.Drawing.Size(360, 127);

@@ -93,7 +93,8 @@ namespace ProyectoFinal.Calendario
                                  FROM Eventos 
                                  WHERE IdUsuario = @IdUsuario 
                                    AND Activo = 1 
-                                   AND CONVERT(date, Fecha) = @FechaDia"; // Asegurarse de comparar solo la parte de la fecha
+                                   AND Notificado = 0
+                                   AND CONVERT(date, Fecha) = @FechaDia"; // Asegura de comparar solo la parte de la fecha
 
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {

@@ -24,6 +24,7 @@ namespace ProyectoFinal
         public registro()
         {
             InitializeComponent();
+            this.AcceptButton = btn_registrarse;
         }
 
         public string TextoNombre => txt_nombre_registro.Text;
