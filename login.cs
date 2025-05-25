@@ -114,10 +114,14 @@ namespace ProyectoFinal
                     {
                         //Obtiene el id y el usuario para saber que usuario va agregar eventos
                         int id = ObtenerIdSesionActual(txt_usuario.Text);
-                        
+
+                        //Obtiene el color 
+                        int ModoColor = ObtenerModoColor(txt_usuario.Text);
 
                         SesionActual.IdUsuario = id;
                         SesionActual.Usuario = txt_usuario.Text;
+                        SesionActual.ModoColor = ModoColor;
+                        
 
                         //Limpia los campos de texto 
                         txt_usuario.Text = "";

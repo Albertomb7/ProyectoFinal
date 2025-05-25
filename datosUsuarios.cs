@@ -200,6 +200,25 @@ namespace ProyectoFinal
             return IdUsuario;
         }
 
+        public static int ObtenerModoColor(string usuario)
+        {
+            int Oscuro = 1;
+            using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
+            {
+                string query = "SELECT ModoOscuro FROM usuarios WHERE usuario = @usuario";
+                using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@usuario", usuario);
 
+                    object resultado = comando.ExecuteScalar();
+
+                    if (resultado != null && resultado != DBNull.Value)
+                    {
+                        Oscuro = Convert.ToBoolean(resultado) ? 1 : 0;
+                    }
+                }
+            }
+            return Oscuro;
+        }
     }
 }

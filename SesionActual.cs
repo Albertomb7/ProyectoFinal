@@ -14,6 +14,7 @@ namespace ProyectoFinal
         public static string Usuario { get; set; }
         public static string Correo { get; set; }
         public static string Nombre { get; set; }
+        public static int ModoColor { get; set; }
 
         
     }
