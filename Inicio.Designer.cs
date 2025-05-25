@@ -207,10 +207,9 @@ namespace ProyectoFinal.Calendario
             // 
             this.btnGestionarEventosDia.BackColor = System.Drawing.Color.Transparent;
             this.btnGestionarEventosDia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionarEventosDia.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.btnGestionarEventosDia.FlatAppearance.BorderSize = 0;
-            this.btnGestionarEventosDia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-            this.btnGestionarEventosDia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+            this.btnGestionarEventosDia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGestionarEventosDia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnGestionarEventosDia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGestionarEventosDia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnGestionarEventosDia.ForeColor = System.Drawing.Color.White;
@@ -243,7 +242,10 @@ namespace ProyectoFinal.Calendario
             this.btnAjustes.BackColor = System.Drawing.Color.Transparent;
             this.btnAjustes.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAjustes.BackgroundImage")));
             this.btnAjustes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAjustes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAjustes.FlatAppearance.BorderSize = 0;
+            this.btnAjustes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAjustes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAjustes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAjustes.ForeColor = System.Drawing.Color.White;
             this.btnAjustes.Location = new System.Drawing.Point(1386, 12);
@@ -341,10 +343,9 @@ namespace ProyectoFinal.Calendario
             // 
             this.btnEditarEvento.BackColor = System.Drawing.Color.Transparent;
             this.btnEditarEvento.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarEvento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.btnEditarEvento.FlatAppearance.BorderSize = 0;
-            this.btnEditarEvento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-            this.btnEditarEvento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+            this.btnEditarEvento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnEditarEvento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnEditarEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditarEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnEditarEvento.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarEvento.Image")));
@@ -359,10 +360,9 @@ namespace ProyectoFinal.Calendario
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.Transparent;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.btnEliminar.FlatAppearance.BorderSize = 0;
-            this.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+            this.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
