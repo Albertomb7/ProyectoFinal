@@ -71,6 +71,16 @@ namespace ProyectoFinal.Calendario
 
             ActualizarVistaEventosHoy(); // Muestra eventos para el día actual y actualiza la etiqueta de fecha.
             MostrarDias(); // Dibuja el calendario.
+
+            lblUsuarioInicial.Text = SesionActual.Usuario;
+            lbl_id.Text = SesionActual.IdUsuario.ToString();
+
+            //No selecciona nada al cargar 
+            lstMostrarEventosInicio.SelectedIndex = -1;
+
+            //desabilita los botones al cargar 
+            btnEliminar.Enabled = false;
+            btnEditarEvento.Enabled = false;
         }
 
         // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
@@ -118,7 +128,7 @@ namespace ProyectoFinal.Calendario
                 panelConfigBackColor = dark_PanelConfiguracionBackColor;
                 buttonBackColor = dark_ButtonBackColor;
 
-                if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo: Oscuro";
+                if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo claro";
             }
             else
             {
@@ -129,7 +139,7 @@ namespace ProyectoFinal.Calendario
                 panelConfigBackColor = light_PanelConfiguracionBackColor;
                 buttonBackColor = light_ButtonBackColor;
 
-                if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo: Claro";
+                if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo oscuro";
             }
 
             // Aplicar colores al Formulario Principal
@@ -311,6 +321,8 @@ namespace ProyectoFinal.Calendario
                 ActualizarVistaEventosHoy(); //
 
                 // Ya NO abrimos FormularioEvento aquí.
+
+                lstMostrarEventosInicio.SelectedIndex = -1;
             }
         }
 
@@ -362,11 +374,20 @@ namespace ProyectoFinal.Calendario
             if (lstMostrarEventosInicio.SelectedItem is Evento) // Verifica que el ítem seleccionado sea un objeto Evento
             {
                 btnEditarEvento.Enabled = true;
+                btnEliminar.Enabled = true;
             }
             else
             {
                 btnEditarEvento.Enabled = false;
+                btnEliminar.Enabled = false;
             }
+
+            if (lstMostrarEventosInicio != null && lstMostrarEventosInicio.SelectedItem is Evento evento)
+            {
+                _eventoSeleccionadoEnLista = evento;
+                
+            }
+
         }
 
         // ... (otro código de tu clase Inicio)
@@ -375,8 +396,12 @@ namespace ProyectoFinal.Calendario
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             // Lógica para cerrar sesión
-            this.Close(); // Cierra el formulario actual (Inicio)
-            formularioLogin?.Show(); // Muestra el formulario de login si existe
+            if (MessageBox.Show($"¿Estas seguro de cerrar sesion?",
+                                    "Cerrar sesion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Hide(); // Cierra el formulario actual (Inicio)
+                formularioLogin?.Show(); // Muestra el formulario de login si existe
+            }
         }
         private void lblFechaDelEvento_Click(object sender, EventArgs e) { }
         private void flDays_Paint(object sender, PaintEventArgs e) { }
@@ -412,6 +437,48 @@ namespace ProyectoFinal.Calendario
                     MostrarDias(); //
                 }
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (_eventoSeleccionadoEnLista != null)
+            {
+                if (MessageBox.Show($"¿Seguro que quieres eliminar el evento: '{_eventoSeleccionadoEnLista.Descripcion}'?",
+                                    "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int resultadoEliminacion = Evento.EliminarEvento(_eventoSeleccionadoEnLista); //
+                    if (resultadoEliminacion > 0)
+                    {
+                        MessageBox.Show("Evento eliminado con exito.", "Evento eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        EventoAEliminar = _eventoSeleccionadoEnLista; // Para que Inicio.cs sepa cuál se eliminó
+
+                        //SE ENCARGA DE ACTUALIZAR LUEGO DE ELIMINAR EVENTO
+                        this.DialogResult = DialogResult.OK;
+
+                        listaDeEventosGlobal.RemoveAll(ev => ev.Fecha.Date == this.diaActual.Date);
+                        List<Evento> eventosActualizadosDelDia = Evento.ObtenerEventosExistentes(this.diaActual.Date); //
+                        listaDeEventosGlobal.AddRange(eventosActualizadosDelDia);
+
+                        ActualizarVistaEventosHoy();
+                        MostrarDias();
+
+                        // Después de editar, es bueno deshabilitar el botón de editar hasta nueva selección
+                        btnEliminar.Enabled = false;
+
+                        //DEJA DE SELECCIONAR EN LA LISTA
+                        lstMostrarEventosInicio.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el evento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void Inicio_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();   // cierra todos los formularios y finaliza el programa
         }
 
         // {{Nombre del archivo: albertomb7/proyectofinal/ProyectoFinal-da20101d38e16f72249e912a01f958d7214d6f9a/Inicio.cs}}
@@ -451,12 +518,15 @@ namespace ProyectoFinal.Calendario
 
                         // Después de editar, es bueno deshabilitar el botón de editar hasta nueva selección
                         btnEditarEvento.Enabled = false;
+
+                        //DEJA DE SELECCIONAR EN LA LISTA
+                        lstMostrarEventosInicio.SelectedIndex = -1;
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Querido cliene agrege un evento para editarlo.", "Ningún evento seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Querido cliente agrege un evento para editarlo.", "Ningún evento seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
       

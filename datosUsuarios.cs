@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using static ProyectoFinal.datosUsuarios;
 
 
 namespace ProyectoFinal
@@ -128,7 +130,7 @@ namespace ProyectoFinal
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = "SELECT * FROM usuarios WHERE usuario = @usuario";
+                string query = "SELECT * FROM usuarios WHERE usuario COLLATE Latin1_General_CS_AS = @usuario";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@usuario", persona.usuario);
@@ -177,7 +179,7 @@ namespace ProyectoFinal
 
         }
 
-        public static int ObtenerInformacionSesion(string usuario)
+        public static int ObtenerIdSesionActual(string usuario)
         {
             int IdUsuario = -1;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
@@ -197,5 +199,7 @@ namespace ProyectoFinal
             }
             return IdUsuario;
         }
+
+
     }
 }

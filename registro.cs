@@ -371,12 +371,14 @@ namespace ProyectoFinal
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\..\Recursos\Imagenes\icon_ocultar.png");
                 rutaImagen = Path.GetFullPath(rutaImagen);
                 btn_ver_contraseña_registro.Image = Image.FromFile(rutaImagen);
+                txt_contraseña_registro.Select();
             }
             else
             {
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\..\Recursos\Imagenes\icon_mostrar.png");
                 rutaImagen = Path.GetFullPath(rutaImagen);
                 btn_ver_contraseña_registro.Image = Image.FromFile(rutaImagen);
+                txt_contraseña_registro.Select();
             }
         }
 

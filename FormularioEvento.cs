@@ -315,5 +315,10 @@ namespace ProyectoFinal.Calendario // Asegúrate que este namespace coincida con
         {
 
         }
+
+        private void PanelColor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

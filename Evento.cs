@@ -56,8 +56,8 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
                 using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
                 {
                     string query = @"
-                INSERT INTO Eventos (IdUsuario, Descripcion, Fecha, Hora, Estado) 
-                VALUES (@idUsuario, @descripcion, @fecha, @hora, @estado)";
+                INSERT INTO Eventos (IdUsuario, Descripcion, Fecha, Hora) 
+                VALUES (@idUsuario, @descripcion, @fecha, @hora)";
 
                     using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                     {
@@ -65,7 +65,7 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
                         comando.Parameters.AddWithValue("@descripcion", evento.Descripcion);
                         comando.Parameters.AddWithValue("@fecha", evento.Fecha.Date); //guarda solo la parte de fecha
                         comando.Parameters.AddWithValue("@hora", (object)evento.Hora ?? DBNull.Value);
-                        comando.Parameters.AddWithValue("@estado", "activo");
+                       
 
                         retorna = comando.ExecuteNonQuery();
                     }
@@ -87,7 +87,7 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
 
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = "SELECT IdEvento, Descripcion, Hora FROM Eventos WHERE CONVERT(date, Fecha) = @fecha AND IdUsuario = @IdUsuario";
+                string query = "SELECT IdEvento, Descripcion, Hora FROM Eventos WHERE CONVERT(date, Fecha) = @fecha AND IdUsuario = @IdUsuario AND Activo = 1";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@fecha", fecha.Date);
@@ -138,8 +138,7 @@ namespace ProyectoFinal.Calendario // OJO: Si pusiste Evento.cs en otra carpeta,
             int retorna = 0;
             using (Microsoft.Data.SqlClient.SqlConnection conexion = conexionSql.ObtenerConexion())
             {
-                string query = "DELETE FROM Eventos WHERE IdEvento = @IdEvento";
-
+                string query = "update Eventos set Activo = 0 where IdEvento = @IdEvento";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@IdEvento", evento.IdEvento);

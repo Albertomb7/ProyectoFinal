@@ -27,6 +27,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioEvento));
             this.lblFechaSeleccionada = new System.Windows.Forms.Label();
             this.txtDescripcionEvento = new System.Windows.Forms.TextBox();
             this.chkUsarHora = new System.Windows.Forms.CheckBox();
@@ -48,16 +49,17 @@
             this.lblFechaSeleccionada.ForeColor = System.Drawing.Color.White;
             this.lblFechaSeleccionada.Location = new System.Drawing.Point(12, 24);
             this.lblFechaSeleccionada.Name = "lblFechaSeleccionada";
-            this.lblFechaSeleccionada.Size = new System.Drawing.Size(142, 25);
+            this.lblFechaSeleccionada.Size = new System.Drawing.Size(117, 20);
             this.lblFechaSeleccionada.TabIndex = 0;
             this.lblFechaSeleccionada.Text = "Fecha del día";
             // 
             // txtDescripcionEvento
             // 
             this.txtDescripcionEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
+            this.txtDescripcionEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcionEvento.CausesValidation = false;
             this.txtDescripcionEvento.ForeColor = System.Drawing.Color.White;
-            this.txtDescripcionEvento.Location = new System.Drawing.Point(12, 103);
+            this.txtDescripcionEvento.Location = new System.Drawing.Point(12, 12);
             this.txtDescripcionEvento.Multiline = true;
             this.txtDescripcionEvento.Name = "txtDescripcionEvento";
             this.txtDescripcionEvento.Size = new System.Drawing.Size(360, 127);
@@ -70,7 +72,7 @@
             this.chkUsarHora.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chkUsarHora.Location = new System.Drawing.Point(16, 280);
             this.chkUsarHora.Name = "chkUsarHora";
-            this.chkUsarHora.Size = new System.Drawing.Size(117, 24);
+            this.chkUsarHora.Size = new System.Drawing.Size(101, 21);
             this.chkUsarHora.TabIndex = 5;
             this.chkUsarHora.Text = "Añadir hora";
             this.chkUsarHora.UseVisualStyleBackColor = true;
@@ -82,12 +84,13 @@
             this.dtpHoraEvento.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
             this.dtpHoraEvento.CalendarTitleBackColor = System.Drawing.SystemColors.ControlText;
             this.dtpHoraEvento.CalendarTitleForeColor = System.Drawing.Color.White;
+            this.dtpHoraEvento.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.dtpHoraEvento.Enabled = false;
             this.dtpHoraEvento.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpHoraEvento.Location = new System.Drawing.Point(115, 278);
             this.dtpHoraEvento.Name = "dtpHoraEvento";
             this.dtpHoraEvento.ShowUpDown = true;
-            this.dtpHoraEvento.Size = new System.Drawing.Size(100, 26);
+            this.dtpHoraEvento.Size = new System.Drawing.Size(100, 23);
             this.dtpHoraEvento.TabIndex = 6;
             this.dtpHoraEvento.ValueChanged += new System.EventHandler(this.dtpHoraEvento_ValueChanged);
             // 
@@ -97,7 +100,7 @@
             this.lstEventosDelDia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lstEventosDelDia.ForeColor = System.Drawing.Color.White;
             this.lstEventosDelDia.FormattingEnabled = true;
-            this.lstEventosDelDia.ItemHeight = 20;
+            this.lstEventosDelDia.ItemHeight = 16;
             this.lstEventosDelDia.Location = new System.Drawing.Point(12, 103);
             this.lstEventosDelDia.Name = "lstEventosDelDia";
             this.lstEventosDelDia.Size = new System.Drawing.Size(356, 84);
@@ -159,7 +162,7 @@
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Location = new System.Drawing.Point(13, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.Size = new System.Drawing.Size(86, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Descripción:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -167,11 +170,14 @@
             // btnSeleccionarColor
             // 
             this.btnSeleccionarColor.ForeColor = System.Drawing.Color.Black;
-            this.btnSeleccionarColor.Location = new System.Drawing.Point(242, 280);
+            this.btnSeleccionarColor.Image = ((System.Drawing.Image)(resources.GetObject("btnSeleccionarColor.Image")));
+            this.btnSeleccionarColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionarColor.Location = new System.Drawing.Point(257, 278);
             this.btnSeleccionarColor.Name = "btnSeleccionarColor";
-            this.btnSeleccionarColor.Size = new System.Drawing.Size(75, 24);
+            this.btnSeleccionarColor.Size = new System.Drawing.Size(69, 26);
             this.btnSeleccionarColor.TabIndex = 10;
             this.btnSeleccionarColor.Text = "Color";
+            this.btnSeleccionarColor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSeleccionarColor.UseVisualStyleBackColor = true;
             this.btnSeleccionarColor.Click += new System.EventHandler(this.btnSeleccionarColor_Click);
             // 
@@ -181,6 +187,7 @@
             this.PanelColor.Name = "PanelColor";
             this.PanelColor.Size = new System.Drawing.Size(28, 24);
             this.PanelColor.TabIndex = 11;
+            this.PanelColor.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelColor_Paint);
             // 
             // btn_actuzalizar
             // 
@@ -202,7 +209,7 @@
             // FormularioEvento
             // 
             this.AcceptButton = this.btnGuardar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
             this.CancelButton = this.btnCancelar;

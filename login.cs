@@ -112,9 +112,16 @@ namespace ProyectoFinal
 
                     if (ePass == persona.ePass)
                     {
-                        int id = ObtenerInformacionSesion(txt_usuario.Text);
+                        //Obtiene el id y el usuario para saber que usuario va agregar eventos
+                        int id = ObtenerIdSesionActual(txt_usuario.Text);
+                        
 
                         SesionActual.IdUsuario = id;
+                        SesionActual.Usuario = txt_usuario.Text;
+
+                        //Limpia los campos de texto 
+                        txt_usuario.Text = "";
+                        txt_contraseña.Text = "";
 
                         Form FormInicio = new Calendario.Inicio(this);
                         FormInicio.Show();
@@ -186,12 +193,14 @@ namespace ProyectoFinal
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\..\Recursos\Imagenes\icon_ocultar.png");
                 rutaImagen = Path.GetFullPath(rutaImagen);
                 btn_ver_contraseña.Image = Image.FromFile(rutaImagen);
+                txt_contraseña.Select();
             }
             else
             {
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\..\Recursos\Imagenes\icon_mostrar.png");
                 rutaImagen = Path.GetFullPath(rutaImagen);
                 btn_ver_contraseña.Image = Image.FromFile(rutaImagen);
+                txt_contraseña.Select();
             }
         }
     }
