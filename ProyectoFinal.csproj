@@ -201,7 +201,9 @@
   <ItemGroup>
     <Compile Include="SesionActual.cs" />
     <Compile Include="conexionSql.cs" />
-    <Compile Include="datosUsuarios.cs" />
+    <Compile Include="..\..\..\..\Desktop\Material progra\datosUsuarios.cs">
+      <Link>datosUsuarios.cs</Link>
+    </Compile>
     <Compile Include="encrip.cs" />
     <Compile Include="enviarCodigo.cs" />
     <Compile Include="codigoDeVerificacion.cs">
@@ -210,18 +212,24 @@
     <Compile Include="codigoDeVerificacion.Designer.cs">
       <DependentUpon>codigoDeVerificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Evento.cs" />
-    <Compile Include="FormularioEvento.cs">
-      <SubType>Form</SubType>
+    <Compile Include="..\..\..\..\Desktop\Material progra\Evento.cs">
+      <Link>Evento.cs</Link>
     </Compile>
-    <Compile Include="FormularioEvento.Designer.cs">
+    <Compile Include="..\..\..\..\Desktop\Material progra\FormularioEvento.cs">
+      <SubType>Form</SubType>
+      <Link>FormularioEvento.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\Desktop\Material progra\FormularioEvento.Designer.cs">
       <DependentUpon>FormularioEvento.cs</DependentUpon>
+      <Link>FormularioEvento.Designer.cs</Link>
     </Compile>
-    <Compile Include="Inicio.cs">
+    <Compile Include="..\..\..\..\Desktop\Material progra\Inicio.cs">
       <SubType>Form</SubType>
+      <Link>Inicio.cs</Link>
     </Compile>
-    <Compile Include="Inicio.Designer.cs">
+    <Compile Include="..\..\..\..\Desktop\Material progra\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
+      <Link>Inicio.Designer.cs</Link>
     </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
@@ -237,20 +245,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UcDias.cs">
+    <Compile Include="..\..\..\..\Desktop\Material progra\UcDias.cs">
       <SubType>UserControl</SubType>
+      <Link>UcDias.cs</Link>
     </Compile>
-    <Compile Include="UcDias.Designer.cs">
+    <Compile Include="..\..\..\..\Desktop\Material progra\UcDias.Designer.cs">
       <DependentUpon>UcDias.cs</DependentUpon>
+      <Link>UcDias.Designer.cs</Link>
     </Compile>
     <EmbeddedResource Include="codigoDeVerificacion.resx">
       <DependentUpon>codigoDeVerificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormularioEvento.resx">
+    <EmbeddedResource Include="..\..\..\..\Desktop\Material progra\FormularioEvento.resx">
       <DependentUpon>FormularioEvento.cs</DependentUpon>
+      <Link>FormularioEvento.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inicio.resx">
+    <EmbeddedResource Include="..\..\..\..\Desktop\Material progra\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+      <Link>Inicio.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
@@ -267,8 +279,9 @@
     <EmbeddedResource Include="registro.resx">
       <DependentUpon>registro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UcDias.resx">
+    <EmbeddedResource Include="..\..\..\..\Desktop\Material progra\UcDias.resx">
       <DependentUpon>UcDias.cs</DependentUpon>
+      <Link>UcDias.resx</Link>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
