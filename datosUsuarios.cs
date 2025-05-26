@@ -47,7 +47,7 @@ namespace ProyectoFinal
                     //Transaccion para hacer las dos acciones
                     Microsoft.Data.SqlClient.SqlTransaction transaccion = conexion.BeginTransaction();
 
-                    string query1 = ("Insert into usuarios values('" + persona.usuario + "', '" + persona.nombre + "','" + persona.ePass + "'); SELECT SCOPE_IDENTITY();");
+                    string query1 = ("Insert into usuarios values('" + persona.usuario + "', '" + persona.nombre + "','" + persona.ePass + "', 1); SELECT SCOPE_IDENTITY();");
 
                     Microsoft.Data.SqlClient.SqlCommand comando1 = new Microsoft.Data.SqlClient.SqlCommand(query1, conexion, transaccion);
 
