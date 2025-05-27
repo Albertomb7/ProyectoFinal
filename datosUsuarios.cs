@@ -37,7 +37,7 @@ namespace ProyectoFinal
             }
         }
 
-        // Crea usuario nuevo en la base de datos
+        // Crea usuario nuevo en la base de datos fadfdsdfdfd
         public static int CrearUsuario(Persona persona)
         {
             int retorna = 0;
