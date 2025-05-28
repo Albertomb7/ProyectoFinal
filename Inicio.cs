@@ -197,6 +197,11 @@ namespace ProyectoFinal.Calendario
                     
                 }
             }
+
+            //Estas dos linea de codigo cambian el color a la hora de usar el Cambio de tema
+            pbSiguiente.Image = isDarkMode ? Properties.Resources.Flecha_blanca_derecha : Properties.Resources.Flecha_Negra_Derecha;
+            pbAnterior.Image = isDarkMode ? Properties.Resources.Flecha_blanca_Izquierda : Properties.Resources.Flecha_Negra_Izquierda;
+
             // --- FIN DE MODIFICACIÓN PARA BOTONES DE ÍCONOS ---
 
             Control[] allImageControls = { btnAjustes, btnGestionarEventosDia, btnEditarEvento, btnEliminar, pbAnterior, pbSiguiente };

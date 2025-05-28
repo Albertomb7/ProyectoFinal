@@ -63,7 +63,7 @@ namespace ProyectoFinal.Calendario
             this.lblFecha.Location = new System.Drawing.Point(44, 31);
             this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(0, 54);
+            this.lblFecha.Size = new System.Drawing.Size(0, 42);
             this.lblFecha.TabIndex = 0;
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -71,7 +71,7 @@ namespace ProyectoFinal.Calendario
             // 
             this.pbAnterior.BackColor = System.Drawing.Color.Transparent;
             this.pbAnterior.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbAnterior.Image = ((System.Drawing.Image)(resources.GetObject("pbAnterior.Image")));
+            this.pbAnterior.Image = global::ProyectoFinal.Properties.Resources.Flecha_blanca_Izquierda;
             this.pbAnterior.Location = new System.Drawing.Point(877, 31);
             this.pbAnterior.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbAnterior.Name = "pbAnterior";
@@ -102,7 +102,7 @@ namespace ProyectoFinal.Calendario
             this.lblLunes.Location = new System.Drawing.Point(62, 129);
             this.lblLunes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLunes.Name = "lblLunes";
-            this.lblLunes.Size = new System.Drawing.Size(99, 29);
+            this.lblLunes.Size = new System.Drawing.Size(77, 24);
             this.lblLunes.TabIndex = 4;
             this.lblLunes.Text = "LUNES ";
             this.lblLunes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -114,7 +114,7 @@ namespace ProyectoFinal.Calendario
             this.lblMartes.Location = new System.Drawing.Point(192, 129);
             this.lblMartes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMartes.Name = "lblMartes";
-            this.lblMartes.Size = new System.Drawing.Size(113, 29);
+            this.lblMartes.Size = new System.Drawing.Size(89, 24);
             this.lblMartes.TabIndex = 5;
             this.lblMartes.Text = "MARTES";
             this.lblMartes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -127,7 +127,7 @@ namespace ProyectoFinal.Calendario
             this.lblViernes.Location = new System.Drawing.Point(605, 129);
             this.lblViernes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblViernes.Name = "lblViernes";
-            this.lblViernes.Size = new System.Drawing.Size(117, 29);
+            this.lblViernes.Size = new System.Drawing.Size(92, 24);
             this.lblViernes.TabIndex = 6;
             this.lblViernes.Text = "VIERNES";
             this.lblViernes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -139,7 +139,7 @@ namespace ProyectoFinal.Calendario
             this.lblMiercoles.Location = new System.Drawing.Point(317, 129);
             this.lblMiercoles.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMiercoles.Name = "lblMiercoles";
-            this.lblMiercoles.Size = new System.Drawing.Size(153, 29);
+            this.lblMiercoles.Size = new System.Drawing.Size(119, 24);
             this.lblMiercoles.TabIndex = 6;
             this.lblMiercoles.Text = "MIERCOLES";
             this.lblMiercoles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -152,7 +152,7 @@ namespace ProyectoFinal.Calendario
             this.lblJueves.Location = new System.Drawing.Point(470, 129);
             this.lblJueves.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblJueves.Name = "lblJueves";
-            this.lblJueves.Size = new System.Drawing.Size(105, 29);
+            this.lblJueves.Size = new System.Drawing.Size(83, 24);
             this.lblJueves.TabIndex = 7;
             this.lblJueves.Text = "JUEVES";
             this.lblJueves.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -165,7 +165,7 @@ namespace ProyectoFinal.Calendario
             this.lblSabado.Location = new System.Drawing.Point(741, 129);
             this.lblSabado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSabado.Name = "lblSabado";
-            this.lblSabado.Size = new System.Drawing.Size(111, 29);
+            this.lblSabado.Size = new System.Drawing.Size(88, 24);
             this.lblSabado.TabIndex = 6;
             this.lblSabado.Text = "SABADO";
             this.lblSabado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -177,7 +177,7 @@ namespace ProyectoFinal.Calendario
             this.lblDomingo.Location = new System.Drawing.Point(873, 129);
             this.lblDomingo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDomingo.Name = "lblDomingo";
-            this.lblDomingo.Size = new System.Drawing.Size(130, 29);
+            this.lblDomingo.Size = new System.Drawing.Size(101, 24);
             this.lblDomingo.TabIndex = 6;
             this.lblDomingo.Text = "DOMINGO";
             this.lblDomingo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -198,7 +198,7 @@ namespace ProyectoFinal.Calendario
             this.lblFechaDelEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaDelEvento.Location = new System.Drawing.Point(1014, 127);
             this.lblFechaDelEvento.Name = "lblFechaDelEvento";
-            this.lblFechaDelEvento.Size = new System.Drawing.Size(480, 58);
+            this.lblFechaDelEvento.Size = new System.Drawing.Size(382, 46);
             this.lblFechaDelEvento.TabIndex = 8;
             this.lblFechaDelEvento.Text = "20 de Mayo de 2025";
             this.lblFechaDelEvento.Click += new System.EventHandler(this.lblFechaDelEvento_Click);
@@ -229,12 +229,11 @@ namespace ProyectoFinal.Calendario
             this.lstMostrarEventosInicio.ForeColor = System.Drawing.Color.Transparent;
             this.lstMostrarEventosInicio.FormattingEnabled = true;
             this.lstMostrarEventosInicio.HorizontalScrollbar = true;
-            this.lstMostrarEventosInicio.ItemHeight = 29;
+            this.lstMostrarEventosInicio.ItemHeight = 25;
             this.lstMostrarEventosInicio.Location = new System.Drawing.Point(1022, 190);
             this.lstMostrarEventosInicio.Name = "lstMostrarEventosInicio";
-            this.lstMostrarEventosInicio.Size = new System.Drawing.Size(333, 493);
+            this.lstMostrarEventosInicio.Size = new System.Drawing.Size(333, 475);
             this.lstMostrarEventosInicio.TabIndex = 11;
-           // this.lstMostrarEventosInicio.Click += new System.EventHandler(this.lblDescripcionDelEvento_Click);
             this.lstMostrarEventosInicio.SelectedIndexChanged += new System.EventHandler(this.lstMostrarEventosInicio_SelectedIndexChanged);
             // 
             // btnAjustes
@@ -276,7 +275,7 @@ namespace ProyectoFinal.Calendario
             this.lbl_id.AutoSize = true;
             this.lbl_id.Location = new System.Drawing.Point(39, 45);
             this.lbl_id.Name = "lbl_id";
-            this.lbl_id.Size = new System.Drawing.Size(153, 25);
+            this.lbl_id.Size = new System.Drawing.Size(124, 20);
             this.lbl_id.TabIndex = 5;
             this.lbl_id.Text = "Nombre Usuario";
             // 
@@ -286,7 +285,7 @@ namespace ProyectoFinal.Calendario
             this.lbl_idInformacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_idInformacion.Location = new System.Drawing.Point(3, 45);
             this.lbl_idInformacion.Name = "lbl_idInformacion";
-            this.lbl_idInformacion.Size = new System.Drawing.Size(40, 25);
+            this.lbl_idInformacion.Size = new System.Drawing.Size(33, 20);
             this.lbl_idInformacion.TabIndex = 4;
             this.lbl_idInformacion.Text = "ID:";
             // 
@@ -296,7 +295,7 @@ namespace ProyectoFinal.Calendario
             this.lbl_usuarioInformacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_usuarioInformacion.Location = new System.Drawing.Point(3, 12);
             this.lbl_usuarioInformacion.Name = "lbl_usuarioInformacion";
-            this.lbl_usuarioInformacion.Size = new System.Drawing.Size(93, 25);
+            this.lbl_usuarioInformacion.Size = new System.Drawing.Size(76, 20);
             this.lbl_usuarioInformacion.TabIndex = 3;
             this.lbl_usuarioInformacion.Text = "Usuario:";
             // 
@@ -334,7 +333,7 @@ namespace ProyectoFinal.Calendario
             this.lblUsuarioInicial.AutoSize = true;
             this.lblUsuarioInicial.Location = new System.Drawing.Point(77, 12);
             this.lblUsuarioInicial.Name = "lblUsuarioInicial";
-            this.lblUsuarioInicial.Size = new System.Drawing.Size(153, 25);
+            this.lblUsuarioInicial.Size = new System.Drawing.Size(124, 20);
             this.lblUsuarioInicial.TabIndex = 0;
             this.lblUsuarioInicial.Text = "Nombre Usuario";
             this.lblUsuarioInicial.Click += new System.EventHandler(this.lblUsuarioInicial_Click);
@@ -375,7 +374,7 @@ namespace ProyectoFinal.Calendario
             // 
             // Inicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.ClientSize = new System.Drawing.Size(1504, 749);
