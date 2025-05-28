@@ -12,7 +12,7 @@ namespace ProyectoFinal
         public static string Usuario { get; set; }
         public static string Correo { get; set; }
         public static string Nombre { get; set; }
-        public static bool ModoOscuroPreferido { get; set; } // Asegúrate que sea bool
+        public static bool ModoOscuroPreferido { get; set; } // AGREGADO A BASE DE DATOS LOL
 
         public static void LimpiarSesion()
         {

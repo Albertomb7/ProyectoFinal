@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-// using System.Globalization; // No se usa directamente en este código
+// using System.Globalization; // No se usa directamente en este código Lo borrarmos xd
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-// using System.Windows.Forms; // No se usa directamente en este código
-using Microsoft.Data.SqlClient; // Asegúrate de usar este namespace para SQL Server
+// using System.Windows.Forms; // No se usa directamente en este código x2
+using Microsoft.Data.SqlClient; 
 
 namespace ProyectoFinal
 {
@@ -115,9 +115,7 @@ namespace ProyectoFinal
                 string query = "UPDATE usuarios SET ModoOscuro = @ModoOscuro WHERE Id = @IdUsuario";
                 using (Microsoft.Data.SqlClient.SqlCommand comando = new Microsoft.Data.SqlClient.SqlCommand(query, conexion))
                 {
-                    // Asegúrate de que los tipos de datos coincidan con tu tabla.
-                    // Si ModoOscuro en la BD es BIT, bool se convierte bien.
-                    // Si es INT (0 o 1), puedes hacer: comando.Parameters.AddWithValue("@ModoOscuro", modoOscuro ? 1 : 0);
+                    
                     comando.Parameters.AddWithValue("@ModoOscuro", modoOscuro);
                     comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
                     try
@@ -149,8 +147,7 @@ namespace ProyectoFinal
                         object resultado = comando.ExecuteScalar();
                         if (resultado != null && resultado != DBNull.Value)
                         {
-                            // Si ModoOscuro es BIT en SQL, Convert.ToBoolean funciona.
-                            // Si es INT (0 o 1), podrías hacer: modoOscuro = Convert.ToInt32(resultado) == 1;
+                            
                             modoOscuro = Convert.ToBoolean(resultado);
                         }
                     }

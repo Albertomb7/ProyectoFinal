@@ -46,7 +46,7 @@ namespace CalendarioApp
                 lblDia.BackColor = Color.Transparent; // Mantener transparente
             }
 
-            // Los manejadores de eventos para Click, MouseMove, MouseLeave ya están en InitializeComponent por el diseñador.
+            
            
             AplicarTema(isCurrentlyDark); // Aplicar tema oscuro por defecto al crear instancia
         }
@@ -98,7 +98,7 @@ namespace CalendarioApp
                 if (lblDia != null) lblDia.ForeColor = light_ForeColor;
             }
             this.BackColor = colorBaseActual;
-            if (lblDia != null) lblDia.BackColor = Color.Transparent; // Asegurar transparencia del label
+            if (lblDia != null) lblDia.BackColor = Color.Transparent; // Asegurar transparencia del label XD
             this.Invalidate(); // Redibujar el control
         }
         // --- Fin de cambios para el Tema ---

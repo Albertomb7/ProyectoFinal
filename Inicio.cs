@@ -23,16 +23,15 @@ namespace ProyectoFinal.Calendario
         private readonly Color dark_FormForeColor = Color.White;
         private readonly Color dark_LabelDayNamesColor = Color.FromArgb(200, 200, 200);
         private readonly Color dark_UcDiasEmptyBackColor = Color.FromArgb(20, 22, 28);
-        private readonly Color dark_ListBoxBackColor = Color.FromArgb(14, 17, 23);
-        // private readonly Color dark_PanelConfiguracionBackColor = Color.FromArgb(14, 17, 23); // Original
-        private readonly Color dark_PanelConfiguracionResaltadoBackColor = Color.FromArgb(28, 32, 40); // Nuevo para resaltar
+        
+        private readonly Color dark_PanelConfiguracionResaltadoBackColor = Color.FromArgb(28, 32, 40); // Para resaltar panel config
 
         // Colores Tema Claro
         private readonly Color light_FormBackColor = SystemColors.Control;
         private readonly Color light_FormForeColor = Color.Black;
         private readonly Color light_LabelDayNamesColor = Color.FromArgb(70, 70, 70);
         private readonly Color light_UcDiasEmptyBackColor = Color.FromArgb(240, 240, 240);
-        private readonly Color light_ListBoxBackColor = SystemColors.Window;
+        
         private readonly Color light_PanelConfiguracionBackColor = SystemColors.ControlLight;
 
         private Evento _eventoSeleccionadoEnLista;
@@ -122,7 +121,7 @@ namespace ProyectoFinal.Calendario
 
         private void AplicarTema()
         {
-            Color formBackColor, formForeColor, labelDayNamesColor, listBoxBackColor, panelConfigBackColor, ucDiasEmptyBackColor;
+            Color formBackColor, formForeColor, labelDayNamesColor, panelConfigBackColor, ucDiasEmptyBackColor;
 
             if (isDarkMode)
             {
@@ -130,8 +129,7 @@ namespace ProyectoFinal.Calendario
                 formForeColor = dark_FormForeColor;
                 labelDayNamesColor = dark_LabelDayNamesColor;
                 ucDiasEmptyBackColor = dark_UcDiasEmptyBackColor;
-                listBoxBackColor = dark_ListBoxBackColor;
-                panelConfigBackColor = dark_PanelConfiguracionResaltadoBackColor; // MODIFICADO para resaltar
+                panelConfigBackColor = dark_PanelConfiguracionResaltadoBackColor;
                 if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo Claro";
             }
             else
@@ -140,7 +138,6 @@ namespace ProyectoFinal.Calendario
                 formForeColor = light_FormForeColor;
                 labelDayNamesColor = light_LabelDayNamesColor;
                 ucDiasEmptyBackColor = light_UcDiasEmptyBackColor;
-                listBoxBackColor = light_ListBoxBackColor;
                 panelConfigBackColor = light_PanelConfiguracionBackColor;
                 if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.Text = "Modo Oscuro";
             }
@@ -165,15 +162,18 @@ namespace ProyectoFinal.Calendario
 
             if (flDays != null) flDays.BackColor = formBackColor;
 
+            // --- INICIO DE MODIFICACIÓN PARA LISTBOX ---
             if (lstMostrarEventosInicio != null)
             {
-                lstMostrarEventosInicio.BackColor = listBoxBackColor;
-                lstMostrarEventosInicio.ForeColor = formForeColor;
+                lstMostrarEventosInicio.BackColor = formBackColor; // Usar el color de fondo del formulario
+                lstMostrarEventosInicio.ForeColor = formForeColor; // Mantener el color del texto del formulario
+                lstMostrarEventosInicio.BorderStyle = BorderStyle.None; // Quitar el borde para que se funda
             }
+            // --- FIN DE MODIFICACIÓN PARA LISTBOX ---
 
             if (pnConfiguracion != null)
             {
-                pnConfiguracion.BackColor = panelConfigBackColor; // Esto aplicará el color de resaltado o normal
+                pnConfiguracion.BackColor = panelConfigBackColor;
                 foreach (Control ctl in pnConfiguracion.Controls)
                 {
                     if (ctl is Label) ctl.ForeColor = formForeColor;
@@ -183,18 +183,21 @@ namespace ProyectoFinal.Calendario
             if (btnCambioDeColorFondo != null) btnCambioDeColorFondo.ForeColor = formForeColor;
             if (btnCerrarSesion != null) btnCerrarSesion.ForeColor = Color.White;
 
+            // --- INICIO DE MODIFICACIÓN PARA BOTONES DE ÍCONOS TRANSPARENTES ---
             Button[] imageActionButtons = { btnGestionarEventosDia, btnEditarEvento, btnEliminar };
             foreach (Button btn in imageActionButtons)
             {
                 if (btn != null)
                 {
                     btn.FlatStyle = FlatStyle.Flat;
-                    btn.BackColor = Color.Transparent;
-                    btn.FlatAppearance.BorderSize = 0;
-                    btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
-                    btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
+                    btn.BackColor = Color.Transparent;        // Fondo del botón transparente
+                    btn.FlatAppearance.BorderSize = 0;       // Sin borde
+                    btn.FlatAppearance.MouseOverBackColor = Color.Transparent; // Sin cambio de color al pasar el mouse
+                    btn.FlatAppearance.MouseDownBackColor = Color.Transparent; // Sin cambio de color al hacer clic
+                    
                 }
             }
+            // --- FIN DE MODIFICACIÓN PARA BOTONES DE ÍCONOS ---
 
             Control[] allImageControls = { btnAjustes, btnGestionarEventosDia, btnEditarEvento, btnEliminar, pbAnterior, pbSiguiente };
             foreach (var ctrl in allImageControls)
@@ -281,12 +284,10 @@ namespace ProyectoFinal.Calendario
                 if (btnEliminar != null) btnEliminar.Enabled = false;
                 if (btnEditarEvento != null) btnEditarEvento.Enabled = false;
 
-                // --- AÑADIDO AQUÍ: Ocultar el panel de configuración ---
                 if (pnConfiguracion != null && pnConfiguracion.Visible)
                 {
                     pnConfiguracion.Visible = false;
                 }
-                // --- FIN DE LA MODIFICACIÓN ---
             }
         }
 
